@@ -1,0 +1,59 @@
+<!--Results-->
+<div fxLayout="column" fxLayoutGap="5%">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+        <!-- loop over de verschillende results
+            <div *ngFor="let result of (results$ | async)" fxFlex="0 0 calc(20%-0.5%)" fxFlex.xs="100%">
+                //put each result in mat card
+                <app-result [result]="result"></app-result>
+        -->
+        <div fxFlex="0 0 calc(20%-0.5%)" fxFlex.xs="100%">
+
+            <mat-card>
+                <img mat-card-image src="../../assets/Graph1.jfif" />
+                <mat-card-title>
+                    Graph1
+                </mat-card-title>
+                <mat-card-content>
+                    Graph1 description
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div fxFlex="0 0 calc(20%-0.5%)" fxFlex.xs="100%">
+            <mat-card>
+                <img mat-card-image src="../../assets/Graph2.jpg" />
+                <mat-card-title>
+                    Graph2
+                </mat-card-title>
+                <mat-card-content>
+                    Graph2 description
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div fxFlex="0 0 calc(20%-0.5%)" fxFlex.xs="100%">
+            <mat-card>
+                <img mat-card-image src="../../assets/Graph3.png" />
+                <mat-card-title>
+                    Graph3
+                </mat-card-title>
+                <mat-card-content>
+                    Graph3 description
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<!--TEMPLATE-->
+<ng-template #loadingOrError>
+    <mat-card>
+        <mat-error *ngIf="(loadingError$ | async) as errorMessage; else loading">
+            Error loading the results list: {{ errorMessage }}. <br />
+            Please try again later.
+        </mat-error>
+        <ng-template #loading>
+            <p style="text-align: center;">Loading latest results...</p>
+        </ng-template>
+    </mat-card>
+</ng-template>
