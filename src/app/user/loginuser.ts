@@ -1,4 +1,4 @@
-export class LoginUser {
+abstract class LoginUser {
     //constructor
     constructor(
         private _username: string,
@@ -9,7 +9,8 @@ export class LoginUser {
     //methods
     toJSON(): any {
       return {
-        username: this._username
+        username: this._username,
+        role: this._role
       };
     }
   

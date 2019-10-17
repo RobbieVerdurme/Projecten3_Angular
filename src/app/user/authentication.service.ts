@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LoginUser } from './loginuser';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Role } from './role';
 
 // parce jwt token to json
 function parseJwt(token) {
@@ -48,7 +48,12 @@ export class AuthenticationService {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
             const parsedToken = parseJwt(token);
-            this._user$.next(new LoginUser(username, parsedToken.roles));
+            //de juiste gebruiker aanmaken aan de hand van de role
+            if(parsedToken.roles == Role.Mulitmed){
+              this._user$.next(new Multimed(username, parsedToken.roles))
+            }else{
+              this._user$.next(new Therapist(username, parsedToken.roles, parsedToken.telephone, parsedToken.function, parsedToken.website,parsedToken.workinghours))
+            }
             return true;
           } else {
             return false;
