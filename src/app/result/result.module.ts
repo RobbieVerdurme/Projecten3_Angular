@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ResultMultimedComponent } from './result-multimed/result-multimed.component';
+import { ResultListComponent } from './result-list/result-list.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
+import { ResultDetailComponent } from './result-detail/result-detail.component';
 
 const routes = [
-  { path: 'multimed', component: ResultMultimedComponent},
+  { path: 'list', component: ResultListComponent},
+  { path: '1', component: ResultDetailComponent},
 ]
 
 @NgModule({
   declarations: [
-    ResultMultimedComponent
+    ResultListComponent,
+    ResultDetailComponent
   ],
   imports: [
     CommonModule,

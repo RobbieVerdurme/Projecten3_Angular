@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultMultimedComponent } from './result-multimed.component';
+import { ResultDetailComponent } from './result-detail.component';
 
-describe('ResultMultimedComponent', () => {
-  let component: ResultMultimedComponent;
-  let fixture: ComponentFixture<ResultMultimedComponent>;
+describe('ResultDetailComponent', () => {
+  let component: ResultDetailComponent;
+  let fixture: ComponentFixture<ResultDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultMultimedComponent ]
+      declarations: [ ResultDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResultMultimedComponent);
+    fixture = TestBed.createComponent(ResultDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
