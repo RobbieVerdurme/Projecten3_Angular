@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { WelcomeComponent } from './welcome/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 //Component
@@ -9,9 +10,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const appRoutes:Routes = [
     //routes to mainpage,....
-    { path: 'result', loadChildren: './result/result.module#ResultModule', data: {preload: true}},
-    { path: '', redirectTo: '', pathMatch: 'full'},
-    { path: '**', component:PageNotFoundComponent}
+    { path: 'welkom', component: WelcomeComponent},
+    { path: '', redirectTo: '/welkom', pathMatch: 'full'},
+    //{ path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
