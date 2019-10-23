@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { UserModule } from './user/user.module';
 import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
