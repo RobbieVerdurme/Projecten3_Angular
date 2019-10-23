@@ -9,6 +9,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const appRoutes:Routes = [
     //routes to mainpage,....
+    { path: 'result', loadChildren: './result/result.module#ResultModule', data: {preload: true}},
+    { path: '', redirectTo: '', pathMatch: 'full'},
     { path: '**', component:PageNotFoundComponent}
 ];
 
