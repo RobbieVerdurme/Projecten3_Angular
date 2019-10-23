@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Role } from './role';
+import { LoginUser } from './loginuser';
+import { Router } from '@angular/router';
 
 // parce jwt token to json
 function parseJwt(token) {
@@ -27,7 +29,8 @@ export class AuthenticationService {
 
   // constr
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
     if (parsedToken) {
@@ -37,10 +40,14 @@ export class AuthenticationService {
         parsedToken = null;
     }
   }
+  this._user$ = new BehaviorSubject<LoginUser>(parsedToken && parsedToken.unique_name);
 }
 
   // meth
-  login(username: string, password: string): Observable<boolean> {
+  login(username: string, password: string): BehaviorSubject<boolean> {
+    this._user$.next(new LoginUser(username, Role.Mulitmed));
+    return new BehaviorSubject<boolean>(true);
+    /*
     return this.http
       .post(`${environment.apiUrl}/login`, {username, password}, { responseType: 'text' })
       .pipe(
@@ -49,16 +56,30 @@ export class AuthenticationService {
             localStorage.setItem(this._tokenKey, token);
             const parsedToken = parseJwt(token);
             //de juiste gebruiker aanmaken aan de hand van de role
+            /*
             if(parsedToken.roles == Role.Mulitmed){
               this._user$.next(new Multimed(username, parsedToken.roles))
             }else{
-              this._user$.next(new Therapist(username, parsedToken.roles, parsedToken.telephone, parsedToken.function, parsedToken.website,parsedToken.workinghours))
+              this._user$.next(new Therapist(username, parsedToken.roles))
             }
+        
             return true;
           } else {
             return false;
           }
         })
-      );
+      );*/
+  }
+
+  //GETTERS
+  get user$(){
+    return this._user$
+  }
+
+  isMultimed() {
+    if(this.user$.value){
+      return this._user$.value.role == Role.Mulitmed?true:false
+    }
+    return false;
   }
 }

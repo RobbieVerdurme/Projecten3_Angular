@@ -26,8 +26,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
   declarations: [
     AppComponent,
     MainNavComponent,
-    WelcomeComponent
-    PageNotFoundComponent,
+    WelcomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

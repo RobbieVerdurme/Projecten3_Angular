@@ -1,4 +1,4 @@
-abstract class LoginUser {
+export class LoginUser {
     //constructor
     constructor(
         private _username: string,

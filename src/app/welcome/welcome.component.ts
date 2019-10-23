@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../user/authentication.service';
+import { Role } from '../user/role';
 import { LoginUser } from '../user/loginuser';
 
 @Component({
@@ -9,7 +10,7 @@ import { LoginUser } from '../user/loginuser';
 })
 export class WelcomeComponent implements OnInit {
 
-  loggedInUser$ = new LoginUser("Sophie", "Multimed");//this._authenticationService.user$;
+  loggedInUser$ = this._authenticationService.user$.value;
 
   constructor(
     private _authenticationService: AuthenticationService

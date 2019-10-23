@@ -1,11 +1,11 @@
-class Multimed extends LoginUser{
+class Multimed {
     //constructor
     constructor(
         private _MultimedUsername: string,
         private _MultimedRole: string,
     )
     {
-        super(_MultimedUsername, _MultimedRole)
+        //super(_MultimedUsername, _MultimedRole)
     }
     //methods  
     toJSON(): any {
@@ -14,5 +14,4 @@ class Multimed extends LoginUser{
           role: this._MultimedRole
         };
       }
-    //getters
   }

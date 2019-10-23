@@ -11,8 +11,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const appRoutes:Routes = [
     //routes to mainpage,....
     { path: 'welkom', component: WelcomeComponent},
+    { path: 'result', loadChildren: './result/result.module#ResultModule'},
     { path: '', redirectTo: '/welkom', pathMatch: 'full'},
-    //{ path: '**', component: PageNotFoundComponent}
+    { path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
