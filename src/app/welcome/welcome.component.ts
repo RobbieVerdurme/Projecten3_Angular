@@ -9,13 +9,10 @@ import { LoginUser } from '../user/loginuser';
 })
 export class WelcomeComponent implements OnInit {
 
-  //loggedInUser$ = this._authenticationService.user$;
-
-  loggedInUser$: LoginUser
+  loggedInUser$ = new LoginUser("Sophie", "Multimed");//this._authenticationService.user$;
 
   constructor(
-    private _authenticationService: AuthenticationService,
-    //loggedInUser$ = new LoginUser("test", "Multimed")
+    private _authenticationService: AuthenticationService
     ) { }
 
   ngOnInit() {

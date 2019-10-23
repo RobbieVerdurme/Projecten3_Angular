@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthenticationService} from './../user/authentication.service'
+import { LoginUser } from '../user/loginuser';
 
 @Component({
   selector: 'app-main-nav',
@@ -10,7 +11,7 @@ import { AuthenticationService} from './../user/authentication.service'
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
-  //loggedInUser$ = this._authenticationService.user$;
+  loggedInUser$ = new LoginUser("Sophie", "Multimed");//this._authenticationService.user$;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -22,4 +23,7 @@ export class MainNavComponent {
     private breakpointObserver: BreakpointObserver,
     private _authenticationService: AuthenticationService) {}
 
+  get isMultimed(){
+    return this.loggedInUser$.role == "Multimed"?true: false;
+  }
 }

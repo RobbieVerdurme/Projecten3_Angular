@@ -10,6 +10,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 const appRoutes:Routes = [
     //routes to mainpage,....
     { path: 'welkom', component: WelcomeComponent},
+    { path: '', redirectTo: '/welkom', pathMatch: 'full'},
     //{ path: '**', component: PageNotFoundComponent}
 ];
 

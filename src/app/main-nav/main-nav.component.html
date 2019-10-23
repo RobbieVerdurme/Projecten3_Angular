@@ -5,21 +5,17 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Profiel</a>
+      <a mat-list-item href="#" >Profiel</a>
       <a mat-list-item href="#">Overzicht</a>
-      <a mat-list-item href="#" style="margin-left:30px;">Gebruikers</a>
-      <a mat-list-item href="#" style="margin-left:30px;">Therapeuten</a>
-      <a mat-list-item href="#" style="margin-left:30px;">Resultaten</a>
-      <a mat-list-item href="#">Registreren</a>
-      <a mat-list-item href="#" style="margin-left:30px;">Gebruikers</a>
-      <a mat-list-item href="#" style="margin-left:30px;">Therapeuten</a>
-    </mat-nav-list>
-    <mat-nav-list>
-      <a mat-list-item href="#">Profiel</a>
-      <a mat-list-item href="#">Overzicht</a>
-      <a mat-list-item href="#">Toevoegen</a>
-      <a mat-list-item href="#" style="margin-left:30px;">Uitdaging</a>
-      <a mat-list-item href="#" style="margin-left:30px;">Info</a>
+      <a mat-list-item href="#" class="submenu">- Gebruikers</a>
+      <a mat-list-item href="#" class="submenu" *ngIf="isMultimed">- Therapeuten</a>
+      <a mat-list-item href="#" class="submenu" *ngIf="isMultimed">- Resultaten</a>
+      <a mat-list-item href="#" *ngIf="isMultimed">Registreren</a>
+      <a mat-list-item href="#" class="submenu" *ngIf="isMultimed">- Gebruikers</a>
+      <a mat-list-item href="#" class="submenu" *ngIf="isMultimed">- Therapeuten</a>
+      <a mat-list-item href="#" >Toevoegen</a>
+      <a mat-list-item href="#" class="submenu">- Uitdaging</a>
+      <a mat-list-item href="#" class="submenu">- Info</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -32,7 +28,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Projecten3Multimed2</span>
+      <span>Multimed</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content></ng-content>
