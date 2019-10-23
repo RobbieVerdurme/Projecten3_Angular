@@ -1,0 +1,6 @@
+.workingHours{
+    background-color: #4E997A; border-collapse: collapse;
+}
+.workingHours td {
+    border: 1px solid black;
+}

@@ -71,6 +71,15 @@ export class AuthenticationService {
       );*/
   }
 
+  registerUser(photo: string, username: string, firstname: string, lastname: string, email: string, telephone: string, category: string): BehaviorSubject<boolean>  {
+    return new BehaviorSubject<boolean>(true);
+  }
+
+  registerTherapist(photo: string, username: string, firstname: string, lastname: string, email: string, telephone: string, category:string): BehaviorSubject<boolean>  {
+    return new BehaviorSubject<boolean>(true);
+  }
+
+
   //GETTERS
   get user$(){
     return this._user$
