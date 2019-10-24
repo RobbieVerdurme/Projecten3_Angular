@@ -1,0 +1,15 @@
+/***************uitdagingen table*****************/
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+/**********matcard***********/
+.matcard {
+  text-align: center;
+  min-width: 40%;
+}

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort, MatPaginator } from '@angular/material';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 export interface UserData {
   lastName: string;
@@ -42,7 +43,10 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   //ctor
-  constructor(breakpointObserver: BreakpointObserver) {
+  constructor(
+    breakpointObserver: BreakpointObserver,
+    private router: Router
+    ) {
     this.dataSource = new MatTableDataSource(USER_DATA); 
 
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
@@ -50,7 +54,6 @@ export class UserListComponent implements OnInit {
         ['firstName', 'lastName'] : 
         ['firstName', 'lastName', 'email', 'amountOfChallenges'];
     });
-  
   }
 
   //methods
@@ -67,4 +70,7 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  detailscreen(user){
+    this.router.navigate(['/overzicht/user/1'])
+  }
 }

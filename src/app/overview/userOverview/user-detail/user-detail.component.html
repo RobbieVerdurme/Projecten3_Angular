@@ -1,0 +1,53 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <mat-card class="matcard">
+        <mat-card-title>
+            <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+        </mat-card-title>
+        <mat-card-content>
+            <table>
+                <!--CONTENT USER-->
+                <td>
+                    <tr>
+                        <td>username : </td>
+                        <td>AngusM</td>
+                    </tr>
+                    <tr>
+                        <td>Firstname : </td>
+                        <td>Angus</td>
+                    </tr>
+                    <tr>
+                        <td>Lastname : </td>
+                        <td>Morton</td>
+                    </tr>
+                    <tr>
+                        <td>E-mail : </td>
+                        <td>
+                            <a href="mailto:Angus.Morton@multimed.be">Angus.Morton@multimed.be</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Telefoon : </td>
+                        <td>0478995889</td>
+                    </tr>
+                </td>
+                <td>
+                    <!--UITDAGINGEN-->
+                    <div class="example-container mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort>
+                            <!-- challengename Column -->
+                            <ng-container matColumnDef="challengename">
+                                <th mat-header-cell *matHeaderCellDef> Uitdagingen </th>
+                                <td mat-cell *matCellDef="let element" (click)="detailscreen(Uitdaging)">
+                                    {{element.challengename}}
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <button mat-button>Voeg uitdagingen toe</button>
+                </td>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>
