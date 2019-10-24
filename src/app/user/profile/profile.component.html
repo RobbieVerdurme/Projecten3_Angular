@@ -1,13 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>User profiel</mat-card-title>
-    </mat-card-header>
+<mat-card style="text-align: center;">
+        <mat-card-title>
+            <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+        </mat-card-title>
     <mat-card-content>
         <table>
-            <tr>
-                <td>Photo</td>
-            </tr>
             <tr>
                 <td>username : </td>
                 <td>{{user$.username}}</td>
@@ -33,17 +30,50 @@
             <tr>
                 <td>Working Hours : </td>
                 <td>
-                    <table class="workingHours">
+                    <table class="workingHours" role="table">
+                        <!--
                         <tr>
                             <td>Maandag</td>
-                            <td>Dinsdag</td>
-                            <td>Woensdag</td>
-                            <td>Donderdag</td>
-                            <td>Vrijdag</td>
-                            <td>Zaterdag</td>
-                            <td>Zondag</td>
+                            <td>9-17</td>
                         </tr>
                         <tr>
+                            <td>Dinsdag</td>
+                            <td>9-17</td>
+                        </tr>
+                        <tr>
+                            <td>Woensdag</td>
+                            <td>9-17</td>
+                        </tr>
+                        <tr>
+                            <td>Donderdag</td>
+                            <td>9-17</td>
+                        </tr>
+                        <tr>
+                            <td>Vrijdag</td>
+                            <td>9-17</td>
+                        </tr>
+                        <tr>
+                            <td>Zaterdag</td>
+                            <td>gesloten</td>
+                        </tr>
+                        <tr>
+                            <td>Zondag</td>
+                            <td>gesloten</td>
+                        </tr>
+                        -->
+                        <thead role="rowgroup">
+                        <tr role="row">
+                            <th>Maandag</th>
+                            <th>Dinsdag</th>
+                            <th>Woensdag</th>
+                            <th>Donderdag</th>
+                            <th>Vrijdag</th>
+                            <th>Zaterdag</th>
+                            <th>Zondag</th>
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <tr role="row">
                             <td>9-17</td>
                             <td>9-17</td>
                             <td>9-16</td>
@@ -52,6 +82,7 @@
                             <td>gesloten</td>
                             <td>gesloten</td>
                         </tr>
+                    </tbody>
                     </table>
                 </td>
             </tr>
