@@ -11,9 +11,9 @@ import { AuthGuard } from './user/auth.guard';
 
 const appRoutes:Routes = [
     //routes to mainpage,....
-    { path: 'welkom', component: WelcomeComponent},
-    { path: 'result', loadChildren: './result/result.module#ResultModule'},
-    { path: 'overzicht', loadChildren: './userOverview/userOverview.module#UserOverviewModule'},
+    { path: 'welkom', canActivate:[AuthGuard], component: WelcomeComponent},
+    { path: 'result', canActivate:[AuthGuard], loadChildren: './result/result.module#ResultModule'},
+    { path: 'overzicht', canActivate:[AuthGuard], loadChildren: './userOverview/userOverview.module#UserOverviewModule'},
     { path: '', redirectTo: '/welkom', pathMatch: 'full'},
     { path: '**', component: PageNotFoundComponent}
 ];
