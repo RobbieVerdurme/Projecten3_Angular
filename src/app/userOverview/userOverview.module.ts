@@ -4,7 +4,6 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserComponent } from './user/user.component';
 
 const routes = [
   { path: 'list', component: UserListComponent},
@@ -14,8 +13,7 @@ const routes = [
 @NgModule({
   declarations: [
     UserListComponent,
-    UserDetailComponent,
-    UserComponent
+    UserDetailComponent
   ],
   imports: [
     CommonModule,
