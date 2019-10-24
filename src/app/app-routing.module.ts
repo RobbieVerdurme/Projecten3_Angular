@@ -13,7 +13,7 @@ const appRoutes:Routes = [
     //routes to mainpage,....
     { path: 'welkom', canActivate:[AuthGuard], component: WelcomeComponent},
     { path: 'result', canActivate:[AuthGuard], loadChildren: './result/result.module#ResultModule'},
-    { path: 'overzicht', canActivate:[AuthGuard], loadChildren: './userOverview/userOverview.module#UserOverviewModule'},
+    { path: 'overzicht', canActivate:[AuthGuard], loadChildren: './overview/overview.module#OverviewModule'},
     { path: '', redirectTo: '/welkom', pathMatch: 'full'},
     { path: '**', component: PageNotFoundComponent}
 ];
