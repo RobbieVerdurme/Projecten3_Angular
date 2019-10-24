@@ -77,6 +77,14 @@ export class AuthenticationService {
       );*/
   }
 
+  logout() {
+    if (this.user$.getValue()) {
+      localStorage.removeItem(this._tokenKey);
+      this._user$.next(null);
+      this.router.navigate(['/login']);
+    }
+  }
+
   registerUser(photo: string, username: string, firstname: string, lastname: string, email: string, telephone: string, category: string): BehaviorSubject<boolean>  {
     return new BehaviorSubject<boolean>(true);
   }
