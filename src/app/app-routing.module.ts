@@ -12,6 +12,7 @@ const appRoutes:Routes = [
     //routes to mainpage,....
     { path: 'welkom', component: WelcomeComponent},
     { path: 'result', loadChildren: './result/result.module#ResultModule'},
+    { path: 'overzicht', loadChildren: './userOverview/userOverview.module#UserOverviewModule'},
     { path: '', redirectTo: '/welkom', pathMatch: 'full'},
     { path: '**', component: PageNotFoundComponent}
 ];

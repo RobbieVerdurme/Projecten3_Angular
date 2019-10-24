@@ -21,13 +21,12 @@ import { MatListModule } from '@angular/material/list';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     WelcomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

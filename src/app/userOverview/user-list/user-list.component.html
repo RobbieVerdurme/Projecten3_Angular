@@ -1,0 +1,27 @@
+<!--POSTS--
+<div fxLayout="column" fxLayoutGap="2%">
+    <div *ngIf="(users$ | async) as users; else loadingOrError">
+      <div *ngFor="let user of (users$ | async)" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+          <app-user [user]="user"></app-user>
+      </div>
+    </div>
+  </div>
+  
+  --TEMPLATE--
+  <ng-template #loadingOrError>
+      <mat-card>
+        <mat-error *ngIf="(loadingError$ | async) as errorMessage; else loading">
+         Error loading the post list: {{ errorMessage }}. <br/>
+          Please try again later.
+        </mat-error>
+        <ng-template #loading>
+  
+          <p style="text-align: center;">Loading latest posts...</p>
+          <div class="drawing" id="loading">
+              <div class="loading-dot"></div>
+            </div>
+        </ng-template>
+      </mat-card>
+    </ng-template> 
+-->
+<p>Userlist works</p>
