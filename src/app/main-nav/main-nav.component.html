@@ -1,36 +1,40 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item >Profiel</a>
-      <a mat-list-item>Overzicht</a>
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="['/welkom']"><mat-icon>home</mat-icon> Home</a>
+        <a mat-list-item [routerLink]="['/profile']"><mat-icon>account_circle</mat-icon> Profiel</a>
+        <a mat-list-item>Overzicht</a>
       <a mat-list-item class="submenu" [routerLink]="['/overzicht/list']">- Gebruikers</a>
-      <a mat-list-item class="submenu" *ngIf="isMultimed">- Therapeuten</a>
-      <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/result/list']">- Resultaten</a>
-      <a mat-list-item *ngIf="isMultimed">Registreren</a>
-      <a mat-list-item class="submenu" *ngIf="isMultimed">- Gebruikers</a>
-      <a mat-list-item class="submenu" *ngIf="isMultimed">- Therapeuten</a>
-      <a mat-list-item>Toevoegen</a>
-      <a mat-list-item class="submenu">- Uitdaging</a>
-      <a mat-list-item class="submenu">- Info</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Multimed</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-    <ng-content></ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+        <a mat-list-item class="submenu" *ngIf="isMultimed"><mat-icon>people</mat-icon> Therapeuten</a>
+        <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/result/list']"><mat-icon>list</mat-icon> Resultaten</a>
+        <a mat-list-item *ngIf="isMultimed">Registreren</a>
+        <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/registeruser']"><mat-icon>person_add</mat-icon> Gebruikers</a>
+        <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/registertherapist']"><mat-icon>person_add</mat-icon> Therapeuten</a>
+        <a mat-list-item>Toevoegen</a>
+        <a mat-list-item class="submenu"><mat-icon>add</mat-icon> Uitdaging</a>
+        <a mat-list-item class="submenu"><mat-icon>add</mat-icon> Info</a>
+        <span *ngIf="(loggedInUser$ | async) as LoginUser">
+          <button (click)="logout()" mat-flat-button><mat-icon>perm_identity</mat-icon>Logout</button>
+        </span>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>Multimed</span>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

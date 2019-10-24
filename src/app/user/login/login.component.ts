@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error){
-          this.errorMsg = `Error bij het inloggen van user ${this.user.value.username}`;
+          this.errorMsg = `Error bij het inloggen van gebruiker ${this.user.value.username}`;
         } else {
-          this.errorMsg = `Error ${err.status} bij het inloggen van user ${this.user.value.username}`;
+          this.errorMsg = `Error ${err.status} bij het inloggen van gebruiker ${this.user.value.username}`;
         }
       }
     )
