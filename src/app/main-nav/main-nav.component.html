@@ -7,7 +7,7 @@
     <mat-nav-list>
       <a mat-list-item >Profiel</a>
       <a mat-list-item>Overzicht</a>
-      <a mat-list-item class="submenu">- Gebruikers</a>
+      <a mat-list-item class="submenu" [routerLink]="['/overzicht/list']">- Gebruikers</a>
       <a mat-list-item class="submenu" *ngIf="isMultimed">- Therapeuten</a>
       <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/result/list']">- Resultaten</a>
       <a mat-list-item *ngIf="isMultimed">Registreren</a>
