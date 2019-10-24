@@ -9,6 +9,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #4E997A;
+    min-height: 95vh;
 }
 
 /**********************SIDENAV*********************************/
