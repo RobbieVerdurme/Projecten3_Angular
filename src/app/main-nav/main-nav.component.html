@@ -5,14 +5,14 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item >Profiel</a>
+      <a mat-list-item [routerLink]="['/profile']">Profiel</a>
       <a mat-list-item>Overzicht</a>
       <a mat-list-item class="submenu">- Gebruikers</a>
       <a mat-list-item class="submenu" *ngIf="isMultimed">- Therapeuten</a>
       <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/result/list']">- Resultaten</a>
       <a mat-list-item *ngIf="isMultimed">Registreren</a>
-      <a mat-list-item class="submenu" *ngIf="isMultimed">- Gebruikers</a>
-      <a mat-list-item class="submenu" *ngIf="isMultimed">- Therapeuten</a>
+      <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/registeruser']">- Gebruikers</a>
+      <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/registertherapist']">- Therapeuten</a>
       <a mat-list-item>Toevoegen</a>
       <a mat-list-item class="submenu">- Uitdaging</a>
       <a mat-list-item class="submenu">- Info</a>

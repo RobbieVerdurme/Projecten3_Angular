@@ -8,14 +8,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
 //Component
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
+import { RegisterTherapistComponent } from './register-therapist/register-therapist.component';
 
 const routes:Routes = [
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'registeruser', component: RegisterUserComponent},
+  {path: 'registertherapist', component: RegisterTherapistComponent},
+  {path: 'profile', component: ProfileComponent}
 ]
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    RegisterUserComponent,
+    RegisterTherapistComponent
   ],
   imports: [
     CommonModule,
