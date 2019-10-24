@@ -30,6 +30,8 @@ export class RegisterTherapistComponent implements OnInit {
       lastname: [''],
       email:[''],
       telephone: [''],
+      workingHours: [''],
+      website: [''],
       category: ['']
     });
   }
@@ -43,6 +45,8 @@ export class RegisterTherapistComponent implements OnInit {
       this.user.value.lastname,
       this.user.value.email,
       this.user.value.telephone,
+      this.user.value.workingHours,
+      this.user.value.website,
       this.user.value.category
       )
       .subscribe(

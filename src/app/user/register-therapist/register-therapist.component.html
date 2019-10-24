@@ -10,16 +10,6 @@
             <form [formGroup]="user" (ngSubmit)="onSubmit()">
                 <table>
                     <tr>
-                        <td>Photo</td>
-                        <td>
-                            <!--
-                                <mat-form-field>
-                                    <input type="image" matInput placeholder="img" formControlName="img" required />
-                                </mat-form-field>
-                                -->
-                        </td>
-                    </tr>
-                    <tr>
                         <td>Gebruikersnaam : </td>
                         <td>
                             <mat-form-field>
@@ -99,7 +89,7 @@
                         <td>Website : </td>
                         <td>
                             <mat-form-field>
-                                <input type="text" matInput placeholder="Website" formControlName="website" required />
+                                <input type="text" matInput placeholder="Website" formControlName="website" />
                             </mat-form-field>
                         </td>
                     </tr>

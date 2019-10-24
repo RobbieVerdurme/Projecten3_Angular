@@ -39,13 +39,19 @@ export class AuthenticationService {
         localStorage.removeItem(this._tokenKey);
         parsedToken = null;
     }
+    this._user$ = new BehaviorSubject<LoginUser>(new LoginUser(parsedToken.username, parsedToken.role));
+  }else{
+    this._user$ = new BehaviorSubject<LoginUser>(parsedToken && parsedToken.username && parsedToken.role);
   }
-  this._user$ = new BehaviorSubject<LoginUser>(parsedToken && parsedToken.unique_name);
+  
 }
 
   // meth
   login(username: string, password: string): BehaviorSubject<boolean> {
-    this._user$.next(new LoginUser(username, Role.Mulitmed));
+    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJTb2ZpZVYiLCJpYXQiOjE1MTYyMzkwMjIsInJvbGUiOiJNdWx0aW1lZCJ9.JaTZOA1TJoFDATM4Tr3vCsFFHtRNd4sHYAoWjPvj-3w";
+    localStorage.setItem(this._tokenKey, token);
+    const parsedToken = parseJwt(token);
+    this._user$.next(new LoginUser(username, parsedToken.role));
     return new BehaviorSubject<boolean>(true);
     /*
     return this.http
@@ -75,7 +81,7 @@ export class AuthenticationService {
     return new BehaviorSubject<boolean>(true);
   }
 
-  registerTherapist(photo: string, username: string, firstname: string, lastname: string, email: string, telephone: string, category:string): BehaviorSubject<boolean>  {
+  registerTherapist(photo: string, username: string, firstname: string, lastname: string, email: string, telephone: string, website:string, workingHours:string, category:string): BehaviorSubject<boolean>  {
     return new BehaviorSubject<boolean>(true);
   }
 
@@ -83,6 +89,16 @@ export class AuthenticationService {
   //GETTERS
   get user$(){
     return this._user$
+  }
+
+  get token(): string {
+    const localToken = localStorage.getItem(this._tokenKey);
+    if(localToken){
+      let parsedToken = parseJwt(localToken);
+      this._user$.next(new LoginUser(parsedToken.username, parsedToken.role));
+      return localToken;
+    }
+    return '';
   }
 
   isMultimed() {

@@ -4,14 +4,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './user/auth.guard';
 
 //Component
 
 
 const appRoutes:Routes = [
     //routes to mainpage,....
-    { path: 'welkom', component: WelcomeComponent},
-    { path: 'result', loadChildren: './result/result.module#ResultModule'},
+    { path: 'welkom', canActivate: [AuthGuard], component: WelcomeComponent},
+    { path: 'result', canActivate: [AuthGuard], loadChildren: './result/result.module#ResultModule'},
     { path: '', redirectTo: '/welkom', pathMatch: 'full'},
     { path: '**', component: PageNotFoundComponent}
 ];

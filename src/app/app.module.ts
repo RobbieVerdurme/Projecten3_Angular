@@ -19,6 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { httpInterceptorProviders } from './interceptors';
 
 
 
@@ -43,7 +44,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

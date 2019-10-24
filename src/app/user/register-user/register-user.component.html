@@ -10,16 +10,6 @@
             <form [formGroup]="user" (ngSubmit)="onSubmit()">
                 <table>
                     <tr>
-                        <td>Photo</td>
-                        <td>
-                            <!--
-                            <mat-form-field>
-                                <input type="image" matInput placeholder="img" formControlName="img" required />
-                            </mat-form-field>
-                            -->
-                        </td>
-                    </tr>
-                    <tr>
                         <td>Gebruikersnaam : </td>
                         <td>
                             <mat-form-field>
@@ -41,7 +31,8 @@
                         <td>Achternaam : </td>
                         <td>
                             <mat-form-field>
-                                <input type="text" matInput placeholder="Achternaam" formControlName="lastname" required />
+                                <input type="text" matInput placeholder="Achternaam" formControlName="lastname"
+                                    required />
                             </mat-form-field>
                         </td>
                     </tr>
@@ -63,14 +54,17 @@
                         </td>
                     </tr>
                     <tr>
-                            <td>Categorie : </td>
-                            <td>
-                                <mat-form-field>
-                                    <input type="text" matInput placeholder="Categorie" formControlName="category" required />
-                                </mat-form-field>
-                                <button mat-button><mat-icon>add_circle</mat-icon></button>
-                            </td>
-                        </tr>
+                        <td>Categorie : </td>
+                        <td>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Categorie" formControlName="category"
+                                    required />
+                            </mat-form-field>
+                            <button mat-button>
+                                <mat-icon>add_circle</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
                 </table>
                 <div class="button">
                     <button type="submit" mat-button>Registreer</button>
@@ -78,4 +72,4 @@
             </form>
         </mat-card-content>
     </mat-card>
-</div>q
+</div>
