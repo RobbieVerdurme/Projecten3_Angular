@@ -22,13 +22,12 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { httpInterceptorProviders } from './interceptors';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     WelcomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

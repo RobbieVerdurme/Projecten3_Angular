@@ -1,0 +1,74 @@
+<!--POSTS--
+<div fxLayout="column" fxLayoutGap="2%">
+    <div *ngIf="(users$ | async) as users; else loadingOrError">
+      <div *ngFor="let user of (users$ | async)" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+          <app-user [user]="user"></app-user>
+      </div>
+    </div>
+  </div>
+  
+  --TEMPLATE--
+  <ng-template #loadingOrError>
+      <mat-card>
+        <mat-error *ngIf="(loadingError$ | async) as errorMessage; else loading">
+         Error loading the post list: {{ errorMessage }}. <br/>
+          Please try again later.
+        </mat-error>
+        <ng-template #loading>
+  
+          <p style="text-align: center;">Loading latest posts...</p>
+          <div class="drawing" id="loading">
+              <div class="loading-dot"></div>
+            </div>
+        </ng-template>
+      </mat-card>
+    </ng-template> 
+-->
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
+      <td mat-cell *matCellDef="let element"> 
+        <span class="mobile-label">Voornaam:</span>
+        {{element.firstName}} 
+      </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Naam </th>
+      <td mat-cell *matCellDef="let element">
+          <span class="mobile-label">Naam:</span>
+           {{element.lastName}} 
+          </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let element">
+          <span class="mobile-label">Email:</span>
+          {{element.email}} 
+        </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="amountOfChallenges">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aantal Challenges </th>
+      <td mat-cell *matCellDef="let element">
+          <span class="mobile-label">Aantal challenges:</span> 
+          {{element.amountOfChallenges}} 
+        </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>  
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
