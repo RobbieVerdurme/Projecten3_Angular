@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../user/auth.guard';
 
+//Defining the different paths
 const routes = [
     { path: 'user', canActivate:[AuthGuard], loadChildren: './userOverview/userOverview.module#UserOverviewModule'},
-    { path: 'therapist', canActivate:[AuthGuard], loadChildren: './therapistOverview/therapistOverview.module#TherapistOverviewModule'}
+    { path: 'therapist', canActivate:[AuthGuard], loadChildren: './therapistOverview/therapistOverview.module#TherapistOverviewModule'},
+    { path: 'company', canActivate:[AuthGuard], loadChildren: './companyOverview/companyOverview.module#CompanyOverviewModule'}
 ]
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)

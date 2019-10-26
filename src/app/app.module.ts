@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { httpInterceptorProviders } from './interceptors';
-import { CompanyComponent } from './company/company.component';
+
 
 
 @NgModule({
@@ -28,8 +28,7 @@ import { CompanyComponent } from './company/company.component';
     AppComponent,
     MainNavComponent,
     WelcomeComponent,
-    PageNotFoundComponent,
-    CompanyComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

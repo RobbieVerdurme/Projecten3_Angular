@@ -9,6 +9,7 @@ class Company{
         private _houseNumber: string,
         private _city: string,
         private _postalCode: string,
+        private _country: string
     ){}
 
     //getters
@@ -42,5 +43,39 @@ class Company{
 
     get postalCode(): string{
         return this._postalCode
+    }
+
+    get country(): string{
+        return this._country
+    }
+
+    //Set JSON object to company object
+    static fromJSON(json: any): Company{
+        const company = new Company(
+            json.id,
+            json.name,
+            json.phone,
+            json.mail,
+            json.street,
+            json.houseNumber,
+            json.city,
+            json.postalCode,
+            json.country
+        );
+        return company;
+    }
+
+    //set company object to JSON object
+    toJSON(): any{
+        return{
+            name: this.name,
+            phone: this.phone,
+            mail: this.mail,
+            street: this.street,
+            houseNumber: this.houseNumber,
+            city: this.city,
+            postalCode: this.postalCode,
+            country: this.country
+        }
     }
 }

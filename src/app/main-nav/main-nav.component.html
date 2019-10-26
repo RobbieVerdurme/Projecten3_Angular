@@ -8,8 +8,9 @@
         <a mat-list-item [routerLink]="['/welkom']"><mat-icon>home</mat-icon> Home</a>
         <a mat-list-item [routerLink]="['/profile']"><mat-icon>account_circle</mat-icon> Profiel</a>
         <a mat-list-item>Overzicht</a>
-      <a mat-list-item class="submenu" [routerLink]="['/overzicht/user/list']"><mat-icon>people</mat-icon> Gebruikers</a>
+        <a mat-list-item class="submenu" [routerLink]="['/overzicht/user/list']"><mat-icon>people</mat-icon> Gebruikers</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/overzicht/therapist/list']"><mat-icon>people</mat-icon> Therapeuten</a>
+        <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/overzicht/company/list']"><mat-icon>business</mat-icon> Bedrijven</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/result/list']"><mat-icon>list</mat-icon> Resultaten</a>
         <a mat-list-item *ngIf="isMultimed">Registreren</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/registeruser']"><mat-icon>person_add</mat-icon> Gebruikers</a>
