@@ -1,7 +1,7 @@
 class Company{
     //constructor
     constructor(
-        private _id: Int32Array,
+        private _id: number,
         private _name: string,
         private _phone: string, 
         private _mail: string,
@@ -9,11 +9,12 @@ class Company{
         private _houseNumber: string,
         private _city: string,
         private _postalCode: string,
-        private _country: string
+        private _country: string,
+        private _site: string
     ){}
 
     //getters
-    get id(): Int32Array{
+    get id(): number{
         return this._id
     }
 
@@ -49,6 +50,10 @@ class Company{
         return this._country
     }
 
+    get site(): string{
+        return this._site
+    }
+
     //Set JSON object to company object
     static fromJSON(json: any): Company{
         const company = new Company(
@@ -60,7 +65,8 @@ class Company{
             json.houseNumber,
             json.city,
             json.postalCode,
-            json.country
+            json.country,
+            json.site
         );
         return company;
     }
@@ -75,7 +81,8 @@ class Company{
             houseNumber: this.houseNumber,
             city: this.city,
             postalCode: this.postalCode,
-            country: this.country
+            country: this.country,
+            site: this.site
         }
     }
 }
