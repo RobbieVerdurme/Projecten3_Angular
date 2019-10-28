@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { httpInterceptorProviders } from './interceptors';
+import { CompanyModule } from './company/company.module';
 
 
 
@@ -38,6 +39,7 @@ import { httpInterceptorProviders } from './interceptors';
     UserModule,
     AppRoutingModule,
     LayoutModule,
+    CompanyModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

@@ -1,4 +1,6 @@
-class Company{
+import { LoginUser } from 'src/app/user/loginuser';
+
+export class Company{
     //constructor
     constructor(
         private _id: number,
@@ -10,7 +12,8 @@ class Company{
         private _city: string,
         private _postalCode: string,
         private _country: string,
-        private _site: string
+        private _site: string,
+        private _companyMembers = new Array<LoginUser>()
     ){}
 
     //getters
@@ -54,6 +57,10 @@ class Company{
         return this._site
     }
 
+    get companyMembers(): LoginUser[]{
+        return this._companyMembers
+    }
+
     //Set JSON object to company object
     static fromJSON(json: any): Company{
         const company = new Company(
@@ -66,7 +73,8 @@ class Company{
             json.city,
             json.postalCode,
             json.country,
-            json.site
+            json.site,
+            json.companyMembers.map(LoginUser.FromJSON)
         );
         return company;
     }
@@ -82,7 +90,8 @@ class Company{
             city: this.city,
             postalCode: this.postalCode,
             country: this.country,
-            site: this.site
+            site: this.site,
+            companyMembers: this.companyMembers.map(cm => cm.toJSON())
         }
     }
 }

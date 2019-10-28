@@ -13,12 +13,14 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { RegisterTherapistComponent } from './register-therapist/register-therapist.component';
 //auth
 import { AuthGuard } from './auth.guard';
+import { RegisterCompanyComponent } from '../company/register-company/register-company.component';
 
 const routes:Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registeruser', canActivate:[AuthGuard], component: RegisterUserComponent},
   {path: 'registertherapist', canActivate:[AuthGuard], component: RegisterTherapistComponent},
-  {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent}
+  {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent},
+  {path: 'registercompany', canActivate:[AuthGuard], component: RegisterCompanyComponent}
 ]
 
 @NgModule({

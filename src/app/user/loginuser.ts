@@ -13,6 +13,15 @@ export class LoginUser {
         role: this._role
       };
     }
+
+    //set JSON object to LoginUser object
+    static FromJSON(json:any): LoginUser{
+      const loginUser = new LoginUser(
+        json.username,
+        json.role
+      );
+      return loginUser
+    }
   
     //getters
     get username(){
@@ -22,4 +31,6 @@ export class LoginUser {
     get role() {
       return this._role;
     }
+
+    
   }
