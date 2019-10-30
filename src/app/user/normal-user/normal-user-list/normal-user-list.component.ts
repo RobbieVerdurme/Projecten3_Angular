@@ -41,14 +41,13 @@ const USER_DATA: UserData[] = [
   {firstName: 'Musa', lastName: 'Strickland', email: 'Musa.Strickland@multimed.be', amountOfChallenges: 2},
   {firstName: 'Darren', lastName: 'Sherman', email: 'Darren.Sherman@multimed.be', amountOfChallenges: 2}
 ];
-
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  selector: 'app-normal-user-list',
+  templateUrl: './normal-user-list.component.html',
+  styleUrls: ['./normal-user-list.component.css']
 })
-export class UserListComponent implements OnInit {
-  //var
+export class NormalUserListComponent implements OnInit {
+//var
   @Input() userData: UserData[]
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'amountOfChallenges'];
   dataSource: MatTableDataSource<UserData>;
@@ -70,7 +69,7 @@ export class UserListComponent implements OnInit {
           ['firstName', 'lastName', 'email', 'amountOfChallenges'];
       });
   }
-
+  
   //methods
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -86,6 +85,8 @@ export class UserListComponent implements OnInit {
   }
 
   detailscreen(user){
-    this.router.navigate(['/overzicht/user/1'])
+    this.router.navigate(['/gebruiker/id'])
   }
+
 }
+ 

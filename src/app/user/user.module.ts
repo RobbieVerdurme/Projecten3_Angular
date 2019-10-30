@@ -9,7 +9,7 @@ import { MaterialModule } from '../material/material.module';
 //Component
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { RegisterUserComponent } from './register-user/register-user.component';
+import { RegisterUserComponent } from './normal-user/register-normal-user/register-user.component';
 import { RegisterTherapistComponent } from './register-therapist/register-therapist.component';
 //auth
 import { AuthGuard } from './auth.guard';
@@ -17,7 +17,7 @@ import { RegisterCompanyComponent } from '../company/register-company/register-c
 
 const routes:Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'registeruser', canActivate:[AuthGuard], component: RegisterUserComponent},
+  {path: 'gebruiker', canActivate:[AuthGuard], loadChildren: () => import(`./normal-user/normal-user.module`).then(m => m.NormalUserModule)},
   {path: 'registertherapist', canActivate:[AuthGuard], component: RegisterTherapistComponent},
   {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent},
   {path: 'registercompany', canActivate:[AuthGuard], component: RegisterCompanyComponent}
@@ -27,7 +27,6 @@ const routes:Routes = [
   declarations: [
     LoginComponent,
     ProfileComponent,
-    RegisterUserComponent,
     RegisterTherapistComponent
   ],
   imports: [
