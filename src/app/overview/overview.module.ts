@@ -5,8 +5,7 @@ import { AuthGuard } from '../user/auth.guard';
 
 //Defining the different paths
 const routes = [
-    { path: 'therapist', canActivate:[AuthGuard], loadChildren: './therapistOverview/therapistOverview.module#TherapistOverviewModule'},
-    { path: 'bedrijf', canActivate:[AuthGuard], loadChildren: './companyOverview/companyOverview.module#CompanyOverviewModule'}
+    { path: 'therapist', canActivate:[AuthGuard], loadChildren: './therapistOverview/therapistOverview.module#TherapistOverviewModule'}
 ]
 
 @NgModule({
