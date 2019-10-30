@@ -24,7 +24,6 @@ export class CompanyDataService {
 
   //Add a company, id generated in backend
   addNewCompany(company: Company): BehaviorSubject<boolean>{
-    this.router.navigate(['/overzicht/company/list']);
     return new BehaviorSubject<boolean>(true);
   }
   

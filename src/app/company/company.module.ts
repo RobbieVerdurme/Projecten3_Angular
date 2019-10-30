@@ -7,15 +7,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../user/auth.guard';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { CompanyListComponent } from './company-list/company-list.component';
 
 const routes: Routes = [
-  {path: 'registercompany', canActivate: [AuthGuard], component: RegisterCompanyComponent}
+  {path: 'bedrijf/registreren', canActivate: [AuthGuard], component: RegisterCompanyComponent},
+  {path: 'bedrijf/lijst', canActivate: [AuthGuard], component: CompanyListComponent},
+  {path: 'bedrijf/id', canActivate: [AuthGuard], component: CompanyDetailComponent}
 ]
 
 @NgModule({
   declarations: [
     RegisterCompanyComponent,
-    CompanyComponent
+    CompanyComponent,
+    CompanyDetailComponent,
+    CompanyListComponent
   ],
   imports: [
     CommonModule,

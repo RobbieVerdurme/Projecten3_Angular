@@ -17,7 +17,6 @@ const routes = [
 
 @NgModule({
   declarations: [
-    NormalUserListComponent, 
     NormalUserComponent,
     RegisterUserComponent,
     NormalUserDetailComponent
@@ -27,6 +26,6 @@ const routes = [
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
-  ]
+  ],
 })
 export class NormalUserModule { }
