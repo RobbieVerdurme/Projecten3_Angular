@@ -18,19 +18,8 @@ export interface CompanyData{
   site: string;
 }
 
-const COMPANY_DATA: CompanyData[] = [
-  {id: 0, name: 'Aaaajegnxc fdskljlgk odskfdsql sd', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '1', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 1, name: 'Bbbb', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '2', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 2, name: 'Cccc', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '3', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 3, name: 'Dddd', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '4', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 4, name: 'Eeee', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '5', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 5, name: 'Ffff', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '6', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 6, name: 'Gggg', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '7', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 7, name: 'Hhhh', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '8', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 8, name: 'Iiii', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '9', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 9, name: 'Jjjj', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '10', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 10, name: 'Kkkk', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '11', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
-  {id: 11, name: 'Llll', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '12', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'}
+const COMPANY_DATA: Company[] = [
+  new Company(0,  'Aaaajegnxc sd',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com')
 ]
 
 @Component({

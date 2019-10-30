@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Company } from 'src/app/company/company';
 
 export interface UserData {
   lastName: string;
@@ -7,22 +8,10 @@ export interface UserData {
   amountOfChallenges: number;
 }
 
-export interface CompanyData{
-  id: number;
-  name: string;
-  phone: string; 
-  mail: string;
-  street: string;
-  houseNumber: string;
-  city: string;
-  postalCode: string;
-  country: string;
-  site: string;
-}
-
-const COMPANY_DATA: CompanyData[] = [
-  {id: 0, name: 'Aaaajegnxc fdskljlgk odskfdsql sd', phone: '093697896', mail: 'comp@ny.com', street: 'companystraat', houseNumber: '1', city: 'Gent', postalCode: '9000', country: 'België', site: 'www.google.com'},
+const COMPANY_DATA: Company[] = [
+  new Company(0,  'Aaaajegnxc sd',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com')
 ]
+
 
 const USER_DATA: UserData[] = [
   {firstName: 'Alex', lastName: 'Barker', email: 'Alex.Barker@multimed.be', amountOfChallenges: 1},
@@ -40,7 +29,7 @@ export class CompanyDetailComponent implements OnInit {
   //var
   displayedColumns: string[] = ['']
   userData: UserData[]
-  companyData: CompanyData
+  companyData: Company
 
   constructor() { 
     this.userData = USER_DATA
