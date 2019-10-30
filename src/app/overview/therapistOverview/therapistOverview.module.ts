@@ -5,8 +5,10 @@ import { RouterModule } from '@angular/router';
 import { TherapistListComponent } from './therapist-list/therapist-list.component';
 import { TherapistDetailComponent } from './therapist-detail/therapist-detail.component';
 
+
 const routes = [
   { path: 'list', component: TherapistListComponent},
+  //create resolver to get by id and modify path
   { path: '1', component: TherapistDetailComponent},
 ]
 

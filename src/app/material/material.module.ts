@@ -4,9 +4,14 @@ import { CommonModule } from '@angular/common';
 import {MatCardModule, MatInputModule, MatButtonModule, MatSortModule, MatPaginatorModule,MatIconModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTableModule} from '@angular/material/table';
+import { UserListComponent } from '../overview/userOverview/user-list/user-list.component';
+import { UserDetailComponent } from '../overview/userOverview/user-detail/user-detail.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    UserListComponent,
+    UserDetailComponent
+  ],
   imports: [
     CommonModule,
     MatCardModule,
@@ -26,7 +31,9 @@ import {MatTableModule} from '@angular/material/table';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    UserListComponent,
+    UserDetailComponent,
   ]
 })
 export class MaterialModule { }

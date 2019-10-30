@@ -3,6 +3,7 @@ table {
     width: 100%;
     opacity: 0.89;
     overflow: auto;
+    cursor: pointer;
   }
   
   .mat-form-field {
@@ -17,6 +18,7 @@ table {
   .mobile-label {
     display: none;
   }
+
   
   @media(max-width: 600px) {
     .mobile-label {

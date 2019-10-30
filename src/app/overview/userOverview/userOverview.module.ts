@@ -7,18 +7,21 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const routes = [
   { path: 'list', component: UserListComponent},
+  //create resolver to get by id and modify path
   { path: '1', component: UserDetailComponent},
 ]
 
 @NgModule({
   declarations: [
-    UserListComponent,
-    UserDetailComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)
+  ],
+  exports: [
+    UserListComponent,
+    UserDetailComponent
   ]
 })
 export class UserOverviewModule { }

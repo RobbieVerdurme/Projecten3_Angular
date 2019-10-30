@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-title>
+        {{companyData.name}}
+    </mat-card-title>
+    <mat-card-content>
+        <div>
+            <!--Goes to localhost/$link, should go to $link only-->
+            <mat-card-subtitle>Contact</mat-card-subtitle>
+            <p>{{companyData.phone}}</p>
+            <p>{{companyData.mail}}</p>
+            <mat-card-subtitle>Adres</mat-card-subtitle>
+            <p>{{companyData.street}} {{companyData.houseNumber}}</p>
+            <p>{{companyData.postalCode}} {{companyData.city}} {{companyData.country}}</p>
+            <a>Ga naar de website</a>
+        </div>
+        <div>
+            <h3>Bedrijfsleden</h3>
+            <app-user-list [userData]="userData"></app-user-list>
+        </div>
+    </mat-card-content>
+</mat-card>

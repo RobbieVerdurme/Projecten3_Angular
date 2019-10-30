@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { Company } from 'src/app/company/company';
 
 //MockData to fill company list
 export interface CompanyData{
@@ -80,8 +81,8 @@ export class CompanyListComponent implements OnInit {
 
   //Deze functie wordt geactiveerd bij het klikken op een bedrijf in de lijst
   //Of naar nieuwe lijst gaan of naar bestaande lijst van users, reeds gefilterd door bedrijfkeuze
-  FunctieAfwerkenBedenken(company){
-
+  companyDetailScreen(company: Company){
+    this.router.navigate(['overzicht/bedrijf/1'])
   }
 
 }
