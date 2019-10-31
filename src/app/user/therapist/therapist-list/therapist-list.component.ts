@@ -25,12 +25,14 @@ const THERAPIST_DATA: TherapistData[] = [
   {firstName: 'Glenn', lastName: 'Campos', email: 'Glenn.Camos@therapeut-multimed.be', telephone:"517(60)108-13-09", functie: "Seksuoloog" },
   {firstName: 'Xavier', lastName: 'Long', email: 'Xavier.Long@therapeut-multimed.be', telephone:"247(580)731-95-65", functie: "Gezinscounselor"}
 ];
+
 @Component({
   selector: 'app-therapist-list',
   templateUrl: './therapist-list.component.html',
   styleUrls: ['./therapist-list.component.css']
 })
 export class TherapistListComponent implements OnInit {
+
   //var
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'telephone', 'functie'];
   dataSource: MatTableDataSource<TherapistData>;
@@ -69,6 +71,7 @@ export class TherapistListComponent implements OnInit {
   }
   
   detailscreen(therapist){
-    this.router.navigate(['/overzicht/therapist/1'])
+    this.router.navigate(['/therapeut/id'])
   }
+
 }

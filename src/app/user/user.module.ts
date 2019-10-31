@@ -9,25 +9,20 @@ import { MaterialModule } from '../material/material.module';
 //Component
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { RegisterUserComponent } from './normal-user/register-normal-user/register-user.component';
-import { RegisterTherapistComponent } from './register-therapist/register-therapist.component';
 //auth
 import { AuthGuard } from './auth.guard';
-import { RegisterCompanyComponent } from '../company/register-company/register-company.component';
 
 const routes:Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'gebruiker', canActivate:[AuthGuard], loadChildren: () => import(`./normal-user/normal-user.module`).then(m => m.NormalUserModule)},
-  {path: 'registertherapist', canActivate:[AuthGuard], component: RegisterTherapistComponent},
-  {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent},
-  {path: 'registercompany', canActivate:[AuthGuard], component: RegisterCompanyComponent}
+  {path: 'therapeut', canActivate:[AuthGuard], loadChildren: () => import(`./therapist/therapist.module`).then(m => m.TherapistModule)},
+  {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent}
 ]
 
 @NgModule({
   declarations: [
     LoginComponent,
     ProfileComponent,
-    RegisterTherapistComponent
   ],
   imports: [
     CommonModule,
