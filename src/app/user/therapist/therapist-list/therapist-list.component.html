@@ -5,20 +5,20 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
       <!-- firstname Column -->
-      <ng-container matColumnDef="firstName">
+      <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
         <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
           <span class="mobile-label">Voornaam:</span>
-          {{element.firstName}}
+          {{element.firstname}}
         </td>
       </ng-container>
   
       <!-- lastname Column -->
-      <ng-container matColumnDef="lastName">
+      <ng-container matColumnDef="familyname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Naam </th>
         <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
           <span class="mobile-label">Naam:</span>
-          {{element.lastName}}
+          {{element.familyname}}
         </td>
       </ng-container>
   
@@ -41,11 +41,11 @@
       </ng-container>
   
       <!-- function Column -->
-      <ng-container matColumnDef="functie">
+      <ng-container matColumnDef="function">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Functie </th>
         <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
           <span class="mobile-label">Functie:</span>
-          {{element.functie}}
+          {{element.function}}
         </td>
       </ng-container>
   

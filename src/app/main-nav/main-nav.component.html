@@ -7,15 +7,15 @@
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/welkom']"><mat-icon>home</mat-icon> Home</a>
         <a mat-list-item [routerLink]="['/profile']"><mat-icon>account_circle</mat-icon> Profiel</a>
-        <a mat-list-item>Overzicht</a>
+        <h3 mat-list-item>Overzicht</h3>
         <a mat-list-item class="submenu" [routerLink]="['/gebruiker/lijst']"><mat-icon>people</mat-icon> Gebruikers</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/therapeut/lijst']"><mat-icon>people</mat-icon> Therapeuten</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/bedrijf/lijst']"><mat-icon>business</mat-icon> Bedrijven</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/result/list']"><mat-icon>list</mat-icon> Resultaten</a>
-        <a mat-list-item *ngIf="isMultimed">Registreren</a>
+        <h3 mat-list-item *ngIf="isMultimed">Registreren</h3>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/gebruiker/registreren']"><mat-icon>person_add</mat-icon> Gebruikers</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/therapeut/registreren']"><mat-icon>person_add</mat-icon> Therapeuten</a>
-        <a mat-list-item>Toevoegen</a>
+        <h3 mat-list-item>Toevoegen</h3>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/bedrijf/registreren']"><mat-icon>add</mat-icon> Bedrijf</a>
         <a mat-list-item class="submenu"><mat-icon>add</mat-icon> Uitdaging</a>
         <a mat-list-item class="submenu"><mat-icon>add</mat-icon> Info</a>
