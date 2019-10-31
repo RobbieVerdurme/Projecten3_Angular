@@ -5,19 +5,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 
 //MockData to fill company list
-export interface CompanyData{
-  id: number;
-  name: string;
-  phone: string; 
-  mail: string;
-  street: string;
-  houseNumber: string;
-  city: string;
-  postalCode: string;
-  country: string;
-  site: string;
-}
-
 const COMPANY_DATA: Company[] = [
   new Company(0,  'Aaaajegnxc sd',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com')
 ]
@@ -31,7 +18,7 @@ export class CompanyListComponent implements OnInit {
 
   //var
   displayedColumns: string[] = ['name', 'city', 'country'];
-  dataSource: MatTableDataSource<CompanyData>;
+  dataSource: MatTableDataSource<Company>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -72,7 +59,7 @@ export class CompanyListComponent implements OnInit {
   //Deze functie wordt geactiveerd bij het klikken op een bedrijf in de lijst
   //Of naar nieuwe lijst gaan of naar bestaande lijst van users, reeds gefilterd door bedrijfkeuze
   companyDetailScreen(company: Company){
-    this.router.navigate(['overzicht/bedrijf/1'])
+    this.router.navigate(['bedrijf/id'])
   }
 
 }

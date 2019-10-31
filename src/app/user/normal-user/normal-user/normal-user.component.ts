@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-normal-user',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./normal-user.component.css']
 })
 export class NormalUserComponent implements OnInit {
-
+  @Input() public normalUser: NormalUser
   constructor() { }
 
   ngOnInit() {
