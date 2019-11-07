@@ -48,7 +48,7 @@ export class AuthenticationService {
 
   // meth
   login(username: string, password: string): BehaviorSubject<boolean> {
-    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJTb2ZpZVYiLCJpYXQiOjE1MTYyMzkwMjIsInJvbGUiOiJNdWx0aW1lZCJ9.JaTZOA1TJoFDATM4Tr3vCsFFHtRNd4sHYAoWjPvj-3w";
+    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlRoZXJhcGlzdC5EZVBhcGVAZ21haWwuY29tIiwiSWQiOiIxIiwiUm9sZSI6IlRoZXJhcGlzdCIsImV4cCI6MTU3MzA1MjgzOX0.XNgGqJ1TB94l9cjKSAMirDH5WkzNJx5mfbIpgxMJIk0";
     localStorage.setItem(this._tokenKey, token);
     const parsedToken = parseJwt(token);
     this._user$.next(new LoginUser(username, parsedToken.role));
@@ -103,10 +103,19 @@ export class AuthenticationService {
     const localToken = localStorage.getItem(this._tokenKey);
     if(localToken){
       let parsedToken = parseJwt(localToken);
-      this._user$.next(new LoginUser(parsedToken.username, parsedToken.role));
+      this._user$.next(new LoginUser(parsedToken.unique_name, parsedToken.role));
       return localToken;
     }
     return '';
+  }
+  get idFromToken(): number {
+    const localToken = localStorage.getItem(this._tokenKey);
+    if(localToken){
+      let parsedToken = parseJwt(localToken);
+      const id = parsedToken.id;
+      return id;
+    }
+    return null;
   }
 
   isMultimed() {

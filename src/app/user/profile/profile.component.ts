@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { TherapistDataService } from '../therapist/therapist-data.service';
+import { Therapist } from '../therapist/Therapist';
 
 @Component({
   selector: 'app-profile',
@@ -8,15 +10,20 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class ProfileComponent implements OnInit {
   //var
-  user$ = this._authService.user$.value
+  public therapist: Therapist;
+  user$ = this._authService.user$.value;
 
   //const
   constructor(
-    private _authService: AuthenticationService
+    private _authService: AuthenticationService,
+    private _therapistService: TherapistDataService
   ) { }
 
   //method
   ngOnInit() {
+    this._therapistService
+      .getTherapist$(1)
+      .subscribe(item => (this.therapist = item));
   }
 
 }
