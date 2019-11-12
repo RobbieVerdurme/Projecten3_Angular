@@ -36,10 +36,13 @@ export class RegisterCompanyComponent implements OnInit {
       postalCode: ['', Validators.required],
       country: ['', Validators.required],
       site: [''],
+      contract: ['', Validators.required]
     });
   }
 
   onSubmit(){
+    var contractDate = new Date();
+    contractDate = this.company.value.contract
     this._companyDataService.addNewCompany(
       new Company(
         null, 
@@ -52,6 +55,7 @@ export class RegisterCompanyComponent implements OnInit {
         this.company.value.postalCode, 
         this.company.value.country, 
         this.company.value.site, 
+        contractDate,
         new Array<LoginUser>())
     )
     .subscribe(
@@ -70,6 +74,13 @@ export class RegisterCompanyComponent implements OnInit {
         }
       }
     )
+  }
+
+  getErrorMessage(errors: any){
+    if(!errors){
+      return null;
+    }
+    if(errors.required) return 'Verplicht'
   }
 
 }

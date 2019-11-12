@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 //MockData to fill company list
 const COMPANY_DATA: Company[] = [
-  new Company(0,  'Aaaajegnxc sd',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com')
+  new Company(0,  'Aaaajegnxc sd',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com', new Date())
 ]
 
 @Component({
