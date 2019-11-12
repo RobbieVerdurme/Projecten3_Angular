@@ -17,8 +17,8 @@ export class LoginUser {
     //set JSON object to LoginUser object
     static FromJSON(json:any): LoginUser{
       const loginUser = new LoginUser(
-        json.unique_name,
-        json.Role
+        json.username,
+        json.role
       );
       return loginUser
     }

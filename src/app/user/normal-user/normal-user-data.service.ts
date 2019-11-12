@@ -31,9 +31,9 @@ export class NormalUserDataService {
   addNewUser(normalUser: NormalUser) {
     return this.http.post(`${environment.apiUrl}/users/add`, normalUser.toJSON());
   }
-  editTherapist(normalUser: NormalUser) {
+  editNormalUser(normalUser: NormalUser) {
     return this.http
-      .put(`${environment.apiUrl}/therapist/edit`, normalUser.toJSON())
+      .put(`${environment.apiUrl}/users/edit`, normalUser.toJSON())
       .pipe();
   }
 }
