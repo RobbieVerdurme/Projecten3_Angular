@@ -11,7 +11,8 @@
             <mat-card-subtitle>Adres</mat-card-subtitle>
             <p>{{companyData.street}} {{companyData.houseNumber}}</p>
             <p>{{companyData.postalCode}} {{companyData.city}} {{companyData.country}}</p>
-            <a>Ga naar de website</a>
+            <mat-card-subtitle>Einde contract</mat-card-subtitle>
+            <p>{{companyData.contract | date: "dd-MM-yyyy"}}</p>
         </div>
         <div>
             <h3>Bedrijfsleden</h3>

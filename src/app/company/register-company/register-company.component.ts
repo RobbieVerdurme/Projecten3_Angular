@@ -5,6 +5,7 @@ import { CompanyDataService } from '../company-data.service';
 import { Company } from 'src/app/company/company';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginUser } from 'src/app/user/loginuser';
+import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 
 @Component({
   selector: 'app-register-company',
@@ -56,7 +57,7 @@ export class RegisterCompanyComponent implements OnInit {
         this.company.value.country, 
         this.company.value.site, 
         contractDate,
-        new Array<LoginUser>())
+        new Array<NormalUser>())
     )
     .subscribe(
       val => {

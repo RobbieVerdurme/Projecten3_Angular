@@ -3,6 +3,7 @@ import { Subject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
+import { NormalUser } from './NormalUser';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,14 @@ export class NormalUserDataService {
         this.loadingError$.next(error.statusText);
         return of(null);
       }),
-      map((list: any[]): NormalUser[] => list.map(NormalUser.fromJSON))
+      map((list: any[]): NormalUser[] => list.map(NormalUser.FromJSON))
     );
   }
 
   getNormalUser$(id): Observable<NormalUser> {
     return this.http
       .get(`${environment.apiUrl}/users/${id}`)
-      .pipe(map((the: any): NormalUser => NormalUser.fromJSON(the)));
+      .pipe(map((the: any): NormalUser => NormalUser.FromJSON(the)));
   }
 
   addNewUser(normalUser: NormalUser) {

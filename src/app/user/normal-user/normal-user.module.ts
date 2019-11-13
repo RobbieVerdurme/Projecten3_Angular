@@ -17,8 +17,8 @@ const routes = [
 
 @NgModule({
   declarations: [
-    NormalUserComponent,
     RegisterUserComponent,
+    NormalUserComponent,
     NormalUserDetailComponent
   ],
   imports: [

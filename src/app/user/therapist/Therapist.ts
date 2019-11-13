@@ -1,3 +1,5 @@
+import { NormalUser } from '../normal-user/NormalUser';
+
 export class Therapist{
     constructor(
         private _id: number,
