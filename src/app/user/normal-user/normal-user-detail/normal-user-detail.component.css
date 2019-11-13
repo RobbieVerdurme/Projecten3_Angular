@@ -13,4 +13,14 @@
     text-align: center;
     min-width: 40%;
   }
-  
+
+  .challenges{
+    display: grid;
+    grid-template-rows: auto auto;
+    vertical-align: top;
+  }
+
+.addchallengebtn{
+  text-align: right;
+}
+

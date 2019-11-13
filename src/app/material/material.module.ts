@@ -5,12 +5,12 @@ import {MatCardModule, MatInputModule, MatButtonModule, MatSortModule, MatPagina
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTableModule} from '@angular/material/table';
 import { NormalUserListComponent } from '../user/normal-user/normal-user-list/normal-user-list.component';
-import { ChallengeComponent } from '../challenge/challenge/challenge.component';
+import { ChallengeListComponent } from '../challenge/challenge-list/challenge-list.component';
 
 @NgModule({
   declarations: [
     NormalUserListComponent,
-    ChallengeComponent
+    ChallengeListComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +39,7 @@ import { ChallengeComponent } from '../challenge/challenge/challenge.component';
     MatDatepickerModule,
     MatNativeDateModule,
     NormalUserListComponent,
-    ChallengeComponent
+    ChallengeListComponent
   ]
 })
 export class MaterialModule { }

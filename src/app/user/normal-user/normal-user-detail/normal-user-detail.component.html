@@ -29,13 +29,14 @@
                             <td>Telefoon : </td>
                             <td>{{user.telephone}}</td>
                         </tr>
-                    </td>
-                    <td>
-                        <button mat-button>Voeg uitdagingen toe</button>
-                        <!--UITDAGINGEN-->
-                        <!--USE CHALLENGE COMPONENT AND LOAD EVERY CHALLENGE IN IT, LONG LIVE THE POWER OF ANGULAR-->
+                        <tr>
+                            <td>Einde contract : </td>
+                            <td>{{user.contract | date: "dd-MM-yyyy"}}</td>
+                        </tr>
                     </td>
                 </table>
+                <button class="addchallengebtn" mat-button>Voeg uitdagingen toe</button>
+                <app-challenge-list [challenges]="user.challenges"></app-challenge-list>
             </mat-card-content>
         </mat-card>
     </div>
