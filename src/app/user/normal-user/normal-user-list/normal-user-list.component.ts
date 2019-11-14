@@ -1,46 +1,25 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { NormalUser } from '../NormalUser';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort, MatPaginator } from '@angular/material';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { Challenge } from 'src/app/challenge/Challenge';
 
-export interface UserData {
-  lastName: string;
-  firstName: string;
-  email: string;
-  amountOfChallenges: number;
-}
 
-const USER_DATA: UserData[] = [
-  {firstName: 'Alex', lastName: 'Barker', email: 'Alex.Barker@multimed.be', amountOfChallenges: 1},
-  {firstName: 'Angus', lastName: 'Morton', email: 'Angus.Morton@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Eric', lastName: 'Mitchel', email: 'Eric.Mitchel@multimed.be', amountOfChallenges: 3},
-  {firstName: 'Aiden', lastName: 'Davison', email: 'Aiden.Davison@multimed.be', amountOfChallenges: 6},
-  {firstName: 'Abdul', lastName: 'Castro', email: 'Abdul.Castro@multimed.be', amountOfChallenges: 8},
-  {firstName: 'Freddy', lastName: 'Parsons', email: 'Freddy.Parsons@multimed.be', amountOfChallenges: 9},
-  {firstName: 'Charles', lastName: 'Higgins', email: 'Charles.Higgins@multimed.be', amountOfChallenges: 6},
-  {firstName: 'Marco', lastName: 'Frost', email: 'Marco.Frost@multimed.be', amountOfChallenges: 7},
-  {firstName: 'Ciaran', lastName: 'Matthews', email: 'Ciaran.Matthews@multimed.be', amountOfChallenges: 7},
-  {firstName: 'Oskar', lastName: 'Houston', email: 'Oskar.Houston@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Glenn', lastName: 'Campos', email: 'Glenn.Camos@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Xavier', lastName: 'Long', email: 'Xavier.Long@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Musa', lastName: 'Strickland', email: 'Musa.Strickland@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Darren', lastName: 'Sherman', email: 'Darren.Sherman@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Alex', lastName: 'Barker', email: 'Alex.Barker@multimed.be', amountOfChallenges: 1},
-  {firstName: 'Angus', lastName: 'Morton', email: 'Angus.Morton@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Eric', lastName: 'Mitchel', email: 'Eric.Mitchel@multimed.be', amountOfChallenges: 3},
-  {firstName: 'Aiden', lastName: 'Davison', email: 'Aiden.Davison@multimed.be', amountOfChallenges: 6},
-  {firstName: 'Abdul', lastName: 'Castro', email: 'Abdul.Castro@multimed.be', amountOfChallenges: 8},
-  {firstName: 'Freddy', lastName: 'Parsons', email: 'Freddy.Parsons@multimed.be', amountOfChallenges: 9},
-  {firstName: 'Charles', lastName: 'Higgins', email: 'Charles.Higgins@multimed.be', amountOfChallenges: 6},
-  {firstName: 'Marco', lastName: 'Frost', email: 'Marco.Frost@multimed.be', amountOfChallenges: 7},
-  {firstName: 'Ciaran', lastName: 'Matthews', email: 'Ciaran.Matthews@multimed.be', amountOfChallenges: 7},
-  {firstName: 'Oskar', lastName: 'Houston', email: 'Oskar.Houston@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Glenn', lastName: 'Campos', email: 'Glenn.Camos@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Xavier', lastName: 'Long', email: 'Xavier.Long@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Musa', lastName: 'Strickland', email: 'Musa.Strickland@multimed.be', amountOfChallenges: 2},
-  {firstName: 'Darren', lastName: 'Sherman', email: 'Darren.Sherman@multimed.be', amountOfChallenges: 2}
-];
+
+const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
+us.addChallenge(new Challenge(0, "Eerste challenge"))
+us.addChallenge(new Challenge(0, "Eerste challenge"))
+us.addChallenge(new Challenge(0, "Eerste challenge"))
+const er: NormalUser =  new NormalUser(1, "wazzaaaa97", "Ruben1", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
+er.addChallenge(new Challenge(0, "Eerste challenge"))
+er.addChallenge(new Challenge(0, "Eerste challenge"))
+
+
+const USER_DATA: NormalUser[] = [us, er];
+
+
 @Component({
   selector: 'app-normal-user-list',
   templateUrl: './normal-user-list.component.html',
@@ -48,9 +27,9 @@ const USER_DATA: UserData[] = [
 })
 export class NormalUserListComponent implements OnInit {
 //var
-  @Input() userData: UserData[]
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'amountOfChallenges'];
-  dataSource: MatTableDataSource<UserData>;
+  @Input() userData: NormalUser[]
+  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'challenges'];
+  dataSource: MatTableDataSource<NormalUser>;
   
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -65,8 +44,8 @@ export class NormalUserListComponent implements OnInit {
 
       breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
         this.displayedColumns = result.matches ? 
-          ['firstName', 'lastName'] : 
-          ['firstName', 'lastName', 'email', 'amountOfChallenges'];
+          ['firstname', 'lastname'] : 
+          ['firstname', 'lastname', 'email', 'challenges'];
       });
   }
   

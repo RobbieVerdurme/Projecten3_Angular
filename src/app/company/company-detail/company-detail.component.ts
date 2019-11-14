@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../company';
-
-export interface UserData {
-  lastName: string;
-  firstName: string;
-  email: string;
-  amountOfChallenges: number;
-}
+import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 
 const COMPANY_DATA: Company[] = [
-  new Company(0,  'Aaaajegnxc sd',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com')
+  new Company(0,  'Aaaajegnxc sd',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com', new Date(2019, 11, 14))
 ]
 
 const USER_DATA: NormalUser[] = [

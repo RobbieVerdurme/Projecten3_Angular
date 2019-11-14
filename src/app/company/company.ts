@@ -1,4 +1,4 @@
-import { LoginUser } from 'src/app/user/loginuser';
+import { NormalUser } from '../user/normal-user/NormalUser'
 
 export class Company{
     //constructor
@@ -13,7 +13,8 @@ export class Company{
         private _postalCode: string,
         private _country: string,
         private _site: string,
-        private _companyMembers = new Array<LoginUser>()
+        private _contract: Date,
+        private _companyMembers = new Array<NormalUser>()
     ){}
 
     //getters
@@ -57,7 +58,11 @@ export class Company{
         return this._site
     }
 
-    get companyMembers(): LoginUser[]{
+    get contract(): Date{
+        return this._contract
+    }
+
+    get companyMembers(): NormalUser[]{
         return this._companyMembers
     }
 
@@ -74,7 +79,8 @@ export class Company{
             json.postalCode,
             json.country,
             json.site,
-            json.companyMembers.map(LoginUser.FromJSON)
+            json.contract,
+            json.companyMembers.map(NormalUser.FromJSON)
         );
         return company;
     }
@@ -82,6 +88,7 @@ export class Company{
     //set company object to JSON object
     toJSON(): any{
         return{
+            id: this.id,
             name: this.name,
             phone: this.phone,
             mail: this.mail,
@@ -91,7 +98,12 @@ export class Company{
             postalCode: this.postalCode,
             country: this.country,
             site: this.site,
+            contract: this._contract,
             companyMembers: this.companyMembers.map(cm => cm.toJSON())
         }
+    }
+
+    addCompanyMember(member: NormalUser) {
+        this._companyMembers.push(member);
     }
 }

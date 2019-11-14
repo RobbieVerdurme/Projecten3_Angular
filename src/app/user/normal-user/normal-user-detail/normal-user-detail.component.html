@@ -9,45 +9,34 @@
                     <td>
                         <tr>
                             <td>username : </td>
-                            <td>AngusM</td>
+                            <td>{{user.username}}</td>
                         </tr>
                         <tr>
                             <td>Firstname : </td>
-                            <td>Angus</td>
+                            <td>{{user.firstname}}</td>
                         </tr>
                         <tr>
                             <td>Lastname : </td>
-                            <td>Morton</td>
+                            <td>{{user.lastname}}</td>
                         </tr>
                         <tr>
                             <td>E-mail : </td>
                             <td>
-                                <a href="mailto:Angus.Morton@multimed.be">Angus.Morton@multimed.be</a>
+                                <a href="mailto:{{user.email}}">{{user.email}}</a>
                             </td>
                         </tr>
                         <tr>
                             <td>Telefoon : </td>
-                            <td>0478995889</td>
+                            <td>{{user.telephone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Einde contract : </td>
+                            <td>{{user.contract | date: "dd-MM-yyyy"}}</td>
                         </tr>
                     </td>
-                    <td>
-                        <!--UITDAGINGEN-->
-                        <div class="example-container mat-elevation-z8">
-                            <table mat-table [dataSource]="dataSource" matSort>
-                                <!-- challengename Column -->
-                                <ng-container matColumnDef="challengename">
-                                    <th mat-header-cell *matHeaderCellDef> Uitdagingen </th>
-                                    <td mat-cell *matCellDef="let element" (click)="detailscreen(Uitdaging)">
-                                        {{element.challengename}}
-                                    </td>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>
-                        </div>
-                        <button mat-button>Voeg uitdagingen toe</button>
-                    </td>
                 </table>
+                <button class="addchallengebtn" mat-button>Voeg uitdagingen toe</button>
+                <app-challenge-list [challenges]="user.challenges"></app-challenge-list>
             </mat-card-content>
         </mat-card>
     </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NormalUser } from '../NormalUser';
 
 @Component({
   selector: 'app-normal-user',

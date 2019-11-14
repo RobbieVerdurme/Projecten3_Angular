@@ -1,15 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Challenge } from 'src/app/challenge/Challenge';
+import { NormalUser } from '../NormalUser';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
-export interface PeriodicElement {
-  challengename: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {challengename: 'Loop 10 kilometer'},
-  {challengename: 'Eet een gezonde maaltijd'},
-  {challengename: 'Fiets naar het werk'},
-  {challengename: 'Ga naar de fitness'}
-];
+const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km"));
+us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
+us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+
 @Component({
   selector: 'app-normal-user-detail',
   templateUrl: './normal-user-detail.component.html',
@@ -17,12 +41,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class NormalUserDetailComponent implements OnInit {
 //var
-displayedColumns = ['challengename'];
-dataSource = ELEMENT_DATA;
+user : NormalUser = us;
+challenges : Challenge[] = us.challenges;
 
-  constructor() { }
+
+  constructor() { 
+  }
 
   ngOnInit() {
   }
-
 }

@@ -5,6 +5,7 @@ import { CompanyDataService } from '../company-data.service';
 import { Company } from 'src/app/company/company';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginUser } from 'src/app/user/loginuser';
+import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 
 @Component({
   selector: 'app-register-company',
@@ -36,10 +37,13 @@ export class RegisterCompanyComponent implements OnInit {
       postalCode: ['', Validators.required],
       country: ['', Validators.required],
       site: [''],
+      contract: ['', Validators.required]
     });
   }
 
   onSubmit(){
+    var contractDate = new Date();
+    contractDate = this.company.value.contract
     this._companyDataService.addNewCompany(
       new Company(
         null, 
@@ -52,7 +56,8 @@ export class RegisterCompanyComponent implements OnInit {
         this.company.value.postalCode, 
         this.company.value.country, 
         this.company.value.site, 
-        new Array<LoginUser>())
+        contractDate,
+        new Array<NormalUser>())
     )
     .subscribe(
       val => {
@@ -70,6 +75,13 @@ export class RegisterCompanyComponent implements OnInit {
         }
       }
     )
+  }
+
+  getErrorMessage(errors: any){
+    if(!errors){
+      return null;
+    }
+    if(errors.required) return 'Verplicht'
   }
 
 }
