@@ -16,6 +16,7 @@ const routes:Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'gebruiker', canActivate:[AuthGuard], loadChildren: () => import(`./normal-user/normal-user.module`).then(m => m.NormalUserModule)},
   {path: 'therapeut', canActivate:[AuthGuard], loadChildren: () => import(`./therapist/therapist.module`).then(m => m.TherapistModule)},
+  {path: 'challenge', canActivate:[AuthGuard], loadChildren: () => import(`../challenge/challenge.module`).then(m => m.ChallengeModule)},
   {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent}
 ]
 
