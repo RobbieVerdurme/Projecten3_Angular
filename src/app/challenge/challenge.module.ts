@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes : Routes = [
   {path: 'add', component: AddChallengeComponent},
   {path: 'assign', component: AssignChallengeComponent},
+  {path: '', pathMatch: 'full', redirectTo: '/welkom'}
 ];
 
 @NgModule({

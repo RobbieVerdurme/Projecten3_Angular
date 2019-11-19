@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 export class AddChallengeComponent implements OnInit {
 
   public inputForm: FormGroup;
-  private _dataSource: MatTableDataSource<string> = new MatTableDataSource([
-    "Category 1","Category 2","Category 3"
-  ]);
+  dataSource: MatTableDataSource<string>;
 
-  constructor(private router: Router,private fb: FormBuilder) { }
+  constructor(private router: Router,private fb: FormBuilder) { 
+    this.dataSource = new MatTableDataSource(["Category 1","Category 2"]);
+  }
 
   ngOnInit() {
     this.inputForm = this.fb.group({
@@ -27,10 +27,6 @@ export class AddChallengeComponent implements OnInit {
 
   onSubmit(){
     //TODO: validate form input AND if category isn't null
-  }
-
-  get dataSource(){
-    return this._dataSource;
   }
 
   selectCategory(category) {
