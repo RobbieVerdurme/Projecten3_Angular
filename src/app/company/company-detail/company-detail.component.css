@@ -1,0 +1,25 @@
+button{
+    float: right;
+}
+
+.title{
+    text-align: center;
+}
+
+.titlePart{
+    display: inline-block;
+}
+
+.info, mat-card-title{
+    text-align: center;
+}
+
+@media screen and (min-width: 700px){
+    .infoPart{
+        display: inline-block;
+        vertical-align:top;
+        text-align: left;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

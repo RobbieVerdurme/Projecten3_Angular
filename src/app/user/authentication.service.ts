@@ -62,7 +62,7 @@ export class AuthenticationService {
             localStorage.setItem(this._tokenKey, token);
             const parsedToken = parseJwt(token);
             //de juiste gebruiker aanmaken aan de hand van de role
-            /*
+            
             if(parsedToken.roles == Role.Mulitmed){
               this._user$.next(new Multimed(username, parsedToken.roles))
             }else{
@@ -120,7 +120,7 @@ export class AuthenticationService {
 
   isMultimed() {
     if(this.user$.value){
-      return this._user$.value.role == Role.Mulitmed?true:false
+      return this._user$.value.role == Role.Mulitmed?false:true
     }
     return false;
   }

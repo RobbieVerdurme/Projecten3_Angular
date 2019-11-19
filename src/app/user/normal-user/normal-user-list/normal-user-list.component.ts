@@ -5,6 +5,7 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { Challenge } from 'src/app/challenge/Challenge';
+import { Company } from 'src/app/company/company';
 
 
 
@@ -27,7 +28,7 @@ const USER_DATA: NormalUser[] = [us, er];
 })
 export class NormalUserListComponent implements OnInit {
 //var
-  @Input() userData: NormalUser[]
+  @Input() company: Company
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'challenges'];
   dataSource: MatTableDataSource<NormalUser>;
   
@@ -40,8 +41,6 @@ export class NormalUserListComponent implements OnInit {
     breakpointObserver: BreakpointObserver,
     private router: Router
     ) {
-      this.dataSource = new MatTableDataSource(USER_DATA); 
-
       breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
         this.displayedColumns = result.matches ? 
           ['firstname', 'lastname'] : 
@@ -51,6 +50,15 @@ export class NormalUserListComponent implements OnInit {
   
   //methods
   ngOnInit() {
+  //Get all normal users  
+  if(this.company == null){
+    this.dataSource = new MatTableDataSource(USER_DATA); 
+  }
+  //Get users of given company
+  else{
+    this.dataSource = new MatTableDataSource(this.company.companyMembers); 
+  }
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
