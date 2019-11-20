@@ -9,11 +9,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../user/auth.guard';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyResolver } from './company-resolver';
 
 const routes: Routes = [
   {path: 'bedrijf/registreren', canActivate: [AuthGuard], component: RegisterCompanyComponent},
   {path: 'bedrijf/lijst', canActivate: [AuthGuard], component: CompanyListComponent},
-  {path: 'bedrijf/id', canActivate: [AuthGuard], component: CompanyDetailComponent}
+  {path: 'bedrijf/:id', canActivate: [AuthGuard], component: CompanyDetailComponent, resolve: { company: CompanyResolver} },
+  {path: 'bedrijf/edit/:id', canActivate: [AuthGuard], component: RegisterCompanyComponent, resolve: { company: CompanyResolver} }
 ]
 
 @NgModule({

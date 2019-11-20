@@ -59,7 +59,7 @@ export class CompanyListComponent implements OnInit {
   //Deze functie wordt geactiveerd bij het klikken op een bedrijf in de lijst
   //Of naar nieuwe lijst gaan of naar bestaande lijst van users, reeds gefilterd door bedrijfkeuze
   companyDetailScreen(company: Company){
-    this.router.navigate(['bedrijf/id'])
+    this.router.navigate([`bedrijf/${company.id}`])
   }
 
 }

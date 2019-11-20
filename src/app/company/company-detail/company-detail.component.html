@@ -3,7 +3,7 @@
         <mat-card-title class="titlePart">
             {{company.name}}
         </mat-card-title>
-        <button mat-button class="titlePart"><mat-icon>settings</mat-icon></button>
+        <button mat-button class="titlePart" (click)="editCompany(company.id)"><mat-icon>settings</mat-icon></button>
     </div>
     <mat-card-content>
         <div class="info">
