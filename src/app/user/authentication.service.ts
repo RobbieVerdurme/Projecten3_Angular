@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { Role } from './role';
 import { LoginUser } from './loginuser';
 import { Router } from '@angular/router';
+import { Therapist } from './therapist/Therapist';
+import { Multimed } from './Multimed';
 
 // parce jwt token to json
 function parseJwt(token) {
@@ -39,23 +41,28 @@ export class AuthenticationService {
         localStorage.removeItem(this._tokenKey);
         parsedToken = null;
     }
-    this._user$ = new BehaviorSubject<LoginUser>(new LoginUser(parsedToken.username, parsedToken.role));
+    if(parsedToken.roles == Role.Mulitmed){
+      this._user$ = new BehaviorSubject<LoginUser>(new Multimed(parsedToken.id, parsedToken.unique_name, parsedToken.roles));
+    }else{
+      this._user$ = new BehaviorSubject<LoginUser>(new Therapist(parsedToken.id, parsedToken.unique_name, parsedToken.roles));
+    }
   }else{
-    this._user$ = new BehaviorSubject<LoginUser>(parsedToken && parsedToken.username && parsedToken.role);
+    this._user$ = new BehaviorSubject<LoginUser>(parsedToken && parsedToken.unique_name && parsedToken.role);
   }
   
 }
 
   // meth
-  login(username: string, password: string): BehaviorSubject<boolean> {
-    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlRoZXJhcGlzdC5EZVBhcGVAZ21haWwuY29tIiwiSWQiOiIxIiwiUm9sZSI6IlRoZXJhcGlzdCIsImV4cCI6MTU3MzA1MjgzOX0.XNgGqJ1TB94l9cjKSAMirDH5WkzNJx5mfbIpgxMJIk0";
+  login(username: string, password: string): Observable<boolean> {
+    
+    const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTb2ZpZVZAZ21haWwuY29tIiwidW5pcXVlX25hbWUiOiJTb2ZpZVYiLCJJZCI6IiIsInJvbGVzIjoiTXVsdGltZWQiLCJleHAiOjE1NzQyNzI2Mjh9.YeNChn55ifUV_98lWlLT-AuOhfuTVjzVlHc9C9ivUhE";
     localStorage.setItem(this._tokenKey, token);
     const parsedToken = parseJwt(token);
-    this._user$.next(new LoginUser(username, parsedToken.role));
+    this._user$.next(new Multimed(parsedToken.id, username, Role.Mulitmed));
     return new BehaviorSubject<boolean>(true);
     /*
     return this.http
-      .post(`${environment.apiUrl}/login`, {username, password}, { responseType: 'text' })
+      .post(`${environment.apiUrl}/Account`, {username, password}, { responseType: 'text' })
       .pipe(
         map((token: any) => {
           if (token) {
@@ -64,9 +71,9 @@ export class AuthenticationService {
             //de juiste gebruiker aanmaken aan de hand van de role
             
             if(parsedToken.roles == Role.Mulitmed){
-              this._user$.next(new Multimed(username, parsedToken.roles))
+              this._user$.next(new Multimed(parsedToken.id, username, parsedToken.roles))
             }else{
-              this._user$.next(new Therapist(username, parsedToken.roles))
+              this._user$.next(new Therapist(parsedToken.id, username, parsedToken.roles))
             }
         
             return true;
@@ -74,7 +81,8 @@ export class AuthenticationService {
             return false;
           }
         })
-      );*/
+      );
+      */
   }
 
   logout() {
@@ -103,7 +111,11 @@ export class AuthenticationService {
     const localToken = localStorage.getItem(this._tokenKey);
     if(localToken){
       let parsedToken = parseJwt(localToken);
-      this._user$.next(new LoginUser(parsedToken.unique_name, parsedToken.role));
+      if(parsedToken.roles == Role.Mulitmed){
+        this._user$.next(new Multimed(parsedToken.id, parsedToken.unique_name, parsedToken.roles))
+      }else{
+        this._user$.next(new Therapist(parsedToken.id, parsedToken.unique_name, parsedToken.roles))
+      }
       return localToken;
     }
     return '';
@@ -120,7 +132,7 @@ export class AuthenticationService {
 
   isMultimed() {
     if(this.user$.value){
-      return this._user$.value.role == Role.Mulitmed?false:true
+      return this._user$.value.role == Role.Mulitmed?true:false
     }
     return false;
   }

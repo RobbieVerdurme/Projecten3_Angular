@@ -1,6 +1,7 @@
-export class LoginUser {
+export abstract class LoginUser {
     //constructor
     constructor(
+        private _id: number,
         private _username: string,
         private _role: string
     ) {}
@@ -12,15 +13,6 @@ export class LoginUser {
         username: this._username,
         role: this._role
       };
-    }
-
-    //set JSON object to LoginUser object
-    static FromJSON(json:any): LoginUser{
-      const loginUser = new LoginUser(
-        json.username,
-        json.role
-      );
-      return loginUser
     }
   
     //getters

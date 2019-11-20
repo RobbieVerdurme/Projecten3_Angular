@@ -1,17 +1,21 @@
-class Multimed {
+import { LoginUser } from './loginuser';
+
+export class Multimed extends LoginUser {
     //constructor
     constructor(
-        private _MultimedUsername: string,
-        private _MultimedRole: string,
+        private _multimedId: number,
+        private _multimedUsername: string,
+        private _multimedRole: string,
     )
     {
-        //super(_MultimedUsername, _MultimedRole)
+        super(_multimedId, _multimedUsername, _multimedRole)
     }
     //methods  
     toJSON(): any {
         return {
-          username: this._MultimedUsername,
-          role: this._MultimedRole
+            id: this._multimedId,
+          username: this._multimedUsername,
+          role: this._multimedRole
         };
       }
   }

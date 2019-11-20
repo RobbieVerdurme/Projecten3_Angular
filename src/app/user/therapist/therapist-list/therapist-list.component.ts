@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 
 
 const THERAPIST_DATA: Therapist[] = [
-  new Therapist(0, "ther1", "Jos", "Krets", "joskrets@hotmail.com", "0445879636", "Sportcoach"),
-  new Therapist(1, "ther2", "Joss", "Kretes", "joskrets@hotmail.com", "0445879636", "Revalidatie"),
-  new Therapist(2, "ther3", "Josd", "Kreets", "joskrets@hotmail.com", "0445879636", "Dietist"),
-  new Therapist(3, "ther4", "Josf", "Kreets", "joskrets@hotmail.com", "0445879636", "AA"),
-  new Therapist(4, "ther5", "Josg", "Kerets", "joskrets@hotmail.com", "0445879636", "iets"),
+  new Therapist(0, "ther1", "Jos"),
+  new Therapist(1, "ther2", "Joss"),
+  new Therapist(2, "ther3", "Josd"),
+  new Therapist(3, "ther4", "Josf",),
+  new Therapist(4, "ther5", "Josg",),
 ];
 
 @Component({
