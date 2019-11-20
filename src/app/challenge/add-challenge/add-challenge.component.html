@@ -2,29 +2,34 @@
     <mat-card-title>Nieuwe Uitdaging</mat-card-title>
     <mat-card-content>
         <form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
-            <div fxLayout="column" fxLayout.gt-sm="row">
+            <div fxLayout="column" fxLayoutGap="10px" fxLayout.gt-sm="row">
                 <div fxLayout="column" fxFlex="1 1 auto">
                     <mat-form-field>
                         <input type="text" matInput placeholder="Titel" formControlName="title" required />
                     </mat-form-field>
-                    <br>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Omschrijving" formControlName="description" required />
                     </mat-form-field>
                 </div>
-                <br>
                 <div fxLayout="column" fxFlex="3 3 auto">
-                    <p>Selecteer een Categorie</p>
-                    <!--TODO: no category selected error-->
-                    <table mat-table [dataSource]="dataSource">
-                        <ng-container>
-                            <td mat-cell *matCellDef="let element" (click)="selectCategory(category)">
-                                {{element}}
+                    <div *ngIf="selectedCategoryId === -1">
+                        Gelieve een categorie te selecteren
+                    </div>
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Selecteer een Categorie</th>
+                            <td mat-cell *matCellDef="let element"> 
+                            <div class="button">
+                                <button (click)="selectCategory(element)" mat-button>{{element.name}}</button>
+                            </div>
                             </td>
                         </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
                 </div>
             </div>
+            <br>
             <div class="button">
                 <button type="submit" mat-button>Maak Uitdaging</button>
             </div>
