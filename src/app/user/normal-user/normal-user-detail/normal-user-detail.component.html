@@ -36,7 +36,7 @@
                     </td>
                 </table>
                 <!--Pass data with state param and navigate-->
-                <button class="addchallengebtn" [routerLink]="['/challenge/assign']" [state]="{ data: user}" mat-button>
+                <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button>
                     Voeg uitdagingen toe
                 </button>
                 <app-challenge-list [challenges]="user.challenges"></app-challenge-list>

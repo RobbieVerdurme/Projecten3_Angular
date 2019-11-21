@@ -6,6 +6,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Router } from '@angular/router';
 import { Challenge } from 'src/app/challenge/Challenge';
 import { Category } from 'src/app/challenge/Category';
+import { SelectUserService } from 'src/app/challenge/select-user.service';
 
 
 
@@ -34,7 +35,8 @@ export class NormalUserListComponent implements OnInit {
   //ctor
   constructor(
     breakpointObserver: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private selectUserService: SelectUserService
     ) {
       this.dataSource = new MatTableDataSource(USER_DATA); 
 
@@ -60,7 +62,8 @@ export class NormalUserListComponent implements OnInit {
   }
 
   navigateToDetailPage(user: NormalUser){
-    this.router.navigate(['/gebruiker/id'],{state : user});
+    this.selectUserService.setUser(user);
+    this.router.navigate(['/gebruiker/id']);
   }
 
 }
