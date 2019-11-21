@@ -18,7 +18,7 @@ export class AddChallengeComponent implements OnInit {
   selectedCategory: Category = null;
   selectedCategoryId: number = 0;
 
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   submitError: string = null;
 
   constructor(private router: Router,private fb: FormBuilder) { 
