@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 //Material
-import {MatCardModule, MatInputModule, MatButtonModule, MatSortModule, MatPaginatorModule,MatIconModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule} from '@angular/material';
+import {MatCardModule, MatInputModule, MatButtonModule, MatSortModule, MatPaginatorModule,MatIconModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatProgressSpinnerModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTableModule} from '@angular/material/table';
 import { NormalUserListComponent } from '../user/normal-user/normal-user-list/normal-user-list.component';
@@ -24,7 +24,8 @@ import { ChallengeListComponent } from '../challenge/challenge-list/challenge-li
     MatIconModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatCardModule,
@@ -39,7 +40,8 @@ import { ChallengeListComponent } from '../challenge/challenge-list/challenge-li
     MatDatepickerModule,
     MatNativeDateModule,
     NormalUserListComponent,
-    ChallengeListComponent
+    ChallengeListComponent,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }

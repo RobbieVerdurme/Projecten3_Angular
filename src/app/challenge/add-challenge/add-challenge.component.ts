@@ -1,7 +1,7 @@
 import { Category } from './../Category';
 import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +17,9 @@ export class AddChallengeComponent implements OnInit {
 
   selectedCategory: Category = null;
   selectedCategoryId: number = 0;
+
+  isLoading: boolean = true;
+  submitError: string = null;
 
   constructor(private router: Router,private fb: FormBuilder) { 
     this.dataSource = new MatTableDataSource([new Category(1,"Category 1"),new Category(2,"Category 2")]);
@@ -37,6 +40,16 @@ export class AddChallengeComponent implements OnInit {
   selectCategory(category: Category) {
     this.selectedCategory = category;
     this.selectedCategoryId = category.id;
+  }
+
+  get TitleField() : FormControl
+  {
+    return <FormControl> this.inputForm.get("title");
+  }
+
+  get DescriptionField() : FormControl
+  {
+    return <FormControl> this.inputForm.get("description");
   }
 
 }

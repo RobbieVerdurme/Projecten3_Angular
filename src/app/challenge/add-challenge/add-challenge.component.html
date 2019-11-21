@@ -6,12 +6,18 @@
                 <div fxLayout="column" fxFlex="1 1 auto">
                     <mat-form-field>
                         <input type="text" matInput placeholder="Titel" formControlName="title" required />
+                        <mat-error *ngIf='TitleField.errors?.required && TitleField.touched'>Titel is verplicht</mat-error>
                     </mat-form-field>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Omschrijving" formControlName="description" required />
+                        <mat-error *ngIf='DescriptionField.errors?.required && DescriptionField.touched'>Omschrijving is verplicht</mat-error>
                     </mat-form-field>
                 </div>
-                <div fxLayout="column" fxFlex="3 3 auto">
+                <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlex="3 3 auto">
+                    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                    <div>Categoriën aan het laden</div>
+                </div>
+                <div *ngIf="!isLoading" fxLayout="column" fxFlex="3 3 auto">
                     <div *ngIf="selectedCategoryId === -1">
                         Gelieve een categorie te selecteren
                     </div>
@@ -32,6 +38,9 @@
             <br>
             <div class="button">
                 <button type="submit" mat-button>Maak Uitdaging</button>
+            </div>
+            <div *ngIf="submitError !== null">
+                {{submitError}}
             </div>
         </form>
     </mat-card-content>
