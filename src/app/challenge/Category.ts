@@ -1,0 +1,14 @@
+export class Category {
+    constructor(private _id: number, private _name: String){}
+
+    static fromJSON(json: any): Category{
+        return new Category(json.categoryId,json.name);
+    }
+
+    toJSON(): any {
+        return {
+            categoryId: this._id,
+            name: this._name
+        };
+    }
+}
