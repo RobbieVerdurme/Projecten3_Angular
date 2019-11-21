@@ -8,7 +8,7 @@
           <!-- Position Column -->
           <ng-container matColumnDef="firstname">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
-            <td mat-cell *matCellDef="let element" (click)="detailscreen(user)"> 
+            <td mat-cell *matCellDef="let element" (click)="navigateToDetailPage(element)">
               <span class="mobile-label">Voornaam:</span>
               {{element.firstname}} 
             </td>
@@ -17,7 +17,7 @@
           <!-- Name Column -->
           <ng-container matColumnDef="lastname">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Naam </th>
-            <td mat-cell *matCellDef="let element" (click)="detailscreen(user)">
+            <td mat-cell *matCellDef="let element" (click)="navigateToDetailPage(element)">
                 <span class="mobile-label">Naam:</span>
                  {{element.lastname}} 
                 </td>
@@ -26,7 +26,7 @@
           <!-- Weight Column -->
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-            <td mat-cell *matCellDef="let element" (click)="detailscreen(user)">
+            <td mat-cell *matCellDef="let element" (click)="navigateToDetailPage(element)">
                 <span class="mobile-label">Email:</span>
                 {{element.email}} 
               </td>
@@ -35,7 +35,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="challenges">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Aantal Challenges </th>
-            <td mat-cell *matCellDef="let element" (click)="detailscreen(user)">
+            <td mat-cell *matCellDef="let element" (click)="navigateToDetailPage(element)">
                 <span class="mobile-label">Aantal challenges:</span> 
                 {{element.challenges.length}} 
               </td>

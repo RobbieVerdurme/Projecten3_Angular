@@ -16,6 +16,10 @@ export class Challenge{
         return this._description
     }
 
+    get title(){
+        return this._title
+    }
+
     //Set JSON object to Challenge object
     static fromJSON(json: any): Challenge{
         return new Challenge(json.id,json.title,json.description,Category.fromJSON(json.category));

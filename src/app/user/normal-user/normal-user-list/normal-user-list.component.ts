@@ -5,19 +5,15 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { Challenge } from 'src/app/challenge/Challenge';
+import { Category } from 'src/app/challenge/Category';
 
 
 
 const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
-us.addChallenge(new Challenge(0, "Eerste challenge"))
-us.addChallenge(new Challenge(0, "Eerste challenge"))
-us.addChallenge(new Challenge(0, "Eerste challenge"))
-const er: NormalUser =  new NormalUser(1, "wazzaaaa97", "Ruben1", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
-er.addChallenge(new Challenge(0, "Eerste challenge"))
-er.addChallenge(new Challenge(0, "Eerste challenge"))
+us.addChallenge(new Challenge(0, "Loop een marathon","Loop 42 kilometer, dit is de afstand van een marathon",new Category(1,"Sport")))
 
 
-const USER_DATA: NormalUser[] = [us, er];
+const USER_DATA: NormalUser[] = [us];
 
 
 @Component({
@@ -63,8 +59,8 @@ export class NormalUserListComponent implements OnInit {
     }
   }
 
-  detailscreen(user){
-    this.router.navigate(['/gebruiker/id'])
+  navigateToDetailPage(user: NormalUser){
+    this.router.navigate(['/gebruiker/id'],{state : user});
   }
 
 }
