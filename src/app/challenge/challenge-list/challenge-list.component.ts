@@ -2,24 +2,21 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Challenge } from '../Challenge';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Category } from '../Category';
 
 var data : Challenge[] = [];
-data.push(new Challenge(0, "Loop 10km"));
-data.push(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-data.push(new Challenge(0, "Loop 10km"));
-data.push(new Challenge(0, "Loop 10km"));
-data.push(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-data.push(new Challenge(0, "Loop 10km"));
-data.push(new Challenge(0, "Loop 10km"));
-data.push(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-data.push(new Challenge(0, "Loop 10km"));
-data.push(new Challenge(0, "Loop 10km"));
-data.push(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-data.push(new Challenge(0, "Loop 10km"));
+data.push(new Challenge(0, "Loop 10km",new Category(1,"Sport")));
+data.push(new Challenge(0, "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
+data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
+data.push(new Challenge(0, "Loop 10km",new Category(1,"Sport")));
+data.push(new Challenge(0, "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
+data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
+data.push(new Challenge(0, "Loop 10km",new Category(1,"Sport")));
+data.push(new Challenge(0, "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
+data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
+data.push(new Challenge(0, "Loop 10km",new Category(1,"Sport")));
+data.push(new Challenge(0, "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
+data.push(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
 
 @Component({
   selector: 'app-challenge-list',

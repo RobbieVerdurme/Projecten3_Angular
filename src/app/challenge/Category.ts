@@ -11,4 +11,15 @@ export class Category {
     get name() : String{
         return this._name;
     }
+
+    static fromJSON(json: any){
+        return new Category(json.categoryId,json.name);
+    }
+
+    toJSON(){
+        return {
+            categoryId: this._id,
+            name: this._name
+        }
+    }
 }
