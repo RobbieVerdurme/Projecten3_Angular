@@ -10,12 +10,12 @@ import { Category } from 'src/app/challenge/Category';
 
 
 const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
-us.addChallenge(new Challenge(0, "Eerste challenge",new Category(1,"Categorie")))
-us.addChallenge(new Challenge(0, "Eerste challenge",new Category(1,"Categorie")))
-us.addChallenge(new Challenge(0, "Eerste challenge",new Category(1,"Categorie")))
+us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
+us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
+us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
 const er: NormalUser =  new NormalUser(1, "wazzaaaa97", "Ruben1", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
-er.addChallenge(new Challenge(0, "Eerste challenge",new Category(1,"Categorie")))
-er.addChallenge(new Challenge(0, "Eerste challenge",new Category(1,"Categorie")))
+er.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
+er.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
 
 
 const USER_DATA: NormalUser[] = [us, er];

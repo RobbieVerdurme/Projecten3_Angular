@@ -1,3 +1,4 @@
+import { MessageService } from './../../message.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from './../Category';
 import { MatTableDataSource } from '@angular/material';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryService } from '../category.service';
+import { ChallengeService } from '../challenge.service';
 
 @Component({
   selector: 'app-add-challenge',
@@ -23,7 +25,7 @@ export class AddChallengeComponent implements OnInit {
   isLoading: boolean = false;
   submitError: string = null;
 
-  constructor(private router: Router,private fb: FormBuilder,private categoryService: CategoryService) {}
+  constructor(private router: Router,private fb: FormBuilder,private categoryService: CategoryService,private challengeService: ChallengeService,private messageService: MessageService) {}
 
   ngOnInit() {
     this.inputForm = this.fb.group({
@@ -31,20 +33,28 @@ export class AddChallengeComponent implements OnInit {
       description: ['', [Validators.required]]
     });
     this.isLoading = true;
-    this.categoryService.getCategories().subscribe((value)=> {
-      this.dataSource = new MatTableDataSource(value);
-      this.submitError = null;
-      this.isLoading = false;
-    },(error: HttpErrorResponse)=> {
-      this.submitError = "Kon de categoriën niet ophalen";
-      console.log(error);
-      this.isLoading = false;
+    this.categoryService.getCategories().subscribe(response => {
+      if(response.status === 200){
+        this.dataSource = new MatTableDataSource(response.body);
+        this.submitError = null;
+        this.isLoading = false;
+      }else{
+        this.submitError = "Kon de Catergorieën niet ophalen";
+        this.isLoading = false;
+      }
     });
   }
 
   onSubmit(){
     if(this.selectedCategory !== null && !this.TitleField.hasError && !this.DescriptionField.hasError){
-      //TODO
+      this.challengeService.addChallenge(this.TitleField.value,this.DescriptionField.value, this.selectedCategory).subscribe(response => {
+        if(response.status === 200){
+          this.submitError = null;
+          this.messageService.setMessage(`Uitdaging '${this.TitleField.value}' toegevoegd`);
+        }else{
+          this.submitError = "Kon de Uitdaging niet opslaan";
+        }
+      });
     }
   }
 

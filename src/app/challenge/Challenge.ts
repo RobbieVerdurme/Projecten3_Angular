@@ -3,7 +3,8 @@ import { Category } from './Category';
 export class Challenge{
     constructor(
         private _id: number,
-        private _description: string,
+        private _title: String,
+        private _description: String,
         private _category: Category,
     ){}
 
@@ -11,14 +12,19 @@ export class Challenge{
         return this._id
     }
 
-    get description(){
+    get description(): String{
         return this._description
+    }
+
+    get title(): String {
+        return this._title;
     }
 
     //Set JSON object to Challenge object
     static fromJSON(json: any): Challenge{
         const normalUser = new Challenge(
-            json.id,
+            json.challengeId,
+            json.title,
             json.description,
             Category.fromJSON(json.category)
         )
@@ -29,6 +35,7 @@ export class Challenge{
     toJSON(): any{
         return{
             id: this._id,
+            title: this._title,
             description: this._description,
             category: this._category.toJSON()
         }

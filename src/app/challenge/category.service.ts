@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from './Category';
@@ -13,15 +13,7 @@ export class CategoryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCategories(): Observable<Category[]>{
-    return this.httpClient.get(`${this.baseurl}/category`,{headers: {"Access-Control-Allow-Origin":"*"}}).pipe(
-      map((list: any[]): Category[] => {
-        if(!list){
-          return null;
-        }else{
-          return list.map(Category.fromJSON);
-        }
-      })
-    );
+  getCategories(): Observable<HttpResponse<Category[]>>{
+    return this.httpClient.get<Category[]>(`${this.baseurl}/category`,{observe: 'response',headers: {"Access-Control-Allow-Origin":"*"}});
   }
 }
