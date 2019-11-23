@@ -22,44 +22,88 @@ export class Company{
         return this._id
     }
 
+    set id(id: number){
+        this._id = id
+    }
+
     get name(): string{
         return this._name
+    }
+
+    set name(name: string){
+        this._name = name
     }
 
     get phone(): string{
         return this._phone
     }
 
+    set phone(phone: string){
+        this._phone = phone
+    }
+
     get mail(): string{
         return this._mail
+    }
+
+    set mail(mail: string){
+        this._mail = mail
     }
 
     get street(): string{
         return this._street
     }
 
+    set street(street: string){
+        this._street = street
+    }
+
     get houseNumber(): string{
         return this._houseNumber
+    }
+
+    set houseNumber(houseNumber: string){
+        this._houseNumber = houseNumber
     }
 
     get city(): string{
         return this._city
     }
 
+    set city(city: string){
+        this._city = city
+    }
+
     get postalCode(): string{
         return this._postalCode
+    }
+
+    set postalCode(postalCode: string){
+        this._postalCode = postalCode
     }
 
     get country(): string{
         return this._country
     }
 
+    set country(country: string){
+        this._country = country
+    }
+
     get site(): string{
         return this._site
     }
 
+    set site(site: string){
+        this._site = site
+    }
+
     get contract(): Date{
         return this._contract
+    }
+
+    set contract(contract: Date){
+        this._contract = contract
     }
 
     get companyMembers(): NormalUser[]{

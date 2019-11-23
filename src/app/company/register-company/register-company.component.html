@@ -7,15 +7,15 @@
             <p *ngIf="errorMsg" class="error">
                 {{errorMsg}}
             </p>
-            <form [formGroup]="company" (ngSubmit)='onSubmit()'>
+            <form [formGroup]="companyForm" (ngSubmit)='onSubmit()'>
                 <table>
                     <tr>
                         <td>Bedrijfsnaam : </td>
                         <td>
                             <mat-form-field>
                                 <input matInput type="text" placeholder="Bedrijfsnaam" formControlName="name" required />
-                                <mat-error *ngIf="company.get('name').errors && company.get('name').touched">
-                                        {{getErrorMessage(company.get('name').errors)}}
+                                <mat-error *ngIf="companyForm.get('name').errors && companyForm.get('name').touched">
+                                        {{getErrorMessage(companyForm.get('name').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -25,8 +25,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Nummer" formControlName="phone" required />
-                                <mat-error *ngIf="company.get('phone').errors && company.get('phone').touched">
-                                        {{getErrorMessage(company.get('phone').errors)}}
+                                <mat-error *ngIf="companyForm.get('phone').errors && companyForm.get('phone').touched">
+                                        {{getErrorMessage(companyForm.get('phone').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -36,8 +36,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="e-mail" formControlName="mail" required />
-                                <mat-error *ngIf="company.get('mail').errors && company.get('mail').touched">
-                                        {{getErrorMessage(company.get('mail').errors)}}
+                                <mat-error *ngIf="companyForm.get('mail').errors && companyForm.get('mail').touched">
+                                        {{getErrorMessage(companyForm.get('mail').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -47,8 +47,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Straat" formControlName="street" required />
-                                <mat-error *ngIf="company.get('street').errors && company.get('street').touched">
-                                        {{getErrorMessage(company.get('street').errors)}}
+                                <mat-error *ngIf="companyForm.get('street').errors && companyForm.get('street').touched">
+                                        {{getErrorMessage(companyForm.get('street').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -58,8 +58,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Huisnummer" formControlName="houseNumber" required />
-                                <mat-error *ngIf="company.get('houseNumber').errors && company.get('houseNumber').touched">
-                                        {{getErrorMessage(company.get('houseNumber').errors)}}
+                                <mat-error *ngIf="companyForm.get('houseNumber').errors && companyForm.get('houseNumber').touched">
+                                        {{getErrorMessage(companyForm.get('houseNumber').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -69,8 +69,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Plaats" formControlName="city" required />
-                                <mat-error *ngIf="company.get('city').errors && company.get('city').touched">
-                                        {{getErrorMessage(company.get('city').errors)}}
+                                <mat-error *ngIf="companyForm.get('city').errors && companyForm.get('city').touched">
+                                        {{getErrorMessage(companyForm.get('city').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -80,8 +80,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Postcode" formControlName="postalCode" required />
-                                <mat-error *ngIf="company.get('postalCode').errors && company.get('postalCode').touched">
-                                        {{getErrorMessage(company.get('postalCode').errors)}}
+                                <mat-error *ngIf="companyForm.get('postalCode').errors && companyForm.get('postalCode').touched">
+                                        {{getErrorMessage(companyForm.get('postalCode').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -91,8 +91,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Land" formControlName="country" required />
-                                <mat-error *ngIf="company.get('country').errors && company.get('country').touched">
-                                        {{getErrorMessage(company.get('country').errors)}}
+                                <mat-error *ngIf="companyForm.get('country').errors && companyForm.get('country').touched">
+                                        {{getErrorMessage(companyForm.get('country').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -102,8 +102,8 @@
                         <td>
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Website" formControlName="site" />
-                                <mat-error *ngIf="company.get('site').errors && company.get('site').touched">
-                                        {{getErrorMessage(company.get('site').errors)}}
+                                <mat-error *ngIf="companyForm.get('site').errors && companyForm.get('site').touched">
+                                        {{getErrorMessage(companyForm.get('site').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
@@ -115,8 +115,8 @@
                                 <input matInput [matDatepicker]="contract" placeholder="Einde contract" formControlName='contract'>
                                 <mat-datepicker-toggle matSuffix [for]="contract"></mat-datepicker-toggle>
                                 <mat-datepicker #contract></mat-datepicker>
-                                <mat-error *ngIf="company.get('contract').errors && company.get('contract').touched">
-                                        {{getErrorMessage(company.get('contract').errors)}}
+                                <mat-error *ngIf="companyForm.get('contract').errors && companyForm.get('contract').touched">
+                                        {{getErrorMessage(companyForm.get('contract').errors)}}
                                 </mat-error>
                             </mat-form-field>
                         </td>
