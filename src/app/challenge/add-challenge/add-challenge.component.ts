@@ -42,6 +42,10 @@ export class AddChallengeComponent implements OnInit {
     this.selectedCategoryId = category.id;
   }
 
+  isSelected(element: Category): boolean {
+    return element.id === this.selectedCategoryId;
+  }
+
   get TitleField() : FormControl
   {
     return <FormControl> this.inputForm.get("title");
