@@ -18,17 +18,12 @@ export class Challenge{
 
     get title(): String {
         return this._title;
+
     }
 
     //Set JSON object to Challenge object
     static fromJSON(json: any): Challenge{
-        const normalUser = new Challenge(
-            json.challengeId,
-            json.title,
-            json.description,
-            Category.fromJSON(json.category)
-        )
-        return normalUser;
+        return new Challenge(json.challengeId,json.title,json.description,Category.fromJSON(json.category));
     }
 
     //Set Challenge object to JSON object

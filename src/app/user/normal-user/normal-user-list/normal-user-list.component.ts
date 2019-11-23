@@ -6,10 +6,12 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Router } from '@angular/router';
 import { Challenge } from 'src/app/challenge/Challenge';
 import { Category } from 'src/app/challenge/Category';
+import { SelectUserService } from 'src/app/challenge/select-user.service';
 
 
 
 const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
+
 us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
 us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
 us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
@@ -18,7 +20,7 @@ er.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Cate
 er.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
 
 
-const USER_DATA: NormalUser[] = [us, er];
+const USER_DATA: NormalUser[] = [us];
 
 
 @Component({
@@ -39,7 +41,8 @@ export class NormalUserListComponent implements OnInit {
   //ctor
   constructor(
     breakpointObserver: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private selectUserService: SelectUserService
     ) {
       this.dataSource = new MatTableDataSource(USER_DATA); 
 
@@ -64,8 +67,9 @@ export class NormalUserListComponent implements OnInit {
     }
   }
 
-  detailscreen(user){
-    this.router.navigate(['/gebruiker/id'])
+  navigateToDetailPage(user: NormalUser){
+    this.selectUserService.setUser(user);
+    this.router.navigate(['/gebruiker/id']);
   }
 
 }
