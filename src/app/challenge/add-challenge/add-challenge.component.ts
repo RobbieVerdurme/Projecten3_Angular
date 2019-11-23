@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from './../Category';
 import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-add-challenge',
@@ -21,20 +23,29 @@ export class AddChallengeComponent implements OnInit {
   isLoading: boolean = false;
   submitError: string = null;
 
-  constructor(private router: Router,private fb: FormBuilder) { 
-    this.dataSource = new MatTableDataSource([new Category(1,"Category 1"),new Category(2,"Category 2")]);
-  }
+  constructor(private router: Router,private fb: FormBuilder,private categoryService: CategoryService) {}
 
   ngOnInit() {
     this.inputForm = this.fb.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]]
     });
-    //TODO fetch categories for list
+    this.isLoading = true;
+    this.categoryService.getCategories().subscribe((value)=> {
+      this.dataSource = new MatTableDataSource(value);
+      this.submitError = null;
+      this.isLoading = false;
+    },(error: HttpErrorResponse)=> {
+      this.submitError = "Kon de categoriën niet ophalen";
+      console.log(error);
+      this.isLoading = false;
+    });
   }
 
   onSubmit(){
-    //TODO: validate form input AND if category isn't null
+    if(this.selectedCategory !== null && !this.TitleField.hasError && !this.DescriptionField.hasError){
+      //TODO
+    }
   }
 
   selectCategory(category: Category) {
