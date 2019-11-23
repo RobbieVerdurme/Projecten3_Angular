@@ -9,7 +9,6 @@ data.push(new Challenge(0, "Loop 10km","Loop een afstand van in totaal 10 kilome
 data.push(new Challenge(1, "Gezonde Maaltijd", "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
 data.push(new Challenge(2,"Daguitstap", "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
 
-
 @Component({
   selector: 'app-challenge-list',
   templateUrl: './challenge-list.component.html',

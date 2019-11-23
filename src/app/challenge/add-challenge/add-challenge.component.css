@@ -11,3 +11,8 @@ td:last-child {
 table {
   width: 100%;
 }
+
+.categoryItem {
+  display: block;
+  width: 100%;
+}

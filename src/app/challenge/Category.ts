@@ -20,5 +20,4 @@ export class Category {
     get name() : String{
         return this._name;
     }
-
 }
