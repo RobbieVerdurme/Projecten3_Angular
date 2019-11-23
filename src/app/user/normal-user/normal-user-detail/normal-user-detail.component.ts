@@ -1,38 +1,20 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Challenge } from 'src/app/challenge/Challenge';
 import { NormalUser } from '../NormalUser';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
-import { BreakpointObserver } from '@angular/cdk/layout';
-
+import { Category } from 'src/app/challenge/Category';
+import { SelectUserService } from 'src/app/challenge/select-user.service';
 
 const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
-us.addChallenge(new Challenge(0, "Loop 10km"));
-us.addChallenge(new Challenge(0, "Maak een speciale gezonde maaltijd"))
-us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal mee"))
+us.addChallenge(new Challenge(0, "Loop 10km","Loop een afstand van 10 kilometer",new Category(1,"Sport")));
+us.addChallenge(new Challenge(0,"Speciale Maaltijd", "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
+us.addChallenge(new Challenge(0,"Daguitstap", "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
+us.addChallenge(new Challenge(0, "Loop 10km","Loop een afstand van 10 kilometer",new Category(1,"Sport")));
+us.addChallenge(new Challenge(0,"Speciale Maaltijd", "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
+us.addChallenge(new Challenge(0,"Daguitstap", "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
+us.addChallenge(new Challenge(0, "Loop 10km","Loop een afstand van 10 kilometer",new Category(1,"Sport")));
+us.addChallenge(new Challenge(0,"Speciale Maaltijd", "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
+us.addChallenge(new Challenge(0,"Daguitstap", "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
 
 @Component({
   selector: 'app-normal-user-detail',
@@ -41,13 +23,16 @@ us.addChallenge(new Challenge(0, "Doe een daguitstap en neem eigen middagmaal me
 })
 export class NormalUserDetailComponent implements OnInit {
 //var
-user : NormalUser = us;
-challenges : Challenge[] = us.challenges;
+  user : NormalUser;
 
-
-  constructor() { 
+  constructor(private router: Router, private selectUserService: SelectUserService) { 
   }
 
   ngOnInit() {
+    this.user = this.selectUserService.getSubject().value;
+  }
+
+  navigateToAssignChallenges(){
+    this.router.navigate(["/challenge/assign"]);
   }
 }

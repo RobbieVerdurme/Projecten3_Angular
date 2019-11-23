@@ -35,7 +35,10 @@
                         </tr>
                     </td>
                 </table>
-                <button class="addchallengebtn" mat-button>Voeg uitdagingen toe</button>
+                <!--Pass data with state param and navigate-->
+                <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button>
+                    Voeg uitdagingen toe
+                </button>
                 <app-challenge-list [challenges]="user.challenges"></app-challenge-list>
             </mat-card-content>
         </mat-card>

@@ -1,1 +1,32 @@
-<p>assign-challenge works!</p>
+<mat-card>
+    <mat-card-title>
+        <div fxLayout="column" fxLayout.gt-sm="row">
+            <div>
+                Voeg Uitdagingen toe voor 
+            </div>
+            <div fxFlex="5 5 auto"></div>
+            <div>
+                {{user.firstname}} {{user.lastname}}
+            </div>
+        </div>
+    </mat-card-title>
+    <mat-card-content>
+        <div fxLayout="column">
+            <mat-selection-list #list (selectionChange)="onSelectionChange($event, list.selectedOptions.selected)">
+                <mat-list-option *ngFor="let challenge of challengesOnCurrentPage" >
+                    {{challenge.title}}
+                </mat-list-option>
+            </mat-selection-list>
+            <mat-paginator [length]="challenges.length" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
+            <br>
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <div *ngIf="challengesToAdd.length === 0">
+                    Gelieve minstens één uitdaging te selecteren
+                </div>
+                <div class="button" mat-button>
+                    <button type="submit" mat-button>Uitdagingen Toevoegen</button>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

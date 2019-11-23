@@ -54,13 +54,13 @@ export class AuthenticationService {
 
   // meth
   login(username: string, password: string): Observable<boolean> {
-    /*
+    
     const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTb2ZpZVZAZ21haWwuY29tIiwidW5pcXVlX25hbWUiOiJTb2ZpZVYiLCJJZCI6IiIsInJvbGVzIjoiTXVsdGltZWQiLCJleHAiOjE1NzQyNzI2Mjh9.YeNChn55ifUV_98lWlLT-AuOhfuTVjzVlHc9C9ivUhE";
     localStorage.setItem(this._tokenKey, token);
     const parsedToken = parseJwt(token);
     this._user$.next(new Multimed(parsedToken.id, username, Role.Mulitmed));
     return new BehaviorSubject<boolean>(true);
-    */
+    
     return this.http
       .post(`${environment.apiUrl}/Account`, {username, password}, { responseType: 'text' })
       .pipe(
