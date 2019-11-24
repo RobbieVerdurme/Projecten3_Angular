@@ -7,7 +7,7 @@
             <p *ngIf="errorMsg" class="error">
                 {{errorMsg}}
             </p>
-            <form [formGroup]="companyForm" (ngSubmit)='onSubmit()'>
+            <form [formGroup]="companyForm">
                 <table>
                     <tr>
                         <td>Bedrijfsnaam : </td>
@@ -122,8 +122,16 @@
                         </td>
                     </tr>
                 </table>
-                <div class="button">
-                    <button type="submit" mat-button>Voeg toe</button>
+                <div *ngIf="isEdit == false">
+                    <div class="button">
+                        <button (click)="addCompany()" mat-button>Voeg toe</button>
+                    </div>
+                </div>
+                <div *ngIf="isEdit == true">
+                    <div>
+                        <button mat-button (click)="editCompany()">Aanpassen</button>
+                        <button mat-button (click)="deleteCompany()">Verwijderen</button>
+                    </div>
                 </div>
             </form>
         </mat-card-content>

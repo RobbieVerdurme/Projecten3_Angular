@@ -37,7 +37,7 @@ export class RegisterCompanyComponent implements OnInit {
       }
       // remove create of company and add error, company should never be null if it has a detail page
       if(this.company === null || this.company === undefined){
-        this.errorMsg = "Company can never be null if it has a detail page, line 33 in register company gets null from company resolver line 17"
+        this.company = new Company(0, "", "", "", "", "", "", "", "", "", new Date(), new Array<NormalUser>())
       }
 
       //Modify validation of each field
@@ -55,28 +55,7 @@ export class RegisterCompanyComponent implements OnInit {
     });
   }
 
-  onSubmit(){
-    // Set new values to company
-    this.company.name = this.companyForm.value.name;
-    this.company.phone = this.companyForm.value.phone;
-    this.company.mail = this.companyForm.value.mail;
-    this.company.street = this.companyForm.value.street;
-    this.company.houseNumber = this.companyForm.value.houseNumber;
-    this.company.city = this.companyForm.value.city;
-    this.company.postalCode = this.companyForm.value.postalCode; 
-    this.company.country = this.companyForm.value.country;
-    this.company.site = this.companyForm.value.site;
-    this.company.contract = this.companyForm.value.contract
-
-    // check if company is edit or user wants to create new company
-    if(this.isEdit){
-      this.editCompany()
-    }
-    else{
-      this.addCompany()
-    }
-
-  }
+  
 
   getErrorMessage(errors: any){
     if(!errors){
@@ -86,6 +65,8 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   addCompany(){
+    this.setCompanyValues();
+    console.log("add works");
     this._companyDataService.addNewCompany(this.company)
     .subscribe(
       val => {
@@ -106,6 +87,8 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   editCompany(){
+    this.setCompanyValues();
+    console.log("edit works");
     this._companyDataService.editCompany(this.company)
     .subscribe(
       val => {
@@ -117,12 +100,46 @@ export class RegisterCompanyComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
-          this.errorMsg = `Error bij het aanmaken van bedrijf ${this.companyForm.value.name}`
+          this.errorMsg = `Error bij het aanpassen van bedrijf ${this.company.name}`
         }else{
-          this.errorMsg = `Error ${err.status} bij het aanmaken van bedrijf ${this.companyForm.value.name}`
+          this.errorMsg = `Error ${err.status} bij het aanpassen van bedrijf ${this.company.name}`
         }
       }
     )
+  }
+
+  deleteCompany(){
+    this._companyDataService.removeCompany(this.company.id)
+    .subscribe(
+      val => {
+        if(val){
+          this.router.navigate['']
+        }else{
+          this.errorMsg = `Fout bij het verwijderen van ${this.company.name}!`
+        }
+      },
+      (err: HttpErrorResponse) => {
+        if(err.error instanceof Error){
+          this.errorMsg = `Error bij het verwijderen van bedrijf ${this.company.name}`
+        }else{
+          this.errorMsg = `Error ${err.status} bij het verwijderen van bedrijf ${this.company.name}`
+        }
+      }
+    )
+  }
+
+  // Set new values to company
+  setCompanyValues(){
+    this.company.name = this.companyForm.value.name;
+    this.company.phone = this.companyForm.value.phone;
+    this.company.mail = this.companyForm.value.mail;
+    this.company.street = this.companyForm.value.street;
+    this.company.houseNumber = this.companyForm.value.houseNumber;
+    this.company.city = this.companyForm.value.city;
+    this.company.postalCode = this.companyForm.value.postalCode; 
+    this.company.country = this.companyForm.value.country;
+    this.company.site = this.companyForm.value.site;
+    this.company.contract = this.companyForm.value.contract
   }
 
 }
