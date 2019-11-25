@@ -11,22 +11,29 @@
         </div>
     </mat-card-title>
     <mat-card-content>
-        <div fxLayout="column">
+        <div *ngIf="!isLoading" fxLayout="column">
             <mat-selection-list #list (selectionChange)="onSelectionChange($event, list.selectedOptions.selected)">
                 <mat-list-option *ngFor="let challenge of challengesOnCurrentPage" >
                     {{challenge.title}}
                 </mat-list-option>
             </mat-selection-list>
-            <mat-paginator [length]="challenges.length" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
+            <mat-paginator [length]="challenges !== null ? challenges.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
             <br>
             <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-                <div *ngIf="challengesToAdd?.length === 0">
+                <div *ngIf="challengesToAdd?.length === 0 && submitError === null">
                     Gelieve minstens één uitdaging te selecteren
+                </div>
+                <div *ngIf="submitError !== null">
+                    {{submitError}}
                 </div>
                 <div class="button" mat-button (click)="onSubmit()">
                     <button type="submit" mat-button>Uitdagingen Toevoegen</button>
                 </div>
             </div>
+        </div>
+        <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            <div>Uitdagingen aan het laden</div>
         </div>
     </mat-card-content>
 </mat-card>

@@ -1,3 +1,4 @@
+import { MessageService } from './../../../message.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Challenge } from 'src/app/challenge/Challenge';
@@ -24,15 +25,21 @@ us.addChallenge(new Challenge(0,"Daguitstap", "Doe een daguitstap en neem eigen 
 export class NormalUserDetailComponent implements OnInit {
 //var
   user : NormalUser;
+  message: String;
 
-  constructor(private router: Router, private selectUserService: SelectUserService) { 
+  constructor(private router: Router,private messageService: MessageService, private selectUserService: SelectUserService) { 
   }
 
   ngOnInit() {
     this.user = this.selectUserService.getSubject().value;
+    this.message = this.messageService.getObservable().value;
   }
 
   navigateToAssignChallenges(){
     this.router.navigate(["/challenge/assign"]);
+  }
+
+  dismissMessage(){
+    this.messageService.setMessage(null);
   }
 }
