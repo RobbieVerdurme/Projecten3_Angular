@@ -42,6 +42,10 @@ export class AddChallengeComponent implements OnInit {
         this.submitError = "Kon de Catergorieën niet ophalen";
         this.isLoading = false;
       }
+    },(error)=>{
+      console.log(error);
+      this.submitError = "Kon de Catergorieën niet ophalen";
+      this.isLoading = false;
     });
   }
 
@@ -54,6 +58,9 @@ export class AddChallengeComponent implements OnInit {
         }else{
           this.submitError = "Kon de Uitdaging niet opslaan";
         }
+      },(error)=>{
+        console.log(error);
+        this.submitError = "Kon de Uitdaging niet opslaan";
       });
     }
   }
