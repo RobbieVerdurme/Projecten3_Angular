@@ -37,4 +37,13 @@ export class MainNavComponent {
   get isMultimed() {
     return this._authenticationService.isMultimed();
   }
+
+  get isTherapist(){
+    return this._authenticationService.isTherapist();
+  }
+
+  get isLoggedIn(){
+    return this._authenticationService.isLoggedIn();
+  }
+
 }

@@ -137,4 +137,15 @@ export class AuthenticationService {
     }
     return false;
   }
+
+  isTherapist(){
+    if(this.user$.value){
+      return this._user$.value.role == Role.Therapist?false:true
+    }
+    return false;
+  }
+
+  isLoggedIn(){
+    return this.user$.value? true:false
+  }
 }

@@ -1,12 +1,12 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" >
     <mat-sidenav #drawer class="sidenav" fixedInViewport
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="(isHandset$ | async) === false">
-      <mat-toolbar>Menu</mat-toolbar>
-      <mat-nav-list>
+      <mat-toolbar *ngIf="isLoggedIn">Menu</mat-toolbar>
+      <mat-nav-list *ngIf="isLoggedIn">
         <a mat-list-item [routerLink]="['/welkom']"><mat-icon>home</mat-icon> Home</a>
-        <a mat-list-item [routerLink]="['/profile']"><mat-icon>account_circle</mat-icon> Profiel</a>
+        <a mat-list-item [routerLink]="['/profile']" *ngIf="isTherapist" data-cy="profile-button"><mat-icon>account_circle</mat-icon> Profiel</a>
         <h3 mat-list-item>Overzicht</h3>
         <a mat-list-item class="submenu" [routerLink]="['/gebruiker/lijst']"><mat-icon>people</mat-icon> Gebruikers</a>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/therapeut/lijst']"><mat-icon>people</mat-icon> Therapeuten</a>
@@ -20,7 +20,7 @@
         <a mat-list-item class="submenu" [routerLink]="['/challenge/add']"><mat-icon>add</mat-icon> Uitdaging</a>
         <a mat-list-item class="submenu"><mat-icon>add</mat-icon> Info</a>
         <span *ngIf="(loggedInUser$ | async) as LoginUser">
-          <button (click)="logout()" mat-flat-button><mat-icon>perm_identity</mat-icon>Logout</button>
+          <a (click)="logout()" mat-flat-button data-cy="logout-button"><mat-icon>perm_identity</mat-icon>Logout</a>
         </span>
       </mat-nav-list>
     </mat-sidenav>

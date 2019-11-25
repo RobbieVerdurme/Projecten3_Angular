@@ -1,3 +1,5 @@
+// All tests for the authentication
+
 describe('authentication tests', function(){
     it('redirect to login', function(){
         cy.visit('/welkom');
@@ -25,6 +27,15 @@ describe('authentication tests', function(){
     it('fail to login', function(){
         cy.visit('/login');
         cy.get('[data-cy=login-button]').click();
+        cy.url().should('eq', 'http://localhost:4200/login');
+    });
+
+    it('logout after login', function(){
+        cy.visit('/login');
+        cy.get('[data-cy=username]').type('SofieV');
+        cy.get('[data-cy=password]').type('P@ssword123');
+        cy.get('[data-cy=login-button]').click();
+        cy.get('[data-cy=logout-button]').click();
         cy.url().should('eq', 'http://localhost:4200/login');
     });
 });
