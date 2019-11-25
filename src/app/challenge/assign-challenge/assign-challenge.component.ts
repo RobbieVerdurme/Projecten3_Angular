@@ -31,11 +31,13 @@ export class AssignChallengeComponent implements OnInit {
     new Challenge(1,"Challenge 1","Challenge 1 Description",new Category(1,"Category 1")),
   ];
 
-  challengesToAdd: Challenge[] = [];
+  challengesToAdd: Challenge[] = null;
   pageSize = 10;
   challengesOnCurrentPage = [];
 
   user: NormalUser
+
+  submitError: String = null;
 
   constructor(private selectUserService: SelectUserService) { }
 
@@ -49,8 +51,16 @@ export class AssignChallengeComponent implements OnInit {
   }
 
   onSelectionChange(e,v){
-    console.log("selected item");
     this.challengesToAdd = v.map(element => element.value);
+  }
+
+  onSubmit(){
+    //Trigger empty selection warning
+    if(this.challengesToAdd === null){
+      this.challengesToAdd = [];
+    }else{
+      //TODO
+    }
   }
 
 }

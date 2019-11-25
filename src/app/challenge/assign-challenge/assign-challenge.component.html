@@ -20,10 +20,10 @@
             <mat-paginator [length]="challenges.length" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
             <br>
             <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-                <div *ngIf="challengesToAdd.length === 0">
+                <div *ngIf="challengesToAdd?.length === 0">
                     Gelieve minstens één uitdaging te selecteren
                 </div>
-                <div class="button" mat-button>
+                <div class="button" mat-button (click)="onSubmit()">
                     <button type="submit" mat-button>Uitdagingen Toevoegen</button>
                 </div>
             </div>
