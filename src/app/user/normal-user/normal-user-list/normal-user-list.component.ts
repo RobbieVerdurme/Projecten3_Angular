@@ -8,6 +8,9 @@ import { Challenge } from 'src/app/challenge/Challenge';
 import { Company } from 'src/app/company/company';
 import { Category } from 'src/app/challenge/Category';
 import { SelectUserService } from 'src/app/challenge/select-user.service';
+import { AuthenticationService } from '../../authentication.service';
+import { Therapist } from '../../therapist/Therapist';
+import { TherapistDataService } from '../../therapist/therapist-data.service';
 
 
 
@@ -22,6 +25,8 @@ er.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Cate
 
 
 const USER_DATA: NormalUser[] = [us];
+const ther: Therapist = new Therapist(0, "EersteTestTherapist", "Sportdokter")
+ther.addClient(us)
 
 
 @Component({
@@ -43,7 +48,9 @@ export class NormalUserListComponent implements OnInit {
   constructor(
     breakpointObserver: BreakpointObserver,
     private router: Router,
-    private selectUserService: SelectUserService
+    private selectUserService: SelectUserService,
+    private aut: AuthenticationService, 
+    private therapistDataService: TherapistDataService
     ) {
       breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
         this.displayedColumns = result.matches ? 
@@ -54,14 +61,7 @@ export class NormalUserListComponent implements OnInit {
   
   //methods
   ngOnInit() {
-  //Get all normal users  
-  if(this.company == null){
-    this.dataSource = new MatTableDataSource(USER_DATA); 
-  }
-  //Get users of given company
-  else{
-    this.dataSource = new MatTableDataSource(this.company.companyMembers); 
-  }
+    this.loadData()
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -78,6 +78,29 @@ export class NormalUserListComponent implements OnInit {
   navigateToDetailPage(user: NormalUser){
     this.selectUserService.setUser(user);
     this.router.navigate(['/gebruiker/id']);
+  }
+
+  loadData(){
+    // check if current user is multimed or a therapist
+    if(this.aut.isMultimed()){
+      //Get all normal users  
+      if(this.company == null){
+        this.dataSource = new MatTableDataSource(USER_DATA); 
+      }
+      //Get users of given company
+      else{
+        this.dataSource = new MatTableDataSource(this.company.companyMembers); 
+      }
+    }
+    else{
+      //Get therapist and display his clients
+      this.dataSource = new MatTableDataSource(ther.clients)
+      /*This is used to get therapist clients from backend
+      var therapist: Therapist = null
+      this.therapistDataService.getTherapist$(this.aut.idFromToken).subscribe(item => therapist = item['therapist'])
+      this.dataSource = new MatTableDataSource(therapist.clients)
+      */
+    }
   }
 
 }

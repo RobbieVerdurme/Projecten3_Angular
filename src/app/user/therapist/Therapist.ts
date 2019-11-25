@@ -43,7 +43,7 @@ export class Therapist extends LoginUser{
     }
 
     set familyname(familyname: string){
-        this.familyname = familyname
+        this._familyname = familyname
     }
 
     get email(): string{
@@ -51,7 +51,7 @@ export class Therapist extends LoginUser{
     }
 
     set email(email: string){
-        this.email = email
+        this._email = email
     }
 
     get telephone(): string{
@@ -67,11 +67,15 @@ export class Therapist extends LoginUser{
     }
 
     set function(type: string){
-        this.function = type
+        this._function = type
     }
 
     get clients(): Array<NormalUser>{
         return this._clients
+    }
+
+    set clients(clients: Array<NormalUser>){
+        this._clients = clients
     }
 
     //Set JSON object to company object
@@ -86,6 +90,7 @@ export class Therapist extends LoginUser{
         therapist.email = json.email,
         therapist.telephone = json.telephone,
         therapist.function = json.function
+        therapist.clients = json.Clients
         
         return therapist
     }
@@ -101,5 +106,9 @@ export class Therapist extends LoginUser{
             function: this.function,
             clients: this.clients.map(client => client.toJSON)
         }
+    }
+
+    addClient(client: NormalUser){
+        this._clients.push(client)
     }
 }

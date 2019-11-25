@@ -27,6 +27,7 @@ export class AuthenticationService {
   // var
   private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<LoginUser>;
+  private _id: number;
   public redirectUrl: string;
 
   // constr
@@ -132,7 +133,7 @@ export class AuthenticationService {
 
   isMultimed() {
     if(this.user$.value){
-      return this._user$.value.role == Role.Mulitmed?true:false
+      return this._user$.value.role == Role.Mulitmed?false:true
     }
     return false;
   }
