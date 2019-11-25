@@ -86,11 +86,11 @@ export class Therapist extends LoginUser{
             json.role
         );
         therapist.firstname = json.firstname,
-        therapist.familyname = json.familyname,
+        therapist.familyname = json.lastname,
         therapist.email = json.email,
         therapist.telephone = json.telephone,
         therapist.function = json.function
-        therapist.clients = json.Clients
+        therapist.clients = json.Clients.map(NormalUser.FromJSON)
         
         return therapist
     }
@@ -100,7 +100,7 @@ export class Therapist extends LoginUser{
         return{
             username: this.username,
             firstname: this.firstname,
-            familyname: this.familyname,
+            lastname: this.familyname,
             email: this.email,
             telephone: this.telephone,
             function: this.function,

@@ -95,7 +95,8 @@ export class NormalUserListComponent implements OnInit {
     else{
       //Get therapist and display his clients
       this.dataSource = new MatTableDataSource(ther.clients)
-      /*This is used to get therapist clients from backend
+      //This is used to get therapist clients from backend
+      /*
       var therapist: Therapist = null
       this.therapistDataService.getTherapist$(this.aut.idFromToken).subscribe(item => therapist = item['therapist'])
       this.dataSource = new MatTableDataSource(therapist.clients)

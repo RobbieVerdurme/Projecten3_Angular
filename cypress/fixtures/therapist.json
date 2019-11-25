@@ -1,0 +1,34 @@
+[
+    {
+        "id": 0,
+        "username": "Wazzaaaa97",
+        "role": "Therapist",
+        "firstname": "Ruben",
+        "lastname": "Grillaert",
+        "email": "ruben.grillaert.y1033@student.hogent.be",
+        "telephone": "0474139526",
+        "function": "Sportdokter",
+        "clients": [
+            {
+                "id": 0,
+                "username": "client1",
+                "firstname": "Jos",
+                "lastname": "vd",
+                "email": "em@ail.com",
+                "telephone": "0412345678",
+                "contract": "2020-03-13T11:40:03.184905",
+                "challenges": []
+            },
+            {
+                "id": 1,
+                "username": "client2",
+                "firstname": "Karl",
+                "lastname": "Janssens",
+                "email": "em@ail.com",
+                "telephone": "0412345678",
+                "contract": "2020-04-13T11:40:03.184905",
+                "challenges": []
+            }
+        ]
+    }
+]

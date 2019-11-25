@@ -1,0 +1,24 @@
+[
+    {
+        "id": 0,
+        "username": "client1",
+        "firstname": "Jos",
+        "lastname": "vd",
+        "email": "em@ail.com",
+        "telephone": "0412345678",
+        "contract": "2020-03-13T11:40:03.184905",
+        "challenges": [
+            {
+                "challengeId": 0,
+                "title": "eersteChallenge",
+                "description": "Beschrijving van een eerste challenge bij het testen",
+                "category": [
+                    {
+                        "categoryId": 0,
+                        "name": "Eerste"
+                    }
+                ]
+            }
+        ]
+    }
+]

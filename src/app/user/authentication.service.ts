@@ -133,14 +133,14 @@ export class AuthenticationService {
 
   isMultimed() {
     if(this.user$.value){
-      return this._user$.value.role == Role.Mulitmed?true:false
+      return this._user$.value.role == Role.Mulitmed?false:true
     }
     return false;
   }
 
   isTherapist(){
     if(this.user$.value){
-      return this._user$.value.role == Role.Therapist?true:false
+      return this._user$.value.role == Role.Therapist?false:true
     }
     return false;
   }

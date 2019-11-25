@@ -12,7 +12,7 @@
                     <td>
                         <tr>
                             <td>username : </td>
-                            <td>{{user.username}}</td>
+                            <td data-cy="userUsername">{{user.username}}</td>
                         </tr>
                         <tr>
                             <td>Firstname : </td>
@@ -42,7 +42,7 @@
                 <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button>
                     Voeg uitdagingen toe
                 </button>
-                <app-challenge-list [challenges]="user.challenges"></app-challenge-list>
+                <app-challenge-list [challenges]="user.challenges" data-cy="userChallenges"></app-challenge-list>
             </mat-card-content>
         </mat-card>
     </div>
