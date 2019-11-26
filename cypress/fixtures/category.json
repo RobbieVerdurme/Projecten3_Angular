@@ -1,0 +1,14 @@
+[
+    {
+        "categoryId": 0,
+        "name": "Beweging"
+    },
+    {
+        "categoryId": 1,
+        "name": "Voeding"
+    },
+    {
+        "categoryId": 2,
+        "name": "Sociaal"
+    }
+]

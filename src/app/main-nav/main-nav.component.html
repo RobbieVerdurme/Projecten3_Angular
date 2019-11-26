@@ -18,7 +18,7 @@
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/therapeut/registreren']"><mat-icon>person_add</mat-icon> Therapeuten</a>
         <h3 mat-list-item>Toevoegen</h3>
         <a mat-list-item class="submenu" *ngIf="isMultimed" [routerLink]="['/bedrijf/registreren']"><mat-icon>add</mat-icon> Bedrijf</a>
-        <a mat-list-item class="submenu" [routerLink]="['/challenge/add']"><mat-icon>add</mat-icon> Uitdaging</a>
+        <a mat-list-item class="submenu" [routerLink]="['/challenge/add']" data-cy="add-challenge-button"><mat-icon>add</mat-icon> Uitdaging</a>
         <a mat-list-item class="submenu"><mat-icon>add</mat-icon> Info</a>
         <span *ngIf="(loggedInUser$ | async) as LoginUser">
           <a (click)="logout()" mat-flat-button data-cy="logout-button"><mat-icon>perm_identity</mat-icon>Logout</a>
