@@ -36,17 +36,17 @@ export class CompanyDataService {
 
   //Add a company, id generated in backend
   addNewCompany(company: Company){
-    return this.http.post(`${environment.apiUrl}`, company.toJSON());
+    return this.http.post(`${environment.apiUrl}/Companies`, company.toJSON());
   }
   
   //modify a company
   editCompany(company: Company){
-    return this.http.post(`${environment.apiUrl}`, company.toJSON());
+    return this.http.post(`${environment.apiUrl}/Companies/edit`, company.toJSON());
   }
 
   //remove a company
   removeCompany(id){
-    return this.http.delete(`${environment.apiUrl}${id}`);
+    return this.http.delete(`${environment.apiUrl}/Companies/${id}`);
   }
 
 }

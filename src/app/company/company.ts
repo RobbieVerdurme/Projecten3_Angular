@@ -132,7 +132,7 @@ export class Company{
     //set company object to JSON object
     toJSON(): any{
         return{
-            id: this.id,
+            companyId: this.id,
             name: this.name,
             phone: this.phone,
             mail: this.mail,
