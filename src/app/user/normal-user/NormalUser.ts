@@ -2,24 +2,20 @@ import { Challenge } from 'src/app/challenge/Challenge';
 
 export class NormalUser{
     //Constructor
+    
+    private _challenges = new Array<Challenge>()
     constructor(
         private _id: number,
-        private _username: string,
         private _firstname: string,
         private _lastname: string,
         private _email: string,
         private _telephone: string,
         private _contract: Date,
-        private _challenges = new Array<Challenge>()
     ){}
 
     //Getters
     get id(): number{
         return this._id;
-    }
-
-    get username(): string{
-        return this._username;
     }
 
     get firstname(): string{
@@ -49,14 +45,12 @@ export class NormalUser{
     //Set JSON object to NormalUser object
     static FromJSON(json: any): NormalUser{
         const normalUser = new NormalUser(
-            json.id,
-            json.username,
-            json.firstname,
-            json.lastname,
+            json.userId,
+            json.firstName,
+            json.familyName,
             json.email,
-            json.telephone,
-            json.contract,
-            json.challenges.map(Challenge.fromJSON)
+            json.phone,
+            json.contract
         )
         return normalUser;
     }
@@ -65,7 +59,6 @@ export class NormalUser{
     toJSON(): any{
         return{
             id: this.id,
-            username: this.username,
             firstname: this.firstname,
             lastname: this.lastname,
             email: this.email,

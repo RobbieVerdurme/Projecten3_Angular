@@ -11,7 +11,7 @@ const COMPANY_DATA: Company = new Company(0,  'HoGent',  '093697896',  'comp@ny.
 
 const catg: Category = new Category(0, "Lopen")
 
-const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
+const us: NormalUser = new NormalUser(0, "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
 us.addChallenge(new Challenge(0, "Eerste challenge", "De beschrijving van de eerste challenge", catg))
 us.addChallenge(new Challenge(1, "tweede challenge", "De beschrijving van de tweede challenge", catg))
 us.addChallenge(new Challenge(2, "derde challenge", "De beschrijving van de derde challenge", catg))

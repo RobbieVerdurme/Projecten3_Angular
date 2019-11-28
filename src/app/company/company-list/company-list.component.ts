@@ -3,6 +3,8 @@ import { Company } from '../company';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { CompanyDataService } from '../company-data.service';
+import { Observable } from 'rxjs';
 
 //MockData to fill company list
 const COMPANY_DATA: Company[] = [
@@ -19,6 +21,7 @@ export class CompanyListComponent implements OnInit {
   //var
   displayedColumns: string[] = ['name', 'city', 'country'];
   dataSource: MatTableDataSource<Company>;
+  private companies$: Observable<Company[]> = this.companyDataService.Companies$;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -26,7 +29,8 @@ export class CompanyListComponent implements OnInit {
   //ctor
   constructor(
     breakpointObserver: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private companyDataService: CompanyDataService
   ) { 
     //Set fields that can be filtered
     this.dataSource = new MatTableDataSource(COMPANY_DATA);
@@ -44,6 +48,7 @@ export class CompanyListComponent implements OnInit {
 
   //methods
   ngOnInit() {
+    this.companies$.forEach(company => console.log(company));
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort
   }

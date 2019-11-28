@@ -17,7 +17,7 @@ export class CompanyDataService {
 
   //Get all companies
   get Companies$(): Observable<Company[]>{
-    return this.http.get(`${environment.apiUrl}`)
+    return this.http.get(`${environment.apiUrl}/Companies`)
       .pipe(
         catchError(error => {
           this.loadingError$.next(error.statusText);
