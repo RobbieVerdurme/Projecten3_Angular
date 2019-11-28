@@ -29,9 +29,8 @@ export class CompanyDataService {
 
   //Get companie by id
   getCompany$(id): Observable<Company>{
-    return null //Remove when api call works
     return this.http
-      .get(`${environment.apiUrl}${id}`)
+      .get(`${environment.apiUrl}/Companies/${id}`)
       .pipe(map((rec: any): Company => Company.fromJSON(rec)));
   }
 

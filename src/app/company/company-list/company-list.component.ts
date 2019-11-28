@@ -28,27 +28,28 @@ export class CompanyListComponent implements OnInit {
 
   //ctor
   constructor(
-    breakpointObserver: BreakpointObserver,
+    private breakpointObserver: BreakpointObserver,
     private router: Router,
     private companyDataService: CompanyDataService
   ) { 
+    
+  }
+
+  //methods
+  ngOnInit() {
     //Set fields that can be filtered
-    this.dataSource = new MatTableDataSource(COMPANY_DATA);
+    this.dataSource = new MatTableDataSource();
     this.dataSource.filterPredicate = function(data, filter: string): boolean{
       return data.name.toLowerCase().includes(filter)||
       data.city.toLowerCase().includes(filter)||
       data.country.toLowerCase().includes(filter);
     }
 
-    breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+    this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches?
       ['name'] : ['name', 'city', 'country'];
     });
-  }
 
-  //methods
-  ngOnInit() {
-    this.companies$.forEach(company => console.log(company));
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort
   }

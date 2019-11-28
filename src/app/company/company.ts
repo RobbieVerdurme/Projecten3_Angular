@@ -113,7 +113,7 @@ export class Company{
     //Set JSON object to company object
     static fromJSON(json: any): Company{
         const company = new Company(
-            json.id,
+            json.companyId,
             json.name,
             json.phone,
             json.mail,

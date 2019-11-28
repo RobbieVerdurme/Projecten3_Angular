@@ -3,7 +3,7 @@ import { Company } from '../company';
 import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 import { Challenge } from 'src/app/challenge/Challenge';
 import { CompanyComponent } from '../company/company.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyDataService } from '../company-data.service';
 import { Category } from 'src/app/challenge/Category';
 
@@ -28,11 +28,11 @@ export class CompanyDetailComponent implements OnInit {
   displayedColumns: string[] = ['']
   company: Company
 
-  constructor(private _companyDataService: CompanyDataService, private _router: Router) { 
-    this.company = COMPANY_DATA
+  constructor(private route: ActivatedRoute, private _companyDataService: CompanyDataService, private _router: Router) { 
   }
 
   ngOnInit() {
+    this.route.data.subscribe(item => this.company = item['company']);
   }
 
   goToLink(){
