@@ -8,11 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
 import { NormalUserDetailComponent } from './normal-user-detail/normal-user-detail.component';
+import { NormalUserResolver } from './normal-user-resolver'
 
 const routes = [
   {path: 'registreren', canActivate:[AuthGuard], component: RegisterUserComponent},
   {path: 'lijst', canActivate:[AuthGuard], component: NormalUserListComponent},
-  {path: 'id', canActivate:[AuthGuard], component: NormalUserDetailComponent},
+  {path: ':id', canActivate:[AuthGuard], component: NormalUserDetailComponent, resolve: {user: NormalUserResolver}},
 ]
 
 @NgModule({

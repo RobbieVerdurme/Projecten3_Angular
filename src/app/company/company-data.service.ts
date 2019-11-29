@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, Subject, observable } from 'rxjs';
 import { Company } from './company';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
+import { AuthenticationService } from '../user/authentication.service';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 
 @Injectable({
@@ -12,8 +14,9 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class CompanyDataService {
   public loadingError$ = new Subject<string>()
+  private headers = new HttpHeaders();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authentivationService: AuthenticationService) { }
 
   //Get all companies
   get Companies$(): Observable<Company[]>{

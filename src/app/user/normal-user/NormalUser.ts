@@ -1,16 +1,18 @@
 import { Challenge } from 'src/app/challenge/Challenge';
+import { Category } from 'src/app/challenge/Category';
 
 export class NormalUser{
     //Constructor
-    
-    private _challenges = new Array<Challenge>()
+    private _categories = new Array<Category>();
+    private _challenges = new Array<Challenge>();
+    private _xp: number;
     constructor(
         private _id: number,
         private _firstname: string,
         private _lastname: string,
         private _email: string,
         private _telephone: string,
-        private _contract: Date,
+        private _contract: Date
     ){}
 
     //Getters
@@ -38,8 +40,28 @@ export class NormalUser{
         return this._contract
     }
 
+    get xp(): number{
+        return this._xp;
+    }
+
+    set xp(xp: number){
+        this._xp = xp;
+    }
+
     get challenges(): Challenge[]{
         return this._challenges
+    }
+
+    set challenges(chal: Challenge[]){
+        this._challenges = chal;
+    }
+
+    get categories(): Category[]{
+        return this._categories;
+    }
+
+    set categories(cat: Category[]){
+        this._categories = cat;
     }
 
     //Set JSON object to NormalUser object
@@ -52,18 +74,22 @@ export class NormalUser{
             json.phone,
             json.contract
         )
+        normalUser.xp = json.experiencePoints;
+        normalUser.categories = json.categories.map(Category.fromJSON);
+        //normalUser.challenges = json.challenges.map(Challenge.fromJSON);
         return normalUser;
     }
 
     //Set NormalUser object to JSON object
     toJSON(): any{
         return{
-            id: this.id,
+            userId: this.id,
             firstname: this.firstname,
-            lastname: this.lastname,
+            familyName: this.lastname,
             email: this.email,
-            telephone: this.telephone,
+            phone: this.telephone,
             contract: this.contract,
+            categories: this._categories,
             challenges: this.challenges.map(ch => ch.toJSON())
         }
     }

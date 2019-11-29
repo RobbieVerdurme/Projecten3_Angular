@@ -11,23 +11,8 @@ import { SelectUserService } from 'src/app/challenge/select-user.service';
 import { AuthenticationService } from '../../authentication.service';
 import { Therapist } from '../../therapist/Therapist';
 import { TherapistDataService } from '../../therapist/therapist-data.service';
-
-
-
-const us: NormalUser = new NormalUser(0, "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
-
-us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
-us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
-us.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
-const er: NormalUser =  new NormalUser(1, "Ruben1", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
-er.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
-er.addChallenge(new Challenge(0,"Titel", "Eerste challenge",new Category(1,"Categorie")))
-
-
-const USER_DATA: NormalUser[] = [us];
-const ther: Therapist = new Therapist(0, "EersteTestTherapist", "Sportdokter")
-ther.addClient(us)
-
+import { Observable } from 'rxjs';
+import { NormalUserDataService } from '../normal-user-data.service';
 
 @Component({
   selector: 'app-normal-user-list',
@@ -39,6 +24,7 @@ export class NormalUserListComponent implements OnInit {
   @Input() company: Company
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'challenges'];
   dataSource: MatTableDataSource<NormalUser>;
+  private normalUsers$: Observable<NormalUser[]>;
   
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -46,22 +32,21 @@ export class NormalUserListComponent implements OnInit {
 
   //ctor
   constructor(
-    breakpointObserver: BreakpointObserver,
+    private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private selectUserService: SelectUserService,
     private aut: AuthenticationService, 
-    private therapistDataService: TherapistDataService
-    ) {
-      breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
-        this.displayedColumns = result.matches ? 
-          ['firstname', 'lastname'] : 
-          ['firstname', 'lastname', 'email', 'challenges'];
-      });
-  }
+    private normalUserDataService: NormalUserDataService
+    ) {}
   
   //methods
   ngOnInit() {
     this.loadData()
+
+    this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      this.displayedColumns = result.matches ? 
+        ['firstname', 'lastname'] : 
+        ['firstname', 'lastname', 'email', 'challenges'];
+    });
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -76,16 +61,16 @@ export class NormalUserListComponent implements OnInit {
   }
 
   navigateToDetailPage(user: NormalUser){
-    this.selectUserService.setUser(user);
-    this.router.navigate(['/gebruiker/id']);
+    this.router.navigate([`/gebruiker/${user.id}`]);
   }
 
-  loadData(){
+  async loadData(){
     // check if current user is multimed or a therapist
     if(this.aut.isMultimed()){
       //Get all normal users  
       if(this.company == null){
-        this.dataSource = new MatTableDataSource(USER_DATA); 
+        this.dataSource = new MatTableDataSource();
+        this.normalUsers$ = this.normalUserDataService.normalUsers$
       }
       //Get users of given company
       else{
@@ -94,7 +79,7 @@ export class NormalUserListComponent implements OnInit {
     }
     else{
       //Get therapist and display his clients
-      this.dataSource = new MatTableDataSource(ther.clients)
+      this.dataSource = new MatTableDataSource()
       //This is used to get therapist clients from backend
       /*
       var therapist: Therapist = null

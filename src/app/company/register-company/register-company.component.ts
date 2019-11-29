@@ -110,15 +110,15 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   deleteCompany(){
+    var bool = true;
     this._companyDataService.removeCompany(this.company.id)
     .subscribe(
-      val => {
-        if(val){
-          this.router.navigate['']
+      val => bool = false)
+        if(bool){
+          this.router.navigate['/bedrijf/lijst']
         }else{
           this.errorMsg = `Fout bij het verwijderen van ${this.company.name}!`
         }
-      },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
           this.errorMsg = `Error bij het verwijderen van bedrijf ${this.company.name}`
@@ -126,7 +126,6 @@ export class RegisterCompanyComponent implements OnInit {
           this.errorMsg = `Error ${err.status} bij het verwijderen van bedrijf ${this.company.name}`
         }
       }
-    )
   }
 
   // Set new values to company
