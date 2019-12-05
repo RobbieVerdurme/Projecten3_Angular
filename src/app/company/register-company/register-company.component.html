@@ -8,120 +8,116 @@
                 {{errorMsg}}
             </p>
             <form [formGroup]="companyForm">
-                <table>
-                    <tr>
-                        <td>Bedrijfsnaam : </td>
-                        <td>
-                            <mat-form-field>
-                                <input matInput type="text" placeholder="Bedrijfsnaam" formControlName="name" required />
-                                <mat-error *ngIf="companyForm.get('name').errors && companyForm.get('name').touched">
-                                        {{getErrorMessage(companyForm.get('name').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tel/GSM nummer : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Nummer" formControlName="phone" required />
-                                <mat-error *ngIf="companyForm.get('phone').errors && companyForm.get('phone').touched">
-                                        {{getErrorMessage(companyForm.get('phone').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>e-mail : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="e-mail" formControlName="mail" required />
-                                <mat-error *ngIf="companyForm.get('mail').errors && companyForm.get('mail').touched">
-                                        {{getErrorMessage(companyForm.get('mail').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Straat : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Straat" formControlName="street" required />
-                                <mat-error *ngIf="companyForm.get('street').errors && companyForm.get('street').touched">
-                                        {{getErrorMessage(companyForm.get('street').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Huisnummer : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Huisnummer" formControlName="houseNumber" required />
-                                <mat-error *ngIf="companyForm.get('houseNumber').errors && companyForm.get('houseNumber').touched">
-                                        {{getErrorMessage(companyForm.get('houseNumber').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Plaats : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Plaats" formControlName="city" required />
-                                <mat-error *ngIf="companyForm.get('city').errors && companyForm.get('city').touched">
-                                        {{getErrorMessage(companyForm.get('city').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Postcode : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Postcode" formControlName="postalCode" required />
-                                <mat-error *ngIf="companyForm.get('postalCode').errors && companyForm.get('postalCode').touched">
-                                        {{getErrorMessage(companyForm.get('postalCode').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Land : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Land" formControlName="country" required />
-                                <mat-error *ngIf="companyForm.get('country').errors && companyForm.get('country').touched">
-                                        {{getErrorMessage(companyForm.get('country').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Website : </td>
-                        <td>
+                <div class="title">
+                        <h4>Algemeen</h4>
+                </div>
+                <div class="form-part">
+                    <div class="form-field">
+                        Bedrijfsnaam :
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="Bedrijfsnaam" formControlName="name" required />
+                            <mat-error *ngIf="companyForm.get('name').errors && companyForm.get('name').touched">
+                                    {{getErrorMessage(companyForm.get('name').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                            Website :
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Website" formControlName="site" />
                                 <mat-error *ngIf="companyForm.get('site').errors && companyForm.get('site').touched">
                                         {{getErrorMessage(companyForm.get('site').errors)}}
                                 </mat-error>
                             </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Einde contract: </td>
-                        <td>
-                            <mat-form-field>
-                                <input matInput [matDatepicker]="contract" placeholder="Einde contract" formControlName='contract'>
-                                <mat-datepicker-toggle matSuffix [for]="contract"></mat-datepicker-toggle>
-                                <mat-datepicker #contract></mat-datepicker>
-                                <mat-error *ngIf="companyForm.get('contract').errors && companyForm.get('contract').touched">
-                                        {{getErrorMessage(companyForm.get('contract').errors)}}
-                                </mat-error>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>
+                    </div>
+                    <div class="form-field" id="end-of-contract">
+                        Einde contract:
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="contract" placeholder="Einde contract" formControlName='contract'>
+                            <mat-datepicker-toggle matSuffix [for]="contract"></mat-datepicker-toggle>
+                            <mat-datepicker #contract></mat-datepicker>
+                            <mat-error *ngIf="companyForm.get('contract').errors && companyForm.get('contract').touched">
+                                    {{getErrorMessage(companyForm.get('contract').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+                </div>
+                <div class="title">
+                        <h4>Contact</h4>
+                </div>
+                <div class="form-part">
+                    <div class="form-field">
+                        Tel/GSM nummer : 
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Nummer" formControlName="phone" required />
+                            <mat-error *ngIf="companyForm.get('phone').errors && companyForm.get('phone').touched">
+                                    {{getErrorMessage(companyForm.get('phone').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        e-mail :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="e-mail" formControlName="mail" required />
+                            <mat-error *ngIf="companyForm.get('mail').errors && companyForm.get('mail').touched">
+                                    {{getErrorMessage(companyForm.get('mail').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="title">
+                    <h4>Adres</h4>
+                </div>
+                <div class="form-part">
+                    <div class="form-field">
+                        Straat :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Straat" formControlName="street" required />
+                            <mat-error *ngIf="companyForm.get('street').errors && companyForm.get('street').touched">
+                                    {{getErrorMessage(companyForm.get('street').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        Huisnummer :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Huisnummer" formControlName="houseNumber" required />
+                            <mat-error *ngIf="companyForm.get('houseNumber').errors && companyForm.get('houseNumber').touched">
+                                    {{getErrorMessage(companyForm.get('houseNumber').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field"></div>
+                    <div class="form-field">      
+                        Plaats :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Plaats" formControlName="city" required />
+                            <mat-error *ngIf="companyForm.get('city').errors && companyForm.get('city').touched">
+                                    {{getErrorMessage(companyForm.get('city').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+                    <div class="form-field">
+                        Postcode :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Postcode" formControlName="postalCode" required />
+                            <mat-error *ngIf="companyForm.get('postalCode').errors && companyForm.get('postalCode').touched">
+                                    {{getErrorMessage(companyForm.get('postalCode').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        Land :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Land" formControlName="country" required />
+                            <mat-error *ngIf="companyForm.get('country').errors && companyForm.get('country').touched">
+                                    {{getErrorMessage(companyForm.get('country').errors)}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+                </div>
+                
+                      
                 <div *ngIf="isEdit == false">
                     <div class="button">
                         <button (click)="addCompany()" mat-button>Voeg toe</button>

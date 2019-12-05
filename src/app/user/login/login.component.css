@@ -18,3 +18,13 @@
     text-align: center;
     opacity:0.89;
 }
+
+mat-card-subtitle{
+    color: #50927C;
+    font-weight: bolder;
+}
+
+button{
+    color: white;
+    background-color: #50927C;
+}
