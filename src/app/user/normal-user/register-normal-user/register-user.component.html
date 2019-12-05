@@ -7,65 +7,52 @@
             <p *ngIf="errorMsg" class="error">
                 {{ errorMsg }}
             </p>
-            <form [formGroup]="user" (ngSubmit)="onSubmit()">
-                <table>
-                    <tr>
-                        <td>Gebruikersnaam : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
-                                    required />
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Voornaam : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Voornaam" formControlName="firstname"
-                                    required />
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Achternaam : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Achternaam" formControlName="lastname"
-                                    required />
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>E-mail : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="email" formControlName="email" required />
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Telefoon : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Telefoon" formControlName="telephone"
-                                    required />
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Categorie : </td>
-                        <td>
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Categorie" formControlName="category"
-                                    required />
-                            </mat-form-field>
-                            <button mat-button>
-                                <mat-icon>add_circle</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
+            <form [formGroup]="user" (ngSubmit)="onSubmit()">    
+                <div>    
+                    Gebruikersnaam:
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
+                            required />
+                    </mat-form-field>
+                </div>
+                <div>    
+                    Voornaam : 
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Voornaam" formControlName="firstname"
+                            required />
+                    </mat-form-field>
+                </div>
+                <div>
+                    Achternaam :
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Achternaam" formControlName="lastname"
+                            required />
+                    </mat-form-field>
+                </div>
+                <div>
+                    E-mail :
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="email" formControlName="email" required />
+                    </mat-form-field>
+                </div>
+                <div>
+                    Telefoon :
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Telefoon" formControlName="telephone"
+                            required />
+                    </mat-form-field>
+                </div>
+                <div>
+                    Categorie :
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Categorie" formControlName="category"
+                            required />
+                    </mat-form-field>
+                
+                <button mat-button>
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+                </div>
                 <div class="button">
                     <button type="submit" mat-button>Registreer</button>
                 </div>
