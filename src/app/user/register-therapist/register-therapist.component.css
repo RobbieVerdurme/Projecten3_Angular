@@ -3,6 +3,7 @@ mat-card{
     width: 97.5%;
     display: inline-block;
     color: #50927C;
+    border: 1px solid red;
 }
 
 mat-card-header{

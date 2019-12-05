@@ -8,46 +8,66 @@
                 {{ errorMsg }}
             </p>
             <form [formGroup]="user" (ngSubmit)="onSubmit()">
-               <div>
-                    Gebruikersnaam : 
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
-                            required />
-                    </mat-form-field>
+                <div class="form-part">
+                    <div class="title">
+                        Algemeen
+                    </div>
+                    <div class="form-field">
+                        Gebruikersnaam : 
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
+                                required />
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        Voornaam :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Voornaam" formControlName="firstname"
+                                required />
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        Achternaam :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Achternaam" formControlName="lastname"
+                                required />
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div>
-                    Voornaam :
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="Voornaam" formControlName="firstname"
-                            required />
-                    </mat-form-field>
+                <div class="form-part">
+                    <div class="title">
+                        Contact
+                    </div>
+                    <div class="form-field">
+                        E-mail : 
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="email" formControlName="email" required />
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        Telefoon :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Telefoon" formControlName="telephone"
+                                required />
+                        </mat-form-field>                            
+                    </div>
+                    <div class="form-field">
+                        Website :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Website" formControlName="website" />
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div>
-                    Achternaam :
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="Achternaam" formControlName="lastname"
-                            required />
-                    </mat-form-field>
-                </div>
-                <div>
-                    E-mail : 
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="email" formControlName="email" required />
-                    </mat-form-field>
-                </div>
-                <div>
-                    Telefoon :
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="Telefoon" formControlName="telephone"
-                            required />
-                    </mat-form-field>                            
-                </div>
-                <div>
-                    Werk-uren :
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="werk uren" formControlName="workingHours"
-                            required />
-                    </mat-form-field>
+                <div class="form-part">
+                    <div class="title">
+                        Specifieke informatie
+                    </div>
+                    <div class="form-field">
+                        Werk-uren :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="werk uren" formControlName="workingHours"
+                                required />
+                        </mat-form-field>
                             <!--
                             <table class="workingHours">
                                 <tr>
@@ -70,19 +90,14 @@
                                 </tr>
                             </table>
                             -->
-                </div>
-                <div>
-                    Website :
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="Website" formControlName="website" />
-                    </mat-form-field>
-                </div>
-                <div>
-                    Categorie :
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="Categorie" formControlName="category" required />
-                    </mat-form-field>
-                    <button mat-button><mat-icon>add_circle</mat-icon></button>
+                    </div>
+                    <div class="form-field">
+                        Categorie :
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Categorie" formControlName="category" required />
+                        </mat-form-field>
+                        <button mat-button><mat-icon>add_circle</mat-icon></button>
+                    </div>
                 </div>
                 <div class="button">
                     <button type="submit" mat-button>Registreer</button>
