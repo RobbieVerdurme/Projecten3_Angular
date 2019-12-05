@@ -22,8 +22,27 @@ form{
     justify-content: center;
 }
 
-div{
-    flex: 0 1 30%;
+.form-part
+{
+    display: inline-flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex: 0 0 100%;
+    margin-left: 15px;
+}
+
+.form-field{
+    flex: 0 0 30%;
+    margin-left: 15px;
+}
+
+.title{
+    margin-left: 15px;
+    width: 100%;
+    flex: 0 0 100%;
+    font-weight: bold;
+    margin-top: 25px;
 }
 
 mat-form-field{
