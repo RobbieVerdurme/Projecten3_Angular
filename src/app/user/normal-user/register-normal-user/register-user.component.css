@@ -37,7 +37,7 @@ mat-form-field{
     text-align: center;
 }
 
-button{
+.button button{
     color: white;
     background-color: #50927C;
 }
