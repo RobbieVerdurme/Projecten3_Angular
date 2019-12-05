@@ -39,8 +39,10 @@ form{
 
 .title{
     margin-left: 15px;
+    margin-top: 25px;
     width: 100%;
     flex: 0 0 100%;
+    font-weight: bold;
 }
 
 mat-form-field{
@@ -57,4 +59,8 @@ mat-form-field{
 .button button{
     color: white;
     background-color: #50927C;
+}
+
+input{
+    color: black;
 }
