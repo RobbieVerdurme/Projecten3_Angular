@@ -6,30 +6,26 @@
         <mat-card-content>
             <table>
                 <tr>
-                    <td>username : </td>
-                    <td>AlexB</td>
-                </tr>
-                <tr>
                     <td>Firstname : </td>
-                    <td>Alex</td>
+                    <td>{{therapist.firstname}}</td>
                 </tr>
                 <tr>
                     <td>Lastname : </td>
-                    <td>Barker</td>
+                    <td>{{therapist.familyname}}</td>
                 </tr>
                 <tr>
                     <td>E-mail : </td>
                     <td>
-                        <a href="mailto:Alex.Barker@therapeut-multimed.be">Alex.Barker@therapeut-multimed.be</a>
+                        <a href="mailto:{{therapist.email}}">{{therapist.email}}</a>
                     </td>
                 </tr>
                 <tr>
                     <td>Functie : </td>
-                    <td>Kinesist</td>
+                    <td>{{therapist.function}}</td>
                 </tr>
                 <tr>
                     <td>Telefoon : </td>
-                    <td>2(6431)465-92-36</td>
+                    <td>{{therapist.telephone}}</td>
                 </tr>
                 <tr>
                     <td>Working Hours : </td>
@@ -48,13 +44,13 @@
                         </thead>
                         <tbody role="rowgroup">
                             <tr role="row">
-                                <td>9-15</td>
-                                <td>9-16</td>
-                                <td>9-12</td>
-                                <td>9-19</td>
-                                <td>9-19</td>
-                                <td>gesloten</td>
-                                <td>gesloten</td>
+                                <td>{{therapist.openingTimes[0].Interval}}</td>
+                                <td>{{therapist.openingTimes[0].Interval}}</td>
+                                <td>{{therapist.openingTimes[0].Interval}}</td>
+                                <td>{{therapist.openingTimes[0].Interval}}</td>
+                                <td>{{therapist.openingTimes[0].Interval}}</td>
+                                <td>{{therapist.openingTimes[0].Interval}}</td>
+                                <td>{{therapist.openingTimes[0].Interval}}</td>
                             </tr>
                         </tbody>
                         </table>
@@ -62,7 +58,7 @@
                 </tr>
                 <tr>
                     <td>website : </td>
-                    <td><a href="https://kinesitherapie-de-clercq-john.business.site/">https://kinesitherapie-de-clercq-john.business.site/</a></td>
+                    <td><a href="{{therapist.website}}">{{therapist.website}}</a></td>
                 </tr>
             </table>
         </mat-card-content>

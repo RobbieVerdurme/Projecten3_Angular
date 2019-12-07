@@ -52,8 +52,8 @@ export class TherapistListComponent implements OnInit {
     }
   }
   
-  detailscreen(therapist){
-    this.router.navigate(['/therapeut/id'])
+  detailscreen(therapist){;
+    this.router.navigate([`/therapeut/${therapist.id}`])
   }
 
 }

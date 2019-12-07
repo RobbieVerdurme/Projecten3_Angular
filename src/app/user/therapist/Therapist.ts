@@ -8,6 +8,7 @@ export class Therapist extends LoginUser{
         private _email: string
         private _telephone: string
         private _function: string
+        private _website: string
         private _clients = new Array<NormalUser>()
         private _openingTimes = new Array<OpeningTimes>()
 
@@ -20,6 +21,14 @@ export class Therapist extends LoginUser{
     }
 
     //Getters
+    get website(): string{
+        return this._website;
+    }
+
+    set website(site: string){
+        this._website = site;
+    }
+
     get id(): number{
         return this._therapistId;
     }
@@ -80,11 +89,11 @@ export class Therapist extends LoginUser{
         this._clients = clients
     }
 
-    get OpeningTimes(): Array<OpeningTimes>{
+    get openingTimes(): Array<OpeningTimes>{
         return this._openingTimes
     }
 
-    set OpeningTimes(openingTimes: Array<OpeningTimes>){
+    set openingTimes(openingTimes: Array<OpeningTimes>){
         this._openingTimes = openingTimes;
     }
 
@@ -99,6 +108,8 @@ export class Therapist extends LoginUser{
         therapist.familyname = json.lastName,
         therapist.email = json.email
         therapist.telephone = json.phoneNumber
+        therapist.website = json.website;
+
         var functions: string[] = null;
         
         if(json.therapistType != null){
@@ -108,7 +119,12 @@ export class Therapist extends LoginUser{
             therapist.function = functions[0];
         }
 
-        therapist.OpeningTimes = json.openingTimes.map(OpeningTimes.FromJSON)
+        var ot: Array<OpeningTimes> = json.openingTimes.map(OpeningTimes.FromJSON)
+        if( ot.length == 0){
+            for(var i = 0; i < 7; i++){
+                therapist.openingTimes.push(new OpeningTimes("geen"));
+            }   
+        }
 
         //therapist.clients = json.Clients.map(NormalUser.FromJSON)
         

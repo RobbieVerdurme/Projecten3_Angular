@@ -9,11 +9,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TherapistComponent } from './therapist/therapist.component';
 import { OpeningTimesComponent } from './opening-times/opening-times.component';
+import { resolve } from 'url';
+import { TherapistResolver } from './therapist-resolver';
 
 const routes = [
   {path: 'registreren', canActivate:[AuthGuard], component: RegisterTherapistComponent},
   {path: 'lijst', canActivate:[AuthGuard], component: TherapistListComponent},
-  {path: 'id', canActivate:[AuthGuard], component: TherapistDetailComponent}
+  {path: ':id', canActivate:[AuthGuard], component: TherapistDetailComponent, resolve: {therapist: TherapistResolver}}
 ]
 
 @NgModule({
