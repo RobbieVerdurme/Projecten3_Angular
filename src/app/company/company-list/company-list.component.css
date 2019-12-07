@@ -35,3 +35,11 @@ table {
       padding: 8px 24px;
     }
   }
+
+  .red{
+    color: red;
+  }
+
+  .green{
+    color: green;
+  }

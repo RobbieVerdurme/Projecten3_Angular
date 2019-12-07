@@ -106,6 +106,15 @@ export class Company{
         this._contract = contract
     }
 
+    get contractValid(): string{
+        var currentDate = new Date();
+        if(this.contract > currentDate)
+        {
+            return "✔";
+        }
+        return "X";
+    }
+
     get companyMembers(): NormalUser[]{
         return this._companyMembers
     }
