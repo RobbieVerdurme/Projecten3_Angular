@@ -1,5 +1,6 @@
 import { NormalUser } from '../normal-user/NormalUser';
 import { LoginUser } from '../loginuser';
+import { OpeningTimes } from './opening-times/opening-times';
 
 export class Therapist extends LoginUser{
     private _firstname: string
@@ -8,6 +9,7 @@ export class Therapist extends LoginUser{
         private _telephone: string
         private _function: string
         private _clients = new Array<NormalUser>()
+        private _openingTimes = new Array<OpeningTimes>()
 
     constructor(
         private _therapistId: number,
@@ -78,19 +80,37 @@ export class Therapist extends LoginUser{
         this._clients = clients
     }
 
+    get OpeningTimes(): Array<OpeningTimes>{
+        return this._openingTimes
+    }
+
+    set OpeningTimes(openingTimes: Array<OpeningTimes>){
+        this._openingTimes = openingTimes;
+    }
+
     //Set JSON object to company object
     static fromJSON(json:any): Therapist{
         const therapist = new Therapist(
-            json.id,
+            json.therapistId,
             json.username,
             json.role
         );
-        therapist.firstname = json.firstname,
-        therapist.familyname = json.lastname,
-        therapist.email = json.email,
-        therapist.telephone = json.telephone,
-        therapist.function = json.function
-        therapist.clients = json.Clients.map(NormalUser.FromJSON)
+        therapist.firstname = json.firstName,
+        therapist.familyname = json.lastName,
+        therapist.email = json.email
+        therapist.telephone = json.phoneNumber
+        var functions: string[] = null;
+        
+        if(json.therapistType != null){
+            json.therapistType.array.forEach(element => {
+                functions.push(element.Type); 
+            });;
+            therapist.function = functions[0];
+        }
+
+        therapist.OpeningTimes = json.openingTimes.map(OpeningTimes.FromJSON)
+
+        //therapist.clients = json.Clients.map(NormalUser.FromJSON)
         
         return therapist
     }

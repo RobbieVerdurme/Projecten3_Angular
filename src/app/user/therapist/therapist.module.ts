@@ -8,6 +8,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TherapistComponent } from './therapist/therapist.component';
+import { OpeningTimesComponent } from './opening-times/opening-times.component';
 
 const routes = [
   {path: 'registreren', canActivate:[AuthGuard], component: RegisterTherapistComponent},
@@ -20,7 +21,8 @@ const routes = [
     TherapistComponent,
     RegisterTherapistComponent,
     TherapistListComponent,
-    TherapistDetailComponent
+    TherapistDetailComponent,
+    OpeningTimesComponent
   ],
   imports: [
     CommonModule,
