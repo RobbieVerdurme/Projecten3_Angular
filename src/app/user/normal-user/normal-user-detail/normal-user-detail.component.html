@@ -4,45 +4,78 @@
         </div>
         <mat-card class="matcard">
             <mat-card-title>
-                <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+                Details {{user.firstname}}
             </mat-card-title>
             <mat-card-content>
-                <table>
-                    <!--CONTENT USER-->
-                    <td>
-                        <tr>
-                            <td>username : </td>
-                            <td data-cy="userUsername">{{user.username}}</td>
-                        </tr>
-                        <tr>
-                            <td>Firstname : </td>
-                            <td>{{user.firstname}}</td>
-                        </tr>
-                        <tr>
-                            <td>Lastname : </td>
-                            <td>{{user.lastname}}</td>
-                        </tr>
-                        <tr>
-                            <td>E-mail : </td>
-                            <td>
-                                <a href="mailto:{{user.email}}">{{user.email}}</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Telefoon : </td>
-                            <td>{{user.telephone}}</td>
-                        </tr>
-                        <tr>
-                            <td>Einde contract : </td>
-                            <td>{{user.contract | date: "dd-MM-yyyy"}}</td>
-                        </tr>
-                    </td>
-                </table>
-                <!--Pass data with state param and navigate-->
-                <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button>
-                    Voeg uitdagingen toe
-                </button>
-                    <app-challenge-list [challenges]="user.challenges" data-cy="userChallenges"></app-challenge-list>
+                <div class="detail-section">
+                    <div id="user-profile-pic" class="detail-part">
+                        <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+                    </div>
+                    <div class="detail-part">
+                        <div class="title">
+                            Algemeen
+                        </div>
+                        <div class="content">
+                            <div class="label">
+                                Voornaam: 
+                            </div>  
+                            <div class="value">
+                                {{user.firstname}}
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="label">
+                                Familienaam: 
+                            </div>  
+                            <div class="value">
+                                {{user.lastname}}
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="label">
+                                Einddatum contract: 
+                            </div>  
+                            <div class="value">
+                                    {{user.contract | date: "dd-MM-yyyy"}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-part">
+                        <div class="title">
+                            Contact
+                        </div>
+                        <div class="content">
+                            <div class="label">
+                                Email: 
+                            </div>  
+                            <div class="value">
+                                {{user.email}}
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="label">
+                                Telefoon: 
+                            </div>  
+                            <div class="value">
+                                {{user.telephone}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <div class="title" id="challenge-title">
+                        Uitdagingen
+                    </div>
+                    <!--Pass data with state param and navigate-->
+                    <div class="challenge-part">
+                        <app-challenge-list [challenges]="user.challenges" data-cy="userChallenges"></app-challenge-list>
+                    </div>
+                    <div class="challenge-part">
+                        <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button>
+                            Voeg uitdagingen toe
+                        </button>
+                    </div>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
