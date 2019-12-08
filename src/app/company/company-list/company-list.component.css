@@ -36,10 +36,10 @@ table {
     }
   }
 
-  .red{
+  .invalid{
     color: red;
   }
 
-  .green{
+  .valid{
     color: green;
   }
