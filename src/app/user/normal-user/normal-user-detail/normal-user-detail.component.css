@@ -3,10 +3,11 @@ mat-card{
   text-align: left;
   display: inline-block;
   color: #50927C;
-  margin-left: 15px;
+  margin-left: 20px;
 }
 
 mat-card-title{
+  margin-left: 20px;
     font-weight: bold;
 }
 
@@ -50,7 +51,6 @@ mat-card-content{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-left: 25px;
 }
 
 #challenge-title{
