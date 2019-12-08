@@ -27,7 +27,7 @@ export class AuthenticationService {
   // var
   private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<LoginUser>;
-  private _id: number;
+  private _username: string;
   public redirectUrl: string;
 
   // constr
@@ -69,8 +69,8 @@ export class AuthenticationService {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
             const parsedToken = parseJwt(token);
-            //de juiste gebruiker aanmaken aan de hand van de role
             
+            //de juiste gebruiker aanmaken aan de hand van de role
             if(parsedToken.roles == Role.Mulitmed){
               this._user$.next(new Multimed(parsedToken.id, username, parsedToken.roles))
             }else{
@@ -106,6 +106,10 @@ export class AuthenticationService {
   //GETTERS
   get user$(){
     return this._user$
+  }
+
+  get username(){
+    return this._username;
   }
 
   get token(): string {

@@ -125,8 +125,11 @@ export class Therapist extends LoginUser{
                 therapist.openingTimes.push(new OpeningTimes("geen"));
             }   
         }
-
-        //therapist.clients = json.Clients.map(NormalUser.FromJSON)
+        var x = json.Clients
+        if(x != undefined){
+            therapist.clients = json.clients.map(NormalUser.FromJSON)
+            console.log(json.clients);
+        }
         
         return therapist
     }

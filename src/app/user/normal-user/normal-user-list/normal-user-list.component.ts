@@ -22,7 +22,7 @@ import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 })
 export class NormalUserListComponent implements OnInit {
 //var
-  @Input() company: Company
+  @Input() normalUsers: NormalUser[]
   displayedColumns: string[] = ['firstname', 'lastname', 'email', 'challenges'];
   dataSource: MatTableDataSource<NormalUser>;
 
@@ -40,7 +40,8 @@ export class NormalUserListComponent implements OnInit {
     private router: Router,
     private aut: AuthenticationService, 
     private normalUserDataService: NormalUserDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private therapistDataService: TherapistDataService
     ) {}
   
   //methods
@@ -56,12 +57,9 @@ export class NormalUserListComponent implements OnInit {
     .subscribe(
       val => {
         const params = val ? { queryParams: { filter: val } } : undefined;
-        if(this.company == null){
+        if(this.normalUsers == null){
           this.router.navigate(['/gebruiker/lijst'], params);
         } 
-        else{
-          this.router.navigate([`/bedrijf/${this.company.id}`], params);
-        }
       }
     );
 
@@ -97,29 +95,25 @@ export class NormalUserListComponent implements OnInit {
     this.router.navigate([`/gebruiker/${user.id}`]);
   }
 
-  test(): Observable<NormalUser[]>{
-    return of(this.company.companyMembers)
-  }
-
   async loadData(){
+    this.dataSource = new MatTableDataSource()
     // check if current user is multimed or a therapist
     if(this.aut.isMultimed()){
       //Get all normal users  
-      if(this.company == null){
-        this.dataSource = new MatTableDataSource();
+      if(this.normalUsers == null){
         this.normalUsers$ = this.normalUserDataService.normalUsers$
       }
       //Get users of given company
       else{
-        this.dataSource = new MatTableDataSource(this.company.companyMembers); 
-        var x = of(this.company.companyMembers);
-        this.normalUsers$ = x;
-        console.log(x);
+        this.normalUsers$ = of(this.normalUsers);
       }
     }
     else{
       //Get therapist and display his clients
-      this.dataSource = new MatTableDataSource()
+      console.log(this.aut.user$);
+      this.normalUsers$ = this.therapistDataService.getTherapistClients$(1);
+
+      //this.normalUsers$ = this.therapistDataService.getTherapistClients$(1);
       //This is used to get therapist clients from backend
       /*
       var therapist: Therapist = null
