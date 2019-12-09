@@ -38,30 +38,58 @@
     display: flex;
     flex-wrap: wrap;
     flex: 0 0 45%;
-    justify-content: space-evenly;
+    border: 1px solid purple;
   }
   
   .detail-part{
     flex: 0 0 100%;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid red;
   }
   
   #profile-img{
     justify-content: center;
     padding-top: 20px;
+    margin: 0px 25px;
+    border: 1px solid blue;
+  }
+
+  .general-section{
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid red;
+  }
+
+  .general-part{
+    flex: 0 0 30%;
+  }
+
+  .name-content{
+    flex-wrap: wrap;
+    flex: 0 0 100%;
+  }
+
+  #firstname-label{
+    border: 1px solid blue;
+  }
+
+  #general-part-name{
+    flex: 0 0 50%;
+    border: 1px solid fuchsia;
   }
   
   .title{
     flex: 0 0 30%;
     font-weight: bold;
-    border: 1px solid blue;
     margin: 25px 15px;
+    border: 1px solid red;
   }
 
   .title-fill{
-    flex: 1 0 70%;
+    flex: 0 0 60%;
+    border: 1px solid red;
+    margin: 25px 0px;
   }
   
   .detail-content{
@@ -69,7 +97,6 @@
     display: flex;
     margin-left: 15px;
     margin-top: 10px;
-    border: 1px solid purple;
     margin-bottom: 10px;
   }
   
@@ -82,6 +109,30 @@
     color: white;
     background-color: #50927C;
     margin-top: 20px;
+  }
+
+  table{
+    border: 2px solid #50927C;
+    flex: 0 0 100%;
+  }
+
+  table th{
+    text-align: center;
+    padding: 15px 0px;
+    border-bottom: 2px solid #50927C; 
+  }
+
+  td{
+    padding: 5px 5px;
+  }
+
+  tr td:nth-child(2){
+    text-align: center;
+    color: black;
+  }
+
+  td:first-child{
+    padding-top: 10px;
   }
   
   

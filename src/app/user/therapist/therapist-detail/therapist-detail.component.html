@@ -5,28 +5,35 @@
             </mat-card-title>
         <mat-card-content>
             <div class="detail-section">
-                <div id="profile-img" class="detail-part" >
-                    <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
-                </div>
+                
                 <div class="detail-part">
-                    <div class="title">
+                    <div class="title" id="first-title">
                         Algemeen
                     </div>
                     <div class="title-fill"></div>
-                    <div class="detail-content">
-                        <div class="label">
-                            Voornaam:  
+                    <div class="general-section">
+                        <div class="general-part">
+                            <div id="profile-img">
+                                <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+                            </div>
                         </div>
-                        <div class="value">
-                            {{therapist.firstname}}
-                        </div>
-                    </div>
-                    <div class="detail-content">
-                        <div class="label">
-                            Familienaam:  
-                        </div>
-                        <div class="value">
-                            {{therapist.lastname}}
+                        <div class="general-part" id="general-part-name">
+                            <div class="name-content">
+                                <div class="label" id="firstname-label">
+                                    Voornaam:  
+                                </div>
+                                <div class="value">
+                                    {{therapist.firstname}}
+                                </div>
+                            </div>
+                            <div class="name-content">
+                                <div class="label">
+                                    Familienaam:  
+                                </div>
+                                <div class="value">
+                                    {{therapist.lastname}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
