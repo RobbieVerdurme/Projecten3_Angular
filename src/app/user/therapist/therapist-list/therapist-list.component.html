@@ -3,7 +3,7 @@
   </mat-form-field>
   
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="(therapists$ | async)" matSort>
       <!-- firstname Column -->
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
@@ -39,7 +39,7 @@
           {{element.telephone}}
         </td>
       </ng-container>
-  
+
       <!-- function Column -->
       <ng-container matColumnDef="function">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Functie </th>
@@ -49,6 +49,7 @@
         </td>
       </ng-container>
   
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

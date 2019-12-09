@@ -11,6 +11,7 @@ import { Therapist } from '../Therapist';
 export class TherapistDetailComponent implements OnInit {
 
   private therapist: Therapist;
+
   constructor(
     private route: ActivatedRoute, 
     private router: Router, 

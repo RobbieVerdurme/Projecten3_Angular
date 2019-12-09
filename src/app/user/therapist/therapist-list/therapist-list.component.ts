@@ -3,7 +3,6 @@ import { Therapist } from '../Therapist';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../authentication.service';
 import { Observable } from 'rxjs';
 import { TherapistDataService } from '../therapist-data.service';
 
@@ -17,7 +16,8 @@ export class TherapistListComponent implements OnInit {
   //var
   displayedColumns: string[] = ['firstname', 'familyname', 'email', 'telephone', 'function'];
   dataSource: MatTableDataSource<Therapist>;
-  private therapists$: Observable<Therapist[]>;
+  private therapists$ = this.therapistDataService.therapists$
+
   
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -25,20 +25,18 @@ export class TherapistListComponent implements OnInit {
 
   //ctor
   constructor(
-    private breakpointObserver: BreakpointObserver,
+    breakpointObserver: BreakpointObserver,
     private router: Router,
-    private auth: AuthenticationService,
     private therapistDataService: TherapistDataService
-    ) {}
+    ) {
+    this.dataSource = new MatTableDataSource(); 
 
-  //methods
-  ngOnInit() {
-    this.loadData();
 
     this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
-        ['firstname', 'lastname'] : 
-        ['firstname', 'lastname', 'email', 'telephone', 'function'];
+        ['firstname', 'familyname'] : 
+        ['firstname', 'familyname', 'email', 'telephone'];
+
     });
 
     this.dataSource.paginator = this.paginator;
@@ -52,15 +50,15 @@ export class TherapistListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
-  detailscreen(therapist: Therapist){
-    this.router.navigate([`/therapeut/${therapist.id}`]);
+  detailscreen(therapist: Therapist){;
+    this.router.navigate([`/therapeut/${therapist.id}`])
   }
 
-  async loadData(){
+ // async loadData(){
       //Get all the therapists
-      this.dataSource = new MatTableDataSource();
-      this.therapists$ = this.therapistDataService.therapists$;
-  }
+  //    this.dataSource = new MatTableDataSource();
+     // this.therapists$ = this.therapistDataService.therapists$;
+
+ 
 
 }

@@ -1,5 +1,6 @@
 import { NormalUser } from '../normal-user/NormalUser';
 import { LoginUser } from '../loginuser';
+import { OpeningTimes } from './opening-times/opening-times';
 
 export class Therapist extends LoginUser{
     private _firstname: string
@@ -7,7 +8,9 @@ export class Therapist extends LoginUser{
         private _email: string
         private _telephone: string
         private _function: string
+        private _website: string
         private _clients = new Array<NormalUser>()
+        private _openingTimes = new Array<OpeningTimes>()
 
     constructor(
         private _therapistId: number,
@@ -18,6 +21,14 @@ export class Therapist extends LoginUser{
     }
 
     //Getters
+    get website(): string{
+        return this._website;
+    }
+
+    set website(site: string){
+        this._website = site;
+    }
+
     get id(): number{
         return this._therapistId;
     }
@@ -78,19 +89,47 @@ export class Therapist extends LoginUser{
         this._clients = clients
     }
 
+    get openingTimes(): Array<OpeningTimes>{
+        return this._openingTimes
+    }
+
+    set openingTimes(openingTimes: Array<OpeningTimes>){
+        this._openingTimes = openingTimes;
+    }
+
     //Set JSON object to company object
     static fromJSON(json:any): Therapist{
         const therapist = new Therapist(
-            json.id,
+            json.therapistId,
             json.username,
             json.role
         );
-        therapist.firstname = json.firstname,
-        therapist.familyname = json.lastname,
-        therapist.email = json.email,
-        therapist.telephone = json.telephone,
-        therapist.function = json.function
-        therapist.clients = json.Clients.map(NormalUser.FromJSON)
+        therapist.firstname = json.firstName,
+        therapist.familyname = json.lastName,
+        therapist.email = json.email
+        therapist.telephone = json.phoneNumber
+        therapist.website = json.website;
+
+        var functions: string[] = null;
+        
+        if(json.therapistType != null){
+            json.therapistType.array.forEach(element => {
+                functions.push(element.Type); 
+            });;
+            therapist.function = functions[0];
+        }
+
+        var ot: Array<OpeningTimes> = json.openingTimes.map(OpeningTimes.FromJSON)
+        if( ot.length == 0){
+            for(var i = 0; i < 7; i++){
+                therapist.openingTimes.push(new OpeningTimes("geen"));
+            }   
+        }
+        var x = json.Clients
+        if(x != undefined){
+            therapist.clients = json.clients.map(NormalUser.FromJSON)
+            console.log(json.clients);
+        }
         
         return therapist
     }

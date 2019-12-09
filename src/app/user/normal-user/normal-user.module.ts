@@ -8,7 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
 import { NormalUserDetailComponent } from './normal-user-detail/normal-user-detail.component';
-import { NormalUserResolver } from './normal-user-resolver'
+import { NormalUserResolver } from './normal-user-resolver';
+import { NormalUserFilterPipe } from './normal-user-filter.pipe'
+import { HttpClientModule } from '@angular/common/http';
 
 const routes = [
   {path: 'registreren', canActivate:[AuthGuard], component: RegisterUserComponent},
@@ -18,6 +20,7 @@ const routes = [
 
 @NgModule({
   declarations: [
+    NormalUserFilterPipe,
     RegisterUserComponent,
     NormalUserComponent,
     NormalUserDetailComponent
@@ -25,8 +28,12 @@ const routes = [
   imports: [
     CommonModule,
     MaterialModule,
+    HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
+  exports: [
+    NormalUserFilterPipe
+  ]
 })
 export class NormalUserModule { }
