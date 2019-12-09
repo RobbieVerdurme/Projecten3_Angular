@@ -14,7 +14,7 @@
       </ng-container>
   
       <!-- lastname Column -->
-      <ng-container matColumnDef="familyname">
+      <ng-container matColumnDef="lastname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Naam </th>
         <td mat-cell *matCellDef="let element" (click)="detailscreen(element)">
           <span class="mobile-label">Naam:</span>
@@ -39,7 +39,17 @@
           {{element.telephone}}
         </td>
       </ng-container>
+
+      <!-- function Column -->
+      <ng-container matColumnDef="function">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Functie </th>
+        <td mat-cell *matCellDef="let element" (click)="detailscreen(element)">
+          <span class="mobile-label">Functie:</span>
+          {{element.function}}
+        </td>
+      </ng-container>
   
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

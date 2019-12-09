@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from './../../../message.service';
 import { Therapist } from '../Therapist';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-therapist-detail',
@@ -11,10 +11,19 @@ import { MessageService } from 'src/app/message.service';
 export class TherapistDetailComponent implements OnInit {
 
   private therapist: Therapist;
-  constructor(private route: ActivatedRoute, private router: Router, private messageService: MessageService) { }
+
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private messageService: MessageService) { 
+    }
 
   ngOnInit() {
-    this.route.data.subscribe(item => this.therapist = item['therapist']);
+    this.route.data.subscribe(item => this.therapist = item['therapist'])
+  }
+
+  dismissMessage(){
+    this.messageService.setMessage(null);
   }
 
 }

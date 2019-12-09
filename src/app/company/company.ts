@@ -106,6 +106,16 @@ export class Company{
         this._contract = contract
     }
 
+    get contractValid(): string{
+        var currentDate = new Date();
+        var contractValue = this.contract;
+        if(contractValue > currentDate)
+        {
+            return "✓";
+        }
+        return "X";
+    }
+
     get companyMembers(): NormalUser[]{
         return this._companyMembers
     }
@@ -123,7 +133,7 @@ export class Company{
             json.postalCode,
             json.country,
             json.site,
-            json.contract,
+            new Date(json.contract),
             json.companyMembers.map(NormalUser.FromJSON)
         );
         return company;
