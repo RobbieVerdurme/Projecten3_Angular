@@ -7,16 +7,16 @@
       <!-- firstname Column -->
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
-        <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
+        <td mat-cell *matCellDef="let element" (click)="detailscreen(element)">
           <span class="mobile-label">Voornaam:</span>
           {{element.firstname}}
         </td>
       </ng-container>
   
       <!-- lastname Column -->
-      <ng-container matColumnDef="familyname">
+      <ng-container matColumnDef="lastname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Naam </th>
-        <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
+        <td mat-cell *matCellDef="let element" (click)="detailscreen(element)">
           <span class="mobile-label">Naam:</span>
           {{element.familyname}}
         </td>
@@ -25,7 +25,7 @@
       <!-- email Column -->
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
+        <td mat-cell *matCellDef="let element" (click)="detailscreen(element)">
           <span class="mobile-label">Email:</span>
           {{element.email}}
         </td>
@@ -34,7 +34,7 @@
       <!-- telephone Column -->
       <ng-container matColumnDef="telephone">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefoon </th>
-        <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
+        <td mat-cell *matCellDef="let element" (click)="detailscreen(element)">
           <span class="mobile-label">Telefoon:</span>
           {{element.telephone}}
         </td>
@@ -43,7 +43,7 @@
       <!-- function Column -->
       <ng-container matColumnDef="function">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Functie </th>
-        <td mat-cell *matCellDef="let element" (click)="detailscreen(therapist)">
+        <td mat-cell *matCellDef="let element" (click)="detailscreen(element)">
           <span class="mobile-label">Functie:</span>
           {{element.function}}
         </td>
