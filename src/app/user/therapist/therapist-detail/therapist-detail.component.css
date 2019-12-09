@@ -25,7 +25,7 @@
   }
   
   mat-card-title{
-    margin-left: 20px;
+    margin-left: 15px;
       font-weight: bold;
   }
   
@@ -37,6 +37,7 @@
   .detail-section{
     display: flex;
     flex-wrap: wrap;
+    flex: 0 0 45%;
     justify-content: space-evenly;
   }
   
@@ -53,16 +54,19 @@
   }
   
   .title{
-    flex: 0 0 100%;
+    flex: 0 0 30%;
     font-weight: bold;
     border: 1px solid blue;
     margin: 25px 15px;
   }
+
+  .title-fill{
+    flex: 1 0 70%;
+  }
   
-  .content{
+  .detail-content{
     flex: 0 0 40%;
     display: flex;
-    flex-wrap: wrap;
     margin-left: 15px;
     margin-top: 10px;
     border: 1px solid purple;

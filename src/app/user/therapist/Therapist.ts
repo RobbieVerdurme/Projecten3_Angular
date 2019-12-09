@@ -4,7 +4,7 @@ import { OpeningTimes } from './opening-times/opening-times';
 
 export class Therapist extends LoginUser{
     private _firstname: string
-        private _familyname: string
+        private _lastname: string
         private _email: string
         private _telephone: string
         private _function: string
@@ -49,12 +49,12 @@ export class Therapist extends LoginUser{
         this._firstname = firstname
     }
 
-    get familyname(): string{
-        return this._familyname
+    get lastname(): string{
+        return this._lastname
     }
 
-    set familyname(familyname: string){
-        this._familyname = familyname
+    set lastname(lastname: string){
+        this._lastname = lastname
     }
 
     get email(): string{
@@ -105,7 +105,7 @@ export class Therapist extends LoginUser{
             json.role
         );
         therapist.firstname = json.firstName,
-        therapist.familyname = json.lastName,
+        therapist.lastname = json.lastName,
         therapist.email = json.email
         therapist.telephone = json.phoneNumber
         therapist.website = json.website;
@@ -139,7 +139,7 @@ export class Therapist extends LoginUser{
         return{
             username: this.username,
             firstname: this.firstname,
-            lastname: this.familyname,
+            lastname: this.lastname,
             email: this.email,
             telephone: this.telephone,
             function: this.function,
