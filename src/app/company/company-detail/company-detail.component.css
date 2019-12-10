@@ -13,10 +13,28 @@ mat-card-title{
     flex-wrap: nowrap;
 }
 
-.card-title{
-    flex: 0 0 30%;
+mat-card-subtitle{
+    color: #50927C;
+    font-weight: bolder;
 }
 
-#card-title-fill{
-    flex: 1 1 40%;
+h3{
+    color: #50927C;
+}
+.card-title{
+    color: #50927C;
+    font-weight: bold;
+}
+
+.fill{
+    flex: 1 1 100%;
+}
+
+#info-section{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.infoPart{
+    flex: 0 0 auto;
 }
