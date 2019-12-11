@@ -1,96 +1,120 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-<mat-card style="text-align: center;">
-        <mat-card-title>
-            <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
-        </mat-card-title>
-    <mat-card-content>
-        <table>
-            <tr>
-                <td>username : </td>
-                <td data-cy="profile-username">{{user$.username}}</td>
-            </tr>
-            <tr>
-                <td>Firstname : </td>
-                <td data-cy="profile-firstname">{{therapist.firstname}}</td>
-            </tr>
-            <tr>
-                <td>Lastname : </td>
-                <td>Verpaele</td>
-            </tr>
-            <tr>
-                <td>E-mail : </td>
-                <td>
-                    <a href="mailto:Sophie@multimed-lembeke.be"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Telefoon : </td>
-                <td>0478995889</td>
-            </tr>
-            <tr>
-                <td>Working Hours : </td>
-                <td>
-                    <table class="workingHours" role="table">
-                        <!--
-                        <tr>
-                            <td>Maandag</td>
-                            <td>9-17</td>
-                        </tr>
-                        <tr>
-                            <td>Dinsdag</td>
-                            <td>9-17</td>
-                        </tr>
-                        <tr>
-                            <td>Woensdag</td>
-                            <td>9-17</td>
-                        </tr>
-                        <tr>
-                            <td>Donderdag</td>
-                            <td>9-17</td>
-                        </tr>
-                        <tr>
-                            <td>Vrijdag</td>
-                            <td>9-17</td>
-                        </tr>
-                        <tr>
-                            <td>Zaterdag</td>
-                            <td>gesloten</td>
-                        </tr>
-                        <tr>
-                            <td>Zondag</td>
-                            <td>gesloten</td>
-                        </tr>
-                        -->
-                        <thead role="rowgroup">
-                        <tr role="row">
-                            <th>Maandag</th>
-                            <th>Dinsdag</th>
-                            <th>Woensdag</th>
-                            <th>Donderdag</th>
-                            <th>Vrijdag</th>
-                            <th>Zaterdag</th>
-                            <th>Zondag</th>
-                        </tr>
-                    </thead>
-                    <tbody role="rowgroup">
-                        <tr role="row">
-                            <td>9-17</td>
-                            <td>9-17</td>
-                            <td>9-16</td>
-                            <td>9-17</td>
-                            <td>9-17</td>
-                            <td>gesloten</td>
-                            <td>gesloten</td>
-                        </tr>
-                    </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>website : </td>
-                <td><a href="https://www.multimed-lembeke.be">https://www.multimed-lembeke.be</a></td>
-            </tr>
-        </table>
-    </mat-card-content>
-</mat-card>
-</div>
+        <mat-card>
+                <mat-card-title>
+                    <div class="card-title">
+                        Profiel
+                    </div>
+                    <div class="fill"></div>
+                    <div class="card-title">
+                        <button mat-button class="titlePart" (click)="editCompany(company.id)"><mat-icon>settings</mat-icon></button>
+                    </div>
+                    </mat-card-title>
+            <mat-card-content>
+                <div class="detail-section">
+                    <div class="fill"></div>
+                    <div class="detail-part">
+                        <div class="title" >
+                            Algemeen
+                        </div>
+                        <div class="general-section">
+                            <div class="general-part">
+                                <div id="profile-img">
+                                    <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+                                </div>
+                            </div>
+                            <div class="fill"></div>
+                            <div class="general-part" id="general-part-name">
+                                <div class="detail-content" id="firstname">
+                                    <div class="label">
+                                        Voornaam:
+                                    </div>
+                                    <div class="value">
+                                        {{therapist.firstname}}
+                                    </div>
+                                </div>
+                                <div class="detail-content" id="lastname">
+                                    <div class="label">
+                                        Familienaam:
+                                    </div>
+                                    <div class="value">
+                                        {{therapist.lastname}}
+                                    </div>
+                                </div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fill"></div>
+                    <div class="detail-part">
+                        <div class="title" id="contact-title">
+                            Contact
+                        </div>
+                        <div class="detail-content">
+                            <div class="label">
+                                Email: 
+                            </div>
+                            <div class="value">
+                                {{therapist.email}}
+                            </div>
+                        </div>
+                        <div class="detail-content">
+                            <div class="label">
+                                Telefoon: 
+                            </div>
+                            <div class="value">
+                                {{therapist.telephone}}
+                            </div>
+                        </div>
+                        <div class="detail-content">
+                            <div class="label">
+                                Website: 
+                            </div>
+                            <div class="value">
+                                {{therapist.website}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fill"></div>
+                </div>
+                <div class="detail-section">
+                    <div class="fill"></div>
+                            <table>
+                                <thead>
+                                    <th colspan="2">Werkuren</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Maandag</td>
+                                        <td>9:00 - 18:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dinsdag</td>
+                                        <td>9:00 - 18:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Woensdag</td>
+                                        <td>9:00 - 18:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Donderdag</td>
+                                        <td>9:00 - 18:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vrijdag</td>
+                                        <td>9:00 - 18:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zaterdag</td>
+                                        <td>9:00 - 12:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zondag</td>
+                                        <td> / </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <div class="fill"></div>
+                    </div>
+            </mat-card-content>
+        </mat-card>
+        </div>
