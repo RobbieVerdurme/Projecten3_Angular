@@ -35,3 +35,11 @@ table {
       padding: 8px 24px;
     }
   }
+
+  .invalid{
+    color: red;
+  }
+
+  .valid{
+    color: green;
+  }

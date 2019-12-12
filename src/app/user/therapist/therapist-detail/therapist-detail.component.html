@@ -1,70 +1,103 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-    <mat-card style="text-align: center;">
+    <mat-card>
             <mat-card-title>
-                <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+                Detail therapeut {{therapist.lastname}}
             </mat-card-title>
         <mat-card-content>
-            <table>
-                <tr>
-                    <td>username : </td>
-                    <td>AlexB</td>
-                </tr>
-                <tr>
-                    <td>Firstname : </td>
-                    <td>Alex</td>
-                </tr>
-                <tr>
-                    <td>Lastname : </td>
-                    <td>Barker</td>
-                </tr>
-                <tr>
-                    <td>E-mail : </td>
-                    <td>
-                        <a href="mailto:Alex.Barker@therapeut-multimed.be">Alex.Barker@therapeut-multimed.be</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Functie : </td>
-                    <td>Kinesist</td>
-                </tr>
-                <tr>
-                    <td>Telefoon : </td>
-                    <td>2(6431)465-92-36</td>
-                </tr>
-                <tr>
-                    <td>Working Hours : </td>
-                    <td>
-                        <table class="workingHours" role="table">
-                            <thead role="rowgroup">
-                            <tr role="row">
-                                <th>Maandag</th>
-                                <th>Dinsdag</th>
-                                <th>Woensdag</th>
-                                <th>Donderdag</th>
-                                <th>Vrijdag</th>
-                                <th>Zaterdag</th>
-                                <th>Zondag</th>
-                            </tr>
-                        </thead>
-                        <tbody role="rowgroup">
-                            <tr role="row">
-                                <td>9-15</td>
-                                <td>9-16</td>
-                                <td>9-12</td>
-                                <td>9-19</td>
-                                <td>9-19</td>
-                                <td>gesloten</td>
-                                <td>gesloten</td>
-                            </tr>
-                        </tbody>
+            <div class="detail-section">
+                <div id="profile-img" class="detail-part" >
+                    <img mat-card-image src="../../../assets/profile_circle.png" style="max-height: 100px; max-width: 100px;">
+                </div>
+                <div class="detail-part">
+                    <div class="title">
+                        Algemeen
+                    </div>
+                    <div class="detail-content">
+                        <div class="label">
+                            Voornaam:  
+                        </div>
+                        <div class="value">
+                            {{therapist.firstname}}
+                        </div>
+                    </div>
+                    <div class="detail-content">
+                        <div class="label">
+                            Familienaam:  
+                        </div>
+                        <div class="value">
+                            {{therapist.lastname}}
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-part">
+                    <div class="title">
+                        Contact
+                    </div>
+                    <div class="detail-content">
+                        <div class="label">
+                            Email: 
+                        </div>
+                        <div class="value">
+                            {{therapist.email}}
+                        </div>
+                    </div>
+                    <div class="detail-content">
+                        <div class="label">
+                            Telefoon: 
+                        </div>
+                        <div class="value">
+                            {{therapist.telephone}}
+                        </div>
+                    </div>
+                    <div class="detail-content">
+                        <div class="label">
+                            Website: 
+                        </div>
+                        <div class="value">
+                            {{therapist.website}}
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-part">
+                    <div class="detail-content">
+                        <table>
+                            <thead>
+                                <th colspan="2">Werkuren</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Maandag</td>
+                                    <td>9:00 - 18:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Dinsdag</td>
+                                    <td>9:00 - 18:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Woensdag</td>
+                                    <td>9:00 - 18:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Donderdag</td>
+                                    <td>9:00 - 18:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Vrijdag</td>
+                                    <td>9:00 - 18:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Zaterdag</td>
+                                    <td>9:00 - 12:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Zondag</td>
+                                    <td> / </td>
+                                </tr>
+                            </tbody>
                         </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>website : </td>
-                    <td><a href="https://kinesitherapie-de-clercq-john.business.site/">https://kinesitherapie-de-clercq-john.business.site/</a></td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </mat-card-content>
     </mat-card>
     </div>

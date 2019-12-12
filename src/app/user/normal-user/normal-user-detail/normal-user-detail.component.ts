@@ -20,7 +20,7 @@ export class NormalUserDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.subscribe(item => this.user = item['user'])
+    this.LoadUser()
   }
 
   navigateToAssignChallenges(){
@@ -29,5 +29,9 @@ export class NormalUserDetailComponent implements OnInit {
 
   dismissMessage(){
     this.messageService.setMessage(null);
+  }
+
+  async LoadUser(){
+    this.route.data.subscribe(item => this.user = item['user'])
   }
 }

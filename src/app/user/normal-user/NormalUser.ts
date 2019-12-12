@@ -76,7 +76,9 @@ export class NormalUser{
         )
         normalUser.xp = json.experiencePoints;
         normalUser.categories = json.categories.map(Category.fromJSON);
-        //normalUser.challenges = json.challenges.map(Challenge.fromJSON);
+        if(json.challenges != undefined){
+            normalUser.challenges = json.challenges.map(Challenge.fromJSON);
+        }
         return normalUser;
     }
 

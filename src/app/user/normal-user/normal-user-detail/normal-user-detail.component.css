@@ -1,26 +1,64 @@
-/***************uitdagingen table*****************/
-.example-container {
-    height: 400px;
-    overflow: auto;
-  }
-  
-  table {
-    width: 100%;
-  }
-  
-  /**********matcard***********/
-  .matcard {
-    text-align: center;
-    min-width: 40%;
-  }
-
-  .challenges{
-    display: grid;
-    grid-template-rows: auto auto;
-    vertical-align: top;
-  }
-
-.addchallengebtn{
-  text-align: right;
+mat-card{
+  width: 100%;
+  text-align: left;
+  display: inline-block;
+  color: #50927C;
+  margin-left: 20px;
 }
 
+mat-card-title{
+  margin-left: 20px;
+    font-weight: bold;
+}
+
+mat-card-content{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detail-part{
+  flex: 0 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#user-profile-pic{
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.title{
+  flex: 0 0 100%;
+  font-weight: bold;
+  margin: 25px 15px;
+}
+
+.content{
+  flex: 0 0 40%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.value{
+  color: black;
+  margin-left: 5px;
+}
+
+.challenge-part{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#challenge-title{
+  margin-left: 0px;
+}
+
+button{
+  color: white;
+  background-color: #50927C;
+  margin-top: 20px;
+}

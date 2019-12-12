@@ -19,7 +19,7 @@ const COMPANY_DATA: Company[] = [
 export class CompanyListComponent implements OnInit {
 
   //var
-  displayedColumns: string[] = ['name', 'city', 'country'];
+  displayedColumns: string[] = ['name', 'city', 'country', 'contractValid'];
   dataSource: MatTableDataSource<Company>;
   private companies$: Observable<Company[]> = this.companyDataService.Companies$;
 
@@ -42,12 +42,12 @@ export class CompanyListComponent implements OnInit {
     this.dataSource.filterPredicate = function(data, filter: string): boolean{
       return data.name.toLowerCase().includes(filter)||
       data.city.toLowerCase().includes(filter)||
-      data.country.toLowerCase().includes(filter);
+      data.country.toLowerCase().includes(filter)
     }
 
     this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches?
-      ['name'] : ['name', 'city', 'country'];
+      ['name'] : ['name', 'city', 'country', 'contractValid'];
     });
 
     this.dataSource.paginator = this.paginator;
@@ -66,6 +66,16 @@ export class CompanyListComponent implements OnInit {
   //Of naar nieuwe lijst gaan of naar bestaande lijst van users, reeds gefilterd door bedrijfkeuze
   companyDetailScreen(company: Company){
     this.router.navigate([`bedrijf/${company.id}`])
+  }
+
+  contractValid(contractDate: Date): boolean
+  {
+    var currentDate = new Date();
+    if(contractDate > currentDate)
+    {
+      return true;
+    }
+    return false;
   }
 
 }
