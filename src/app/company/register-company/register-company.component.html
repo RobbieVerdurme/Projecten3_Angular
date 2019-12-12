@@ -1,7 +1,13 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Voeg een bedrijf toe</mat-card-title>
+            <div *ngIf="isEdit == false">
+                <mat-card-title>Voeg een bedrijf toe</mat-card-title>
+            </div>
+            <div *ngIf="isEdit == true">
+                <mat-card-title>{{company.name}} aanpassen</mat-card-title>
+            </div>
+           
         </mat-card-header>
         <mat-card-content>
             <p *ngIf="errorMsg" class="error">
@@ -124,7 +130,7 @@
                     </div>
                 </div>
                 <div *ngIf="isEdit == true">
-                    <div>
+                    <div class="button">
                         <button mat-button (click)="editCompany()">Aanpassen</button>
                         <button mat-button (click)="deleteCompany()">Verwijderen</button>
                     </div>

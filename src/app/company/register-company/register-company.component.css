@@ -61,6 +61,10 @@ mat-form-field{
     background-color: #50927C;
 }
 
+.button button:nth-child(2){
+    margin-left: 50px;
+}
+
 input{
     color: black;
 }

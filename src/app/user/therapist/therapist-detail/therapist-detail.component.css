@@ -25,7 +25,7 @@
   }
   
   mat-card-title{
-    margin-left: 20px;
+    margin-left: 15px;
       font-weight: bold;
   }
   
@@ -37,36 +37,65 @@
   .detail-section{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex: 0 0 45%;
   }
   
   .detail-part{
     flex: 0 0 100%;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid red;
   }
   
   #profile-img{
     justify-content: center;
     padding-top: 20px;
+    margin: 0px 25px;
   }
-  
-  .title{
+
+  .general-section{
     flex: 0 0 100%;
-    font-weight: bold;
-    border: 1px solid blue;
-    margin: 25px 15px;
+    display: flex;
+    flex-wrap: nowrap;
   }
-  
-  .content{
-    flex: 0 0 40%;
+
+  .general-part{
+    flex: 0 0 30%;
+  }
+
+  #general-part-name{
+    flex: 0 0 50%;
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .title{
+    flex: 0 0 30%;
+    font-weight: bold;
+    height: 25px;
+    margin: 25px 15px;
+  }
+
+  .title-fill{
+    flex: 0 0 60%;
+    margin: 25px 0px;
+    height: 25px;
+  }
+
+  #contact-title, #contact-title-fill{
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  
+  .detail-content{
+    flex: 0 0 40%;
+    display: flex;
     margin-left: 15px;
     margin-top: 10px;
-    border: 1px solid purple;
     margin-bottom: 10px;
+  }
+
+  #firstname, #lastname{
+    flex: 0 0 100%;
   }
   
   .value{
@@ -78,6 +107,34 @@
     color: white;
     background-color: #50927C;
     margin-top: 20px;
+  }
+
+  table{
+    border: 2px solid #50927C;
+    flex: 0 0 100%;
+  }
+
+  table th{
+    text-align: center;
+    padding: 15px 0px;
+    border-bottom: 2px solid #50927C; 
+  }
+
+  td{
+    padding: 5px 5px;
+  }
+
+  tr td:nth-child(2){
+    text-align: center;
+    color: black;
+  }
+
+  td:first-child{
+    padding-top: 10px;
+  }
+
+  #hourtable{
+    justify-content: center;
   }
   
   

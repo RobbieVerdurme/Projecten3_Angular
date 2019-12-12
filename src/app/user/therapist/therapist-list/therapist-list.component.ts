@@ -25,20 +25,25 @@ export class TherapistListComponent implements OnInit {
 
   //ctor
   constructor(
-    breakpointObserver: BreakpointObserver,
+    private breakpointObserver: BreakpointObserver,
     private router: Router,
     private therapistDataService: TherapistDataService
-    ) {
+    ){}
+        
+
+  
+
+  ngOnInit(){
     this.dataSource = new MatTableDataSource(); 
 
 
     this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
-        ['firstname', 'familyname'] : 
-        ['firstname', 'familyname', 'email', 'telephone'];
+        ['firstname', 'lastname'] : 
+        ['firstname', 'lastname', 'email', 'telephone'];
 
-    });
-
+      });
+    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
