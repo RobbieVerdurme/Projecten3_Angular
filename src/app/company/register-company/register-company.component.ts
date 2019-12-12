@@ -31,7 +31,6 @@ export class RegisterCompanyComponent implements OnInit {
   ngOnInit() {
     //Check if edit or register 
       this.route.data.subscribe(item => this.company = item['company']);
-      console.log(this.company)
       if(this.company === undefined){
         this.isEdit = false
         this.company = new Company(0, "", "", "", "", "", "", "", "", "", new Date(), new Array<NormalUser>())
@@ -40,7 +39,6 @@ export class RegisterCompanyComponent implements OnInit {
       if(this.company === null || this.company === undefined){
         this.company = new Company(0, "", "", "", "", "", "", "", "", "", new Date(), new Array<NormalUser>())
       }
-      console.log(this.company)
 
       //Modify validation of each field
     this.companyForm = this.fb.group({
@@ -69,7 +67,6 @@ export class RegisterCompanyComponent implements OnInit {
 
   addCompany(){
     this.setCompanyValues();
-    console.log("add works");
     var bool = true;
     this._companyDataService.addNewCompany(this.company)
     .subscribe(val => bool = false) 
@@ -89,7 +86,6 @@ export class RegisterCompanyComponent implements OnInit {
 
   editCompany(){
     this.setCompanyValues();
-    console.log("edit works");
     this._companyDataService.editCompany(this.company)
     .subscribe(
       val => {
