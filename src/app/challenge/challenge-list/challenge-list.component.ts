@@ -15,7 +15,7 @@ data.push(new Challenge(2,"Daguitstap", "Doe een daguitstap en neem eigen middag
   styleUrls: ['./challenge-list.component.css']
 })
 export class ChallengeListComponent implements OnInit {
-  @Input() challenges: Challenge[] = data;
+  @Input() challenges: Challenge[];
 
   displayedColumns: string[] = ['description']
   dataSource: MatTableDataSource<Challenge>;
@@ -23,16 +23,17 @@ export class ChallengeListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   
-    constructor(breakpointObserver: BreakpointObserver,) { 
+    constructor(private breakpointObserver: BreakpointObserver,) { 
+    }
+  
+    ngOnInit() {
       this.dataSource = new MatTableDataSource(this.challenges); 
-      breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
         this.displayedColumns = result.matches ? 
           ['description'] : 
           ['description'];
       });
-    }
-  
-    ngOnInit() {
+
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
