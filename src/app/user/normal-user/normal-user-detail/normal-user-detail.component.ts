@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class NormalUserDetailComponent implements OnInit {
 //var
-  private user : NormalUser;
+  public user : NormalUser;
   constructor(private challengeService: ChallengeService, private route: ActivatedRoute, private router: Router, private messageService: MessageService, private selectUserService: SelectUserService) { 
   }
 

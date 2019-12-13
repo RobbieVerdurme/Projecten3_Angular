@@ -17,7 +17,7 @@ export class RegisterCompanyComponent implements OnInit {
   public companyForm: FormGroup;
   public errorMsg: string;
   public company: Company;
-  private isEdit: boolean = true;
+  public isEdit: boolean = true;
 
   //const
   constructor(

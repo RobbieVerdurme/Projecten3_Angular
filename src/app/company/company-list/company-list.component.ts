@@ -21,7 +21,7 @@ export class CompanyListComponent implements OnInit {
   //var
   displayedColumns: string[] = ['name', 'city', 'country', 'contractValid'];
   dataSource: MatTableDataSource<Company>;
-  private companies$: Observable<Company[]> = this.companyDataService.Companies$;
+  public companies$: Observable<Company[]> = this.companyDataService.Companies$;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

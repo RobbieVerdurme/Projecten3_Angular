@@ -5,9 +5,11 @@
         <mat-card-title>Nieuwe Uitdaging</mat-card-title>
     </mat-card-header>  
     <mat-card-content>
+        <!--ErrorMsg bestaat niet
         <p *ngIf="errorMsg" class="error">
                 {{errorMsg}}
         </p>
+        -->
         <form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
             <div class="form-part">
                 <div class="form-field">

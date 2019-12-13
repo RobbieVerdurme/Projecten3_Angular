@@ -16,7 +16,7 @@ export class TherapistListComponent implements OnInit {
   //var
   displayedColumns: string[] = ['firstname', 'familyname', 'email', 'telephone', 'function'];
   dataSource: MatTableDataSource<Therapist>;
-  private therapists$ = this.therapistDataService.therapists$
+  public therapists$ = this.therapistDataService.therapists$
 
   
 
