@@ -44,7 +44,7 @@ export class CompanyDataService {
   
   //modify a company
   editCompany(company: Company){
-    return this.http.post(`${environment.apiUrl}/Companies/edit`, company.toJSON());
+    return this.http.put(`${environment.apiUrl}/Companies/edit`, company.toJSON());
   }
 
   //remove a company
