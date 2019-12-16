@@ -1,0 +1,35 @@
+{
+    "companyId": 1,
+    "name": "Multimed",
+    "phone": "04785889764",
+    "mail": "Multimed@gmail.com",
+    "street": "Multimedstraat",
+    "houseNumber": 1,
+    "city": "Gent",
+    "postalCode": 9000,
+    "country": "Belgie",
+    "site": "multimed.be",
+    "contract": "2049-12-14T13:27:06.4111399",
+    "companyMembers": [
+      {
+        "userId": 1,
+        "firstName": "Boefer",
+        "familyName": "rob",
+        "email": "Boeferrob@live.be",
+        "phone": "0478995888",
+        "contract": "2049-12-14T13:27:06.4111399",
+        "categories": [],
+        "experiencePoints": 26
+      },
+      {
+        "userId": 2,
+        "firstName": "string",
+        "familyName": "string",
+        "email": "string",
+        "phone": "string",
+        "contract": "2049-12-14T13:27:06.4111399",
+        "categories": [],
+        "experiencePoints": 0
+      }
+    ]
+  }
