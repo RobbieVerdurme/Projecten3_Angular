@@ -16,21 +16,21 @@
                             Gebruikersnaam : 
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
-                                    required />
+                                    required data-cy="TherapistUsername" />
                             </mat-form-field>
                         </div>
                         <div class="form-field">
                             Voornaam :
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Voornaam" formControlName="firstname"
-                                    required />
+                                    required data-cy="TherapistFirstname" />
                             </mat-form-field>
                         </div>
                         <div class="form-field">
                             Achternaam :
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Achternaam" formControlName="lastname"
-                                    required />
+                                    required data-cy="TherapistLastname" />
                             </mat-form-field>
                         </div>
                     </div>
@@ -41,20 +41,20 @@
                         <div class="form-field">
                             E-mail : 
                             <mat-form-field>
-                                <input type="text" matInput placeholder="email" formControlName="email" required />
+                                <input type="text" matInput placeholder="email" formControlName="email" required data-cy="TherapistEmail" />
                             </mat-form-field>
                         </div>
                         <div class="form-field">
                             Telefoon :
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Telefoon" formControlName="telephone"
-                                    required />
+                                    required data-cy="TherapistPhone" />
                             </mat-form-field>                            
                         </div>
                         <div class="form-field">
                             Website :
                             <mat-form-field>
-                                <input type="text" matInput placeholder="Website" formControlName="website" />
+                                <input type="text" matInput placeholder="Website" formControlName="website" data-cy="TherapistWebsite" />
                             </mat-form-field>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                             Werk-uren :
                             <mat-form-field>
                                 <input type="text" matInput placeholder="werk uren" formControlName="workingHours"
-                                    required />
+                                    required data-cy="TherapistWorkHours" />
                             </mat-form-field>
                                 <!--
                                 <table class="workingHours">
@@ -94,13 +94,13 @@
                         <div class="form-field">
                             Categorie :
                             <mat-form-field>
-                                <input type="text" matInput placeholder="Categorie" formControlName="category" required />
+                                <input type="text" matInput placeholder="Categorie" formControlName="category" required data-cy="TherapistCategory" />
                             </mat-form-field>
                             <button mat-button><mat-icon>add_circle</mat-icon></button>
                         </div>
                     </div>
                     <div class="button">
-                        <button type="submit" mat-button>Registreer</button>
+                        <button type="submit" mat-button data-cy="TherapistRegister">Registreer</button>
                     </div>
                 </form>
             </mat-card-content>
