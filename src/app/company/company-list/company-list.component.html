@@ -1,5 +1,5 @@
 <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" data-cy="CompanyFilter">
 </mat-form-field>
 
 <div class="mat-elevation-z8">
@@ -8,7 +8,7 @@
         <!-- name column -->
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Bedrijfnaam</th>
-            <td mat-cell *matCellDef="let element" (click)="companyDetailScreen(element)">
+            <td mat-cell *matCellDef="let element" (click)="companyDetailScreen(element)" data-cy="CompanyNameRow">
                 <span class="mobile-label">Bedrijfsnaam:</span>
                 {{element.name}}
             </td>
