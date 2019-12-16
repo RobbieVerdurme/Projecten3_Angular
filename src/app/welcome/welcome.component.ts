@@ -21,6 +21,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.messageService.getObservable().subscribe(value => this.message = value);
+    console.log(this.loggedInUser$)
   }
 
   dismissMessage(){

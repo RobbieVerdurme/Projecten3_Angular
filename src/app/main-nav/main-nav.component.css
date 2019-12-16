@@ -12,7 +12,7 @@
 }
 
 .mat-toolbar{
-  background:  gray;
+  background: grey;
 }
 
 .mat-toolbar.mat-primary {
@@ -27,4 +27,15 @@
 
 h3{
   margin-left: 20px;
+}
+
+mat-nav-list{
+  color: black;
+}
+
+mat-nav-list a{
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: inherit;
 }

@@ -27,7 +27,7 @@ export class AuthenticationService {
   // var
   private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<LoginUser>;
-  private _id: number;
+  private _username: string;
   public redirectUrl: string;
 
   // constr
@@ -55,13 +55,13 @@ export class AuthenticationService {
 
   // meth
   login(username: string, password: string): Observable<boolean> {
-    
+    /*
     const token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTb2ZpZVZAZ21haWwuY29tIiwidW5pcXVlX25hbWUiOiJTb2ZpZVYiLCJJZCI6IiIsInJvbGVzIjoiTXVsdGltZWQiLCJleHAiOjE1NzQyNzI2Mjh9.YeNChn55ifUV_98lWlLT-AuOhfuTVjzVlHc9C9ivUhE";
     localStorage.setItem(this._tokenKey, token);
     const parsedToken = parseJwt(token);
     this._user$.next(new Multimed(parsedToken.id, username, Role.Mulitmed));
     return new BehaviorSubject<boolean>(true);
-    
+    */
     return this.http
       .post(`${environment.apiUrl}/Account`, {username, password}, { responseType: 'text' })
       .pipe(
@@ -69,8 +69,8 @@ export class AuthenticationService {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
             const parsedToken = parseJwt(token);
-            //de juiste gebruiker aanmaken aan de hand van de role
             
+            //de juiste gebruiker aanmaken aan de hand van de role
             if(parsedToken.roles == Role.Mulitmed){
               this._user$.next(new Multimed(parsedToken.id, username, parsedToken.roles))
             }else{
@@ -108,6 +108,10 @@ export class AuthenticationService {
     return this._user$
   }
 
+  get username(){
+    return this._username;
+  }
+
   get token(): string {
     const localToken = localStorage.getItem(this._tokenKey);
     if(localToken){
@@ -133,14 +137,14 @@ export class AuthenticationService {
 
   isMultimed() {
     if(this.user$.value){
-      return this._user$.value.role == Role.Mulitmed?false:true
+      return this._user$.value.role == Role.Mulitmed?true:false
     }
     return false;
   }
 
   isTherapist(){
     if(this.user$.value){
-      return this._user$.value.role == Role.Therapist?false:true
+      return this._user$.value.role == Role.Therapist?true:false
     }
     return false;
   }

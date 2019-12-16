@@ -25,7 +25,7 @@ export class NormalUserDataService {
 
   getNormalUser$(id): Observable<NormalUser> {
     return this.http
-      .get(`${environment.apiUrl}/users/${id}`)
+      .get(`${environment.apiUrl}/users/details/${id}`)
       .pipe(map((the: any): NormalUser => NormalUser.FromJSON(the)));
   }
 

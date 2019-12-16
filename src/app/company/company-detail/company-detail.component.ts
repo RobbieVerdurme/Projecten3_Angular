@@ -3,7 +3,7 @@ import { Company } from '../company';
 import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 import { Challenge } from 'src/app/challenge/Challenge';
 import { CompanyComponent } from '../company/company.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CompanyDataService } from '../company-data.service';
 import { Category } from 'src/app/challenge/Category';
 
@@ -11,7 +11,7 @@ const COMPANY_DATA: Company = new Company(0,  'HoGent',  '093697896',  'comp@ny.
 
 const catg: Category = new Category(0, "Lopen")
 
-const us: NormalUser = new NormalUser(0, "wazzaaaa97", "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
+const us: NormalUser = new NormalUser(0, "Ruben", "Grillaert", "ruben.grillaert.y1033@student.hogent.be", "+32474139526", new Date());
 us.addChallenge(new Challenge(0, "Eerste challenge", "De beschrijving van de eerste challenge", catg))
 us.addChallenge(new Challenge(1, "tweede challenge", "De beschrijving van de tweede challenge", catg))
 us.addChallenge(new Challenge(2, "derde challenge", "De beschrijving van de derde challenge", catg))
@@ -28,11 +28,11 @@ export class CompanyDetailComponent implements OnInit {
   displayedColumns: string[] = ['']
   company: Company
 
-  constructor(private _companyDataService: CompanyDataService, private _router: Router) { 
-    this.company = COMPANY_DATA
+  constructor(private route: ActivatedRoute, private _companyDataService: CompanyDataService, private _router: Router) { 
   }
 
   ngOnInit() {
+    this.route.data.subscribe(item => this.company = item['company']);
   }
 
   goToLink(){

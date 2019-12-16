@@ -1,0 +1,11 @@
+{
+    "/api": {
+      "target": {
+        "host": "projecten3backend20191106111602.azurewebsites.net",
+        "protocol": "https:"
+      },
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "info"
+    }
+  }
