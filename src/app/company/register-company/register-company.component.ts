@@ -17,7 +17,7 @@ export class RegisterCompanyComponent implements OnInit {
   public companyForm: FormGroup;
   public errorMsg: string;
   public company: Company;
-  private isEdit: boolean = true;
+  public isEdit: boolean = true;
 
   //const
   constructor(
@@ -43,15 +43,15 @@ export class RegisterCompanyComponent implements OnInit {
       //Modify validation of each field
     this.companyForm = this.fb.group({
       name: [this.company.name, Validators.required],
-      phone: ['', Validators.required],
-      mail: ['', Validators.required],
-      street: ['', Validators.required],
-      houseNumber: ['', Validators.required],
-      city: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      country: ['', Validators.required],
-      site: [''],
-      contract: ['', Validators.required]
+      phone: [this.company.phone, Validators.required],
+      mail: [this.company.mail, Validators.required],
+      street: [this.company.street, Validators.required],
+      houseNumber: [this.company.houseNumber, [Validators.required, Validators.pattern("[0-9]*")]],
+      city: [this.company.city, Validators.required],
+      postalCode: [this.company.postalCode, [Validators.required, Validators.pattern("[0-9]*")]],
+      country: [this.company.country, Validators.required],
+      site: [this.company.city],
+      contract: [this.company.contract, Validators.required]
     });
   }
 
@@ -62,20 +62,19 @@ export class RegisterCompanyComponent implements OnInit {
       return null;
     }
     if(errors.required) return 'Verplicht'
+    if(errors.pattern) return 'Only numbers allowed'
   }
 
   addCompany(){
     this.setCompanyValues();
-    console.log("add works");
+    var bool = true;
     this._companyDataService.addNewCompany(this.company)
-    .subscribe(
-      val => {
-        if(val){
+    .subscribe(val => bool = false) 
+        if(bool){
           this.router.navigate['']
         }else{
           this.errorMsg = 'Fout bij het aanmaken van een Bedrijf!'
         }
-      },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
           this.errorMsg = `Error bij het aanmaken van bedrijf ${this.companyForm.value.name}`
@@ -83,12 +82,10 @@ export class RegisterCompanyComponent implements OnInit {
           this.errorMsg = `Error ${err.status} bij het aanmaken van bedrijf ${this.companyForm.value.name}`
         }
       }
-    )
   }
 
   editCompany(){
     this.setCompanyValues();
-    console.log("edit works");
     this._companyDataService.editCompany(this.company)
     .subscribe(
       val => {
@@ -109,15 +106,15 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   deleteCompany(){
+    var bool = true;
     this._companyDataService.removeCompany(this.company.id)
     .subscribe(
-      val => {
-        if(val){
-          this.router.navigate['']
+      val => bool = false)
+        if(bool){
+          this.router.navigate['/bedrijf/lijst']
         }else{
           this.errorMsg = `Fout bij het verwijderen van ${this.company.name}!`
         }
-      },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
           this.errorMsg = `Error bij het verwijderen van bedrijf ${this.company.name}`
@@ -125,7 +122,6 @@ export class RegisterCompanyComponent implements OnInit {
           this.errorMsg = `Error ${err.status} bij het verwijderen van bedrijf ${this.company.name}`
         }
       }
-    )
   }
 
   // Set new values to company

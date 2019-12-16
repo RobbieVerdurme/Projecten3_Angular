@@ -3,6 +3,8 @@ import { Company } from '../company';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { CompanyDataService } from '../company-data.service';
+import { Observable } from 'rxjs';
 
 //MockData to fill company list
 const COMPANY_DATA: Company[] = [
@@ -17,33 +19,37 @@ const COMPANY_DATA: Company[] = [
 export class CompanyListComponent implements OnInit {
 
   //var
-  displayedColumns: string[] = ['name', 'city', 'country'];
+  displayedColumns: string[] = ['name', 'city', 'country', 'contractValid'];
   dataSource: MatTableDataSource<Company>;
+  public companies$: Observable<Company[]> = this.companyDataService.Companies$;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   //ctor
   constructor(
-    breakpointObserver: BreakpointObserver,
-    private router: Router
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private companyDataService: CompanyDataService
   ) { 
-    //Set fields that can be filtered
-    this.dataSource = new MatTableDataSource(COMPANY_DATA);
-    this.dataSource.filterPredicate = function(data, filter: string): boolean{
-      return data.name.toLowerCase().includes(filter)||
-      data.city.toLowerCase().includes(filter)||
-      data.country.toLowerCase().includes(filter);
-    }
-
-    breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
-      this.displayedColumns = result.matches?
-      ['name'] : ['name', 'city', 'country'];
-    });
+    
   }
 
   //methods
   ngOnInit() {
+    //Set fields that can be filtered
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.filterPredicate = function(data, filter: string): boolean{
+      return data.name.toLowerCase().includes(filter)||
+      data.city.toLowerCase().includes(filter)||
+      data.country.toLowerCase().includes(filter)
+    }
+
+    this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      this.displayedColumns = result.matches?
+      ['name'] : ['name', 'city', 'country', 'contractValid'];
+    });
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort
   }
@@ -60,6 +66,16 @@ export class CompanyListComponent implements OnInit {
   //Of naar nieuwe lijst gaan of naar bestaande lijst van users, reeds gefilterd door bedrijfkeuze
   companyDetailScreen(company: Company){
     this.router.navigate([`bedrijf/${company.id}`])
+  }
+
+  contractValid(contractDate: Date): boolean
+  {
+    var currentDate = new Date();
+    if(contractDate > currentDate)
+    {
+      return true;
+    }
+    return false;
   }
 
 }

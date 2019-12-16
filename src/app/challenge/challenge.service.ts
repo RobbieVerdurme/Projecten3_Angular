@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Challenge } from './Challenge';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Category } from './Category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChallengeService {
-
-  private readonly baseurl: String = "https://projecten3backend20191106111602.azurewebsites.net/api";
+  public loadingError$ = new Subject<string>();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,7 +21,7 @@ export class ChallengeService {
       description: description,
       category: category
     };
-    return this.httpClient.post(`${this.baseurl}/challenge/add`,body,{observe: 'response',headers: headers});
+    return this.httpClient.post(`${environment.apiUrl}/challenge/add`,body,{observe: 'response',headers: headers});
   }
 
   assignChallenges(userId: number, challenges: Array<number>){
@@ -31,11 +31,11 @@ export class ChallengeService {
       challengeIds: challenges
     };
 
-    return this.httpClient.post(`${this.baseurl}/challenge/user/add`,body, {observe: 'response',headers: headers});
+    return this.httpClient.post(`${environment.apiUrl}/challenge/user/add`,body, {observe: 'response',headers: headers});
   }
 
   getChallengesForUserPerCategory(id: number){
     let headers = new HttpHeaders();
-    return this.httpClient.get<Challenge[]>(`${this.baseurl}/challenge/category/user/${id}`,{observe: 'response',headers: headers});
+    return this.httpClient.get<Challenge[]>(`${environment.apiUrl}/challenge/category/user/${id}`,{observe: 'response',headers: headers});
   }
 }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { TherapistDataService } from '../therapist/therapist-data.service';
 import { Therapist } from '../therapist/Therapist';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -11,12 +14,18 @@ import { Therapist } from '../therapist/Therapist';
 export class ProfileComponent implements OnInit {
   //var
   public therapist: Therapist;
+  public therapistForm: FormGroup;
+  public errorMsg: string;
+  private isEdit: boolean;
   user$ = this._authService.user$.value;
 
   //const
   constructor(
     private _authService: AuthenticationService,
-    private _therapistService: TherapistDataService
+    private _therapistService: TherapistDataService,
+    private router: Router,
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) { }
 
   //method
@@ -24,6 +33,47 @@ export class ProfileComponent implements OnInit {
     this._therapistService
       .getTherapist$(1)
       .subscribe(item => (this.therapist = item));
+
+    //Add validation to form
+    this.therapistForm = this.fb.group({
+      firstname: [this.therapist.firstname, Validators.required],
+      lastname: [this.therapist.lastname, Validators.required],
+      email: [this.therapist.email, [Validators.required, Validators.email]],
+      telephone: [this.therapist.telephone],
+      website: [this.therapist.website]
+    });
+    
+  }
+
+  getErrorMessage(errors: any){
+    if(!errors){
+      return null;
+    }
+    if(errors.required) return 'Verplicht'
+    if(errors.email) return 'Gelieve een geldig emailadres op te geven'
+  }
+
+  editTherapist(){
+    this.updateTherapistValues();
+    this._therapistService.editTherapist(this.therapist)
+      .subscribe(
+        val => {
+          if(val){
+            this.router.navigate['profile']
+          }
+          else{
+            this.errorMsg = `Fout bij het aanpassen van therapeut ${this.therapist.lastname}!`
+          }
+        }
+      )
+  }
+
+  updateTherapistValues(){
+    this.therapist.firstname = this.therapistForm.value.firstname;
+    this.therapist.lastname = this.therapistForm.value.lastname;
+    this.therapist.email = this.therapistForm.value.email;
+    this.therapist.telephone = this.therapistForm.value.telephone;
+    this.therapist.website = this.therapistForm.value.website;
   }
 
 }

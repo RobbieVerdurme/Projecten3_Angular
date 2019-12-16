@@ -3,15 +3,8 @@ import { Therapist } from '../Therapist';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-
-
-const THERAPIST_DATA: Therapist[] = [
-  new Therapist(0, "ther1", "Jos"),
-  new Therapist(1, "ther2", "Joss"),
-  new Therapist(2, "ther3", "Josd"),
-  new Therapist(3, "ther4", "Josf",),
-  new Therapist(4, "ther5", "Josg",),
-];
+import { Observable } from 'rxjs';
+import { TherapistDataService } from '../therapist-data.service';
 
 @Component({
   selector: 'app-therapist-list',
@@ -23,6 +16,8 @@ export class TherapistListComponent implements OnInit {
   //var
   displayedColumns: string[] = ['firstname', 'familyname', 'email', 'telephone', 'function'];
   dataSource: MatTableDataSource<Therapist>;
+  public therapists$ = this.therapistDataService.therapists$
+
   
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -30,21 +25,25 @@ export class TherapistListComponent implements OnInit {
 
   //ctor
   constructor(
-    breakpointObserver: BreakpointObserver,
-    private router: Router
-    ) {
-    this.dataSource = new MatTableDataSource(THERAPIST_DATA); 
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private therapistDataService: TherapistDataService
+    ){}
+        
 
-    breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
-      this.displayedColumns = result.matches ? 
-        ['firstname', 'familyname'] : 
-        ['firstname', 'familyname', 'email', 'telephone', 'function'];
-    });
   
-  }
 
-  //methods
-  ngOnInit() {
+  ngOnInit(){
+    this.dataSource = new MatTableDataSource(); 
+
+
+    this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
+      this.displayedColumns = result.matches ? 
+        ['firstname', 'lastname'] : 
+        ['firstname', 'lastname', 'email', 'telephone'];
+
+      });
+    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -56,9 +55,15 @@ export class TherapistListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
-  detailscreen(therapist){
-    this.router.navigate(['/therapeut/id'])
+  detailscreen(therapist: Therapist){;
+    this.router.navigate([`/therapeut/${therapist.id}`])
   }
+
+ // async loadData(){
+      //Get all the therapists
+  //    this.dataSource = new MatTableDataSource();
+     // this.therapists$ = this.therapistDataService.therapists$;
+
+ 
 
 }
