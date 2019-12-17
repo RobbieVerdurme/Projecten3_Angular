@@ -3,22 +3,27 @@
 describe("Therapist Clients", () => {
     beforeEach(function() {
       cy.loginTherapist();
-
-      //go to clients page
-      cy.visit("/gebruiker/lijst")
-
-      //TODO Mock data clients
     });
 
     //test filter
     it("Filter on clients",function(){
         //get mockdata
+        cy.server();
+        cy.route({
+            method: 'GET',
+            url: '/api/therapist/clients/1',
+            status: 200,
+            response: 'fixture:users.json'
+        })
+
+              //go to clients page
+      cy.visit("/gebruiker/lijst")
 
         //check if data is in the list
         cy.get('[data-cy=normalUserRow]').should('have.length', 2);
 
         //type in the filter
-        cy.get('[data-cy=normalUserFilter]').type('Jos');
+        cy.get('[data-cy=normalUserFilter]').type('Leanne');
 
         //check if filter works
         cy.get('[data-cy=normalUserRow]').should('have.length', 1);
@@ -26,13 +31,25 @@ describe("Therapist Clients", () => {
 
     //client details
     it("Client Details", function(){
-        //mock doesn't work
+              //go to clients page
+      cy.visit("/gebruiker/lijst")
+
+              //get mockdata
+              cy.server();
+              cy.route({
+                  method: 'GET',
+                  url: '/api/therapist/clients/1',
+                  status: 200,
+                  response: 'fixture:users.json'
+              })
+
+        //mock 
         cy.server();
         cy.route({
             method: 'GET',
-            url: '/api/users/1',
+            url: '/api/users/details/1',
             status: 200,
-            response: 'fixtures:user.json'
+            response: 'fixture:user.json'
         })
 
         //go to the user detail
@@ -42,7 +59,7 @@ describe("Therapist Clients", () => {
         cy.url().should('eq', 'http://localhost:4200/gebruiker/1');
 
         //field check
-        cy.get('[data-cy=userUsername]').contains("client1");
+        cy.get('[data-cy=userUsername]').contains("Leanne");
         cy.get('[data-cy=userChallenges]').should('have.length', 1);
     })
 })
