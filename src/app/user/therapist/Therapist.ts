@@ -3,12 +3,16 @@ import { LoginUser } from '../loginuser';
 import { OpeningTimes } from './opening-times/opening-times';
 
 export class Therapist extends LoginUser{
-    private _firstname: string
+        private _firstname: string
         private _lastname: string
         private _email: string
         private _telephone: string
         private _function: string
         private _website: string
+        private _street: string
+        private _houseNumber: string
+        private _postalCode: string
+        private _city: string
         private _clients = new Array<NormalUser>()
         private _openingTimes = new Array<OpeningTimes>()
 
@@ -73,6 +77,38 @@ export class Therapist extends LoginUser{
         this._telephone = telephone
     }
 
+    get street(): string{
+        return this._street
+    }
+
+    set street(street: string){
+        this._street = street
+    }
+
+    get houseNumber(): string{
+        return this._houseNumber
+    }
+
+    set houseNumber(houseNumber: string){
+        this._houseNumber = houseNumber
+    }
+
+    get postalCode(): string{
+        return this._postalCode
+    }
+
+    set postalCode(postalCode: string){
+        this._postalCode = postalCode
+    }
+
+    get city(): string{
+        return this._city
+    }
+
+    set city(city: string){
+        this._city = city
+    }
+
     get function(): string{
         return this._function
     }
@@ -109,6 +145,10 @@ export class Therapist extends LoginUser{
         therapist.email = json.email
         therapist.telephone = json.phoneNumber
         therapist.website = json.website;
+        therapist.city = json.city;
+        therapist.street = json.street;
+        therapist.houseNumber = json.houseNumber;
+        therapist.postalCode = json.postalCode;
 
         var functions: string[] = null;
         
@@ -137,13 +177,16 @@ export class Therapist extends LoginUser{
     //set Therapist object to JSON object
     toJSON(): any{
         return{
-            username: this.username,
             firstname: this.firstname,
             lastname: this.lastname,
             email: this.email,
-            telephone: this.telephone,
-            function: this.function,
-            clients: this.clients.map(client => client.toJSON)
+            phoneNumber: this.telephone,
+            website: this.website,
+            street: this.street,
+            houseNumber: this.houseNumber,
+            postalCode: this.postalCode,
+            city: this.city,
+            therapistTypeId: 1
         }
     }
 

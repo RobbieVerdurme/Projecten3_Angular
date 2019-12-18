@@ -137,4 +137,6 @@
     justify-content: center;
   }
   
-  
+  .fill{
+    flex: 1 1 100%;
+  }

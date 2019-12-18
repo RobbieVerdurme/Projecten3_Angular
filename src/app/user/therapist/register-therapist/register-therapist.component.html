@@ -7,17 +7,10 @@
                 <p *ngIf="errorMsg" class="error">
                     {{ errorMsg }}
                 </p>
-                <form [formGroup]="user" (ngSubmit)="onSubmit()">
+                <form [formGroup]="therapistForm" (ngSubmit)="onSubmit()">
                     <div class="form-part">
                         <div class="title">
                             Algemeen
-                        </div>
-                        <div class="form-field">
-                            Gebruikersnaam : 
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
-                                    required data-cy="TherapistUsername" />
-                            </mat-form-field>
                         </div>
                         <div class="form-field">
                             Voornaam :
@@ -55,6 +48,35 @@
                             Website :
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Website" formControlName="website" data-cy="TherapistWebsite" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="form-part">
+                        <div class="title">
+                            Adres
+                        </div>
+                        <div class="form-field">
+                            Straat :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Straat" formControlName="street" data-cy="TherapistStreet" />
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field">
+                            Nummer :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Nummer" formControlName="houseNumber" data-cy="TherapistHouseNumber" />
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field">
+                            Postcode :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Postcode" formControlName="postalCode" data-cy="TherapistPostalCode" />
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field">
+                            Plaats :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Plaats" formControlName="city" data-cy="TherapistCity" />
                             </mat-form-field>
                         </div>
                     </div>
@@ -99,8 +121,16 @@
                             <button mat-button><mat-icon>add_circle</mat-icon></button>
                         </div>
                     </div>
-                    <div class="button">
-                        <button type="submit" mat-button data-cy="TherapistRegister">Registreer</button>
+                    <div *ngIf="isEdit == false">
+                        <div class="button">
+                            <button (click)="addTherapist()" mat-button data-cy="TherapistRegister">Voeg toe</button>
+                        </div>
+                    </div>
+                    <div *ngIf="isEdit == true">
+                        <div class="button">
+                            <button mat-button (click)="editTherapist()" data-cy="EditTherapist">Aanpassen</button>
+                            <button mat-button (click)="deleteTherapist()" data-cy="DeleteTherapist">Verwijderen</button>
+                        </div>
                     </div>
                 </form>
             </mat-card-content>

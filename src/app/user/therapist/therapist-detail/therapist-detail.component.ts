@@ -14,7 +14,7 @@ export class TherapistDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private router: Router, 
+    private _router: Router, 
     private messageService: MessageService) { 
     }
 
@@ -24,6 +24,10 @@ export class TherapistDetailComponent implements OnInit {
 
   dismissMessage(){
     this.messageService.setMessage(null);
+  }
+
+  editTherapist(id: number): void{
+    this._router.navigate([`/therapeut/edit/${id}`])
   }
 
 }
