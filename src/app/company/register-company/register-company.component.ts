@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { LoginUser } from 'src/app/user/loginuser';
 import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 
+
 @Component({
   selector: 'app-register-company',
   templateUrl: './register-company.component.html',
@@ -90,43 +91,40 @@ export class RegisterCompanyComponent implements OnInit {
   editCompany(){
     this.setCompanyValues();
     this._companyDataService.editCompany(this.company)
-    .subscribe(
-      (val) => {
-        if(val){
-          this.router.navigate([`/bedrijf/` + this.company.id])
-        }
-        else{
-          this.errorMsg = 'Fout bij het aanpassen van een Bedrijf!'
-        }
-      },
-      (err: HttpErrorResponse) => {
-        if(err.error instanceof Error){
-          this.errorMsg = `Error bij het aanpassen van bedrijf ${this.companyForm.value.name}`
-        }else{
-          this.errorMsg = `Error ${err.status} bij het aanpassen van bedrijf ${this.companyForm.value.name}`
-        }
+    .subscribe( response =>{
+      if(response.status === 200){
+        this.router.navigate([`bedrijf/${this.company.id}`])
+      }else{
+        this.errorMsg = `Fout bij het aanpassen van ${this.company.name}!`
       }
-    )
+    },(err: HttpErrorResponse) => {
+      if(err.error instanceof Error){
+        this.errorMsg = `Error bij het aanpassen van bedrijf ${this.company.name}`
+      }else{
+        this.errorMsg = `Fout bij het aanpassen van bedrijf ${this.company.name}`
+      }
+    }
+)
+        
   }
 
   deleteCompany(){
     this._companyDataService.removeCompany(this.company.id)
     .subscribe(
-      (val) => {
-        if(val){
-          this.router.navigate([`/bedrijf/lijst`])
-        }
-        else{
-          this.errorMsg = 'Fout bij het verwijderen van een Bedrijf!'
+      response => {
+        if(response.status === 200){
+          this.router.navigate(['/bedrijf/lijst'])
+        }else{
+          this.errorMsg = `Fout bij het verwijderen van ${this.company.name}!`
         }
       },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
           this.errorMsg = `Error bij het verwijderen van bedrijf ${this.companyForm.value.name}`
         }else{
-          this.errorMsg = `Error ${err.status} bij het verwijderen van bedrijf ${this.companyForm.value.name}`
+          this.errorMsg = `Fout bij het verwijderen van bedrijf ${this.company.name}`
         }
-      })
+      })    
   }
 
   // Set new values to company
