@@ -3,7 +3,7 @@
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="(companies$ | async)" matSort>
+    <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- name column -->
         <ng-container matColumnDef="name">

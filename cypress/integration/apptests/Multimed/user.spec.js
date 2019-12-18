@@ -20,11 +20,6 @@ describe("Multimed Add user", () => {
         cy.get("[data-cy=UserRegister]").click();
 
         //TODO SHOULD URL REDIRECT ?
-
-        //go to list users
-        cy.visit("/gebruiker/lijst");
-
-        //check if user is added
-        cy.get("[data-cy=normalUserRow]").contains("User")
+        cy.url().should("eq", "http://localhost:4200/gebruiker/lijst");
     });
 });

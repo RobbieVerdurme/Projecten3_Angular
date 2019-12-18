@@ -68,14 +68,16 @@ export class RegisterCompanyComponent implements OnInit {
 
   addCompany(){
     this.setCompanyValues();
-    var bool = true;
     this._companyDataService.addNewCompany(this.company)
-    .subscribe(val => bool = false) 
-        if(bool){
-          this.router.navigate(['bedrijf/lijst'])
-        }else{
+    .subscribe(
+      (val) => {
+        if(val){
+          this.router.navigate([`/bedrijf/lijst`])
+        }
+        else{
           this.errorMsg = 'Fout bij het aanmaken van een Bedrijf!'
         }
+      },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
           this.errorMsg = `Error bij het aanmaken van bedrijf ${this.companyForm.value.name}`
@@ -83,6 +85,7 @@ export class RegisterCompanyComponent implements OnInit {
           this.errorMsg = `Error ${err.status} bij het aanmaken van bedrijf ${this.companyForm.value.name}`
         }
       }
+      ) 
   }
 
   editCompany(){
@@ -106,7 +109,6 @@ export class RegisterCompanyComponent implements OnInit {
   }
 
   deleteCompany(){
-    var bool = true;
     this._companyDataService.removeCompany(this.company.id)
     .subscribe(
       response => {
@@ -118,7 +120,7 @@ export class RegisterCompanyComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
-          this.errorMsg = `Error bij het verwijderen van bedrijf ${this.company.name}`
+          this.errorMsg = `Error bij het verwijderen van bedrijf ${this.companyForm.value.name}`
         }else{
           this.errorMsg = `Fout bij het verwijderen van bedrijf ${this.company.name}`
         }

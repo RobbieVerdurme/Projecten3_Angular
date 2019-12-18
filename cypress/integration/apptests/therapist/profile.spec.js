@@ -5,7 +5,7 @@ describe("Therapist Profile", () => {
     });
 
     //profile page
-    it("Check if everthing is filled in on profile page", function(){
+    it("Profile page check", function(){
         //go to profilepage
         cy.visit("/profile")
 
