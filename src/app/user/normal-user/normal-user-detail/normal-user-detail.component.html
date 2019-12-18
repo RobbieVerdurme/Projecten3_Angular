@@ -68,7 +68,7 @@
                     </div>
                     <!--Pass data with state param and navigate-->
                     <div class="challenge-part">
-                        <app-challenge-list [challenges]="user.challenges" data-cy="userChallenges"></app-challenge-list>
+                        <app-challenge-list [user]="user.id" data-cy="userChallenges"></app-challenge-list>
                     </div>
                     <div class="challenge-part">
                         <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button>

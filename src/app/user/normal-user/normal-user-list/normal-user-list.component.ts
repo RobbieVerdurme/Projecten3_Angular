@@ -110,7 +110,6 @@ export class NormalUserListComponent implements OnInit {
     }
     else{
       //Get therapist and display his clients
-      console.log(this.aut.user$);
       this.normalUsers$ = this.therapistDataService.getTherapistClients$(1);
 
       //this.normalUsers$ = this.therapistDataService.getTherapistClients$(1);

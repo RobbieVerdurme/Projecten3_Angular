@@ -6,6 +6,7 @@ export class Challenge{
         private _title: String,
         private _description: String,
         private _category: Category,
+        private _level: number
     ){}
 
     get id(): number{
@@ -21,9 +22,13 @@ export class Challenge{
 
     }
 
+    get level(): number{
+        return this._level;
+    }
+
     //Set JSON object to Challenge object
     static fromJSON(json: any): Challenge{
-        return new Challenge(json.challengeId,json.title,json.description,Category.fromJSON(json.category));
+        return new Challenge(json.challengeId,json.title,json.description,Category.fromJSON(json.category), json.level);
     }
 
     //Set Challenge object to JSON object
@@ -32,7 +37,8 @@ export class Challenge{
             id: this._id,
             title: this._title,
             description: this._description,
-            category: this._category.toJSON()
+            category: this._category.toJSON(),
+            level: this._level
         }
     }
 }
