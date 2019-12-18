@@ -19,6 +19,7 @@ export class CategoryService {
     .pipe(
       catchError(error => {
         this.loadingError$.next("Kon de categorieën niet ophalen.");
+        console.log(error);
         return null;
       }),
       map((list: any[]): Category[] => list

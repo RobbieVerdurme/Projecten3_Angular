@@ -14,14 +14,9 @@ export class ChallengeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  addChallenge(title: String, description: String, category: Category): Observable<HttpResponse<Object>>{
+  addChallenge(challenge: Challenge){
     let headers = new HttpHeaders();
-    let body = {
-      title: title,
-      description: description,
-      category: category
-    };
-    return this.httpClient.post(`${environment.apiUrl}/challenge/add`,body,{observe: 'response',headers: headers});
+    return this.httpClient.post(`${environment.apiUrl}/challenge/add`,challenge.toJSONForAdd(), {observe: 'response', headers: headers});
   }
 
   assignChallenges(userId: number, challenges: Array<number>){

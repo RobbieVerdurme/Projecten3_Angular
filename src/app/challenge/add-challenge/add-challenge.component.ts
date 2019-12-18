@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CategoryService } from '../category.service';
 import { ChallengeService } from '../challenge.service';
 import { Observable } from 'rxjs';
+import { Challenge } from '../Challenge';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { Observable } from 'rxjs';
 })
 export class AddChallengeComponent implements OnInit {
 
-  public inputForm: FormGroup;
+  public challengeForm: FormGroup;
   dataSource: MatTableDataSource<Category>;
   private categories$: Observable<Category[]> = this.categoryService.categories$;
   private errorMessage$: Observable<string> = this.categoryService.loadingError$;
@@ -38,26 +39,34 @@ export class AddChallengeComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.inputForm = this.fb.group({
+    this.challengeForm = this.fb.group({
       title: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+      image: [''],
+      level: ['', [Validators.required]]
     });
   }
 
   onSubmit(){
-    if(this.selectedCategory !== null && !this.TitleField.hasError && !this.DescriptionField.hasError){
-      this.challengeService.addChallenge(this.TitleField.value,this.DescriptionField.value, this.selectedCategory).subscribe(response => {
-        if(response.status === 200){
-          this.submitError = null;
-          this.messageService.setMessage(`Uitdaging '${this.TitleField.value}' toegevoegd`);
-        }else{
+    if(this.challengeForm.errors === null)
+      {
+        this.challengeService.addChallenge(this.challenge).subscribe(response => {
+          if(response.status === 200){
+            this.submitError = null;
+            this.messageService.setMessage(`Uitdaging '${this.TitleField.value}' toegevoegd`);
+          }else{
+            this.submitError = "Kon de Uitdaging niet opslaan";
+          }
+        },(error)=>{
+          console.log(error);
           this.submitError = "Kon de Uitdaging niet opslaan";
-        }
-      },(error)=>{
-        console.log(error);
-        this.submitError = "Kon de Uitdaging niet opslaan";
-      });
-    }
+        });
+
+      }
+      else
+      {
+        this.messageService.setMessage("Gelieve alle benodigde info op te geven!");
+      }
   }
 
   selectCategory(category: Category) {
@@ -71,11 +80,26 @@ export class AddChallengeComponent implements OnInit {
 
   get TitleField() : FormControl
   {
-    return <FormControl> this.inputForm.get("title");
+    return <FormControl> this.challengeForm.get("title");
   }
 
   get DescriptionField() : FormControl
   {
-    return <FormControl> this.inputForm.get("description");
+    return <FormControl> this.challengeForm.get("description");
+  }
+
+  get ImageField(): FormControl
+  {
+    return <FormControl> this.challengeForm.get("image");
+  }
+
+  get LevelField(): FormControl
+  {
+    return <FormControl> this.challengeForm.get("level");
+  }
+
+  get challenge()
+  {
+    return new Challenge(0, this.TitleField.value, this.DescriptionField.value, this.selectedCategory, this.LevelField.value);
   }
 }

@@ -41,4 +41,14 @@ export class Challenge{
             level: this._level
         }
     }
+
+    toJSONForAdd(): any{
+        return{
+            id: this._id,
+            title: this._title,
+            description: this._description,
+            categoryId: this._category.id,
+            level: this._level
+        }
+    }
 }

@@ -8,7 +8,7 @@
         <p *ngIf="errorMsg" class="error">
                 {{errorMsg}}
         </p>
-        <form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()">
             <div class="form-part">
                 <div class="form-field">
                     Titel :
@@ -22,6 +22,18 @@
                     <mat-form-field>
                         <input type="text" matInput placeholder="Omschrijving" formControlName="description" required />
                         <mat-error *ngIf='DescriptionField.errors?.required && DescriptionField.touched'>Omschrijving is verplicht</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-field">
+                    Link afbeelding :
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Link" formControlName="image"/>
+                    </mat-form-field>
+                </div>
+                <div class="form-field">
+                    Niveau :
+                    <mat-form-field>
+                        <input type="number" matInput placeholder="Niveau" formControlName="level" required/>
                     </mat-form-field>
                 </div>
             </div>
@@ -54,6 +66,7 @@
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
                 </div>
+                
             </div>
         </div>
             <br>
