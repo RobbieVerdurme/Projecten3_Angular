@@ -1,21 +1,14 @@
 <mat-card>
     <mat-card-title>
-        <div fxLayout="column" fxLayout.gt-sm="row">
-            <div>
-                Voeg uitdagingen toe voor 
-            </div>
-            <div fxFlex="5 5 auto"></div>
-            <div>
-                {{user.firstname}} {{user.lastname}}
-            </div>
-        </div>
+        Voeg uitdagingen toe voor {{user.firstname}} {{user.lastname}}
     </mat-card-title>
     <mat-card-content>
         <p *ngIf="errorMsg" class="error">
             {{errorMsg}}
         </p>
         <form [formGroup]="categoryAndLevelForm" (ngSubmit)="onSubmit()">
-            <div>
+            <div class="form-part">
+                <div class="fill"></div>
                 <mat-form-field>
                     <mat-label>
                         Selecteer een categorie:
@@ -26,17 +19,23 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <div class="fill"></div>
                 <mat-form-field>
                     <mat-label>
                         Selecteer een niveau:
                     </mat-label>
                     <input type="number" matInput placeholder="Niveau" formControlName="level" required/>
                 </mat-form-field>
+                <div class="fill"></div>
             </div>
-            <div class="button">
-                <button type="submit" mat-button>
-                    Uitdagingen zoeken
-                </button>  
+            <div class="form-part">
+                <div class="fill"></div>
+                <div class="button">
+                    <button type="submit" mat-button>
+                        Uitdagingen zoeken
+                    </button>  
+                </div>
+                <div class="fill"></div>
             </div>
             <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
                 <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>

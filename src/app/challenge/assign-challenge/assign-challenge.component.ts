@@ -70,22 +70,6 @@ export class AssignChallengeComponent implements OnInit {
           }
         }
         ) 
-      //   if(response.status === 200)
-      //   {
-      //     this.isLoading = false;
-      //     this._router.navigateByUrl(`user/detail/${this.user.id}`);
-      //   }
-      //   else if(response.status === 400)
-      //   {
-      //     this.isLoading = false;
-      //     this.submitError = "Er zijn geen uitdagingen voor deze categorie en niveau! Probeer een andere combinatie.";
-      //   }
-      //   else
-      //   {
-      //     this.isLoading = false;
-      //     this.submitError = "Er ging iets mis! Probeer later opnieuw.";
-      //   }
-      // })
     }
   }
 }
