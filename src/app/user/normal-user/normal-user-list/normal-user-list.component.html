@@ -1,10 +1,8 @@
 <mat-form-field>
-        <input matInput (keyup)="filterNormalUsers$.next($event.target.value)" type="text" placeholder="Filter" data-cy="normalUserFilter" [value]="filterNormalUser">
-      
+        <input matInput (keyup)="applyFilter($event.target.value)" type="text" placeholder="Filter" data-cy="normalUserFilter">
       </mat-form-field>
-
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="(normalUsers$ | async)" matSort >
+        <table mat-table [dataSource]="dataSource" matSort >
       
           <!-- Position Column -->
           <tr matColumnDef="firstname">

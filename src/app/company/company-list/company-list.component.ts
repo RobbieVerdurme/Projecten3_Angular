@@ -31,14 +31,21 @@ export class CompanyListComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private companyDataService: CompanyDataService
-  ) { 
-    
-  }
+  ) {}
 
   //methods
   ngOnInit() {
+    this.dataSource = new MatTableDataSource()
+
+    this.companies$.subscribe(
+      x =>{
+        this.dataSource = new MatTableDataSource(x)
+        this.dataSource.paginator = this.paginator
+        this.dataSource.sort = this.sort
+      }
+    );
+    
     //Set fields that can be filtered
-    this.dataSource = new MatTableDataSource();
     this.dataSource.filterPredicate = function(data, filter: string): boolean{
       return data.name.toLowerCase().includes(filter)||
       data.city.toLowerCase().includes(filter)||
@@ -50,8 +57,7 @@ export class CompanyListComponent implements OnInit {
       ['name'] : ['name', 'city', 'country', 'contractValid'];
     });
 
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort
+
   }
 
   applyFilter(filterValue: string){
