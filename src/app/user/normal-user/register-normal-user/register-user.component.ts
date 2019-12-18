@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../authentication.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NormalUserDataService } from '../normal-user-data.service';
 
 @Component({
   selector: 'app-register-user',
@@ -18,7 +19,8 @@ export class RegisterUserComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private normalUserService: NormalUserDataService
   ) { }
 
   //meth
@@ -35,9 +37,8 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit(){
-    this.auth
-    .registerUser(
-      this.user.value.photo,
+    this.normalUserService
+    .addNewUser(
       this.user.value.username,
       this.user.value.firstname,
       this.user.value.lastname,
@@ -46,9 +47,9 @@ export class RegisterUserComponent implements OnInit {
       this.user.value.category
       )
       .subscribe(
-        val => {
-          if (val){
-            this.router.navigate['']
+        response => {
+          if (response.status === 200){
+            this.router.navigate([`gebruiker/lijst`])
           }else{
             this.errorMsg = "Error bij registreren"
           }
