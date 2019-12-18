@@ -9,7 +9,7 @@ import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 import { CategoryService } from '../category.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NumberValueAccessor, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, pipe } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -31,7 +31,7 @@ export class AssignChallengeComponent implements OnInit {
  
 
   submitError: String = null;
-  isLoading = false;
+  isLoading$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private _router: Router,
@@ -50,13 +50,15 @@ export class AssignChallengeComponent implements OnInit {
   }
 
   onSubmit(){
-    this.isLoading = true;
+    this.isLoading$.next(true);
     if(this.categoryAndLevelForm.errors === null)
     {
       this._challengeService.getChallengesForCategoryAndLevel(this.selectedCategory.id, this.selectedLevel)
       .subscribe(
         response => {
+          this.isLoading$.next(false)
           if(response.status === 200){
+              this.errorMsg = "Gelukt!";
           }
           else{
             this.errorMsg = 'Er zijn geen uitdagingen gevonden voor deze combinatie'
