@@ -1,3 +1,4 @@
+[
     {
         "therapistId": 1,
         "firstName": "Ruben",
@@ -23,4 +24,31 @@
                 "experiencePoints": 26
             }
         ]
+    },
+    {
+        "therapistId": 1,
+        "firstName": "Test",
+        "lastName": "Therapist",
+        "email": "testth@student.hogent.be",
+        "phoneNumber": "0474139526",
+        "website" : "Haha.be",
+        "street": "League of legends",
+        "houseNumber": 1,
+        "postalCode": 9000,
+        "city": "Gent",
+        "therapistType": null,
+        "openingTimes": [],
+        "clients": [
+            {
+                "userId": 1,
+                "firstName": "Client2",
+                "familyName": "Ka",
+                "email": "em@ail.be",
+                "phone": "0478995888",
+                "contract": "2049-12-14T13:27:06.4111399",
+                "categories": [],
+                "experiencePoints": 26
+            }
+        ]
     }
+]

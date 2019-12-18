@@ -10,7 +10,7 @@ describe("Multimed therapist list", () => {
 
     //fil in the fields
     cy.get("[data-cy=TherapistUsername]").type("TestTherapist");
-    cy.get("[data-cy=TherapistFirstname]").type("Therapist");
+    cy.get("[data-cy=TherapistFirstname]").type("TherapistTestingtest");
     cy.get("[data-cy=TherapistLastname]").type("Test");
     cy.get("[data-cy=TherapistEmail]").type("TestTherapist@mail.com");
     cy.get("[data-cy=TherapistWebsite]").type("TestTherapist.com");
@@ -21,27 +21,29 @@ describe("Multimed therapist list", () => {
     //click register
     cy.get("[data-cy=TherapistRegister]").click();
 
-    //TODO SHOULD URL REDIRECT ?
-
-    //go to list Therapists
-    cy.visit("therapeut/lijst");
-
-    //check if Therapist is added
-    cy.get("[data-cy=TherapistRow]").contains("Therapist");
+    //TODO SHOULD URL REDIRECT automaticly? to check
+    cy.url().should("eq", "http://localhost:4200/therapeut/lijst");
   });
 
   //Filter on therapists
   it("Filter on Therapists", function() {
+    //get all therapist from mockdata
+    cy.server();
+    cy.route({
+      method: "GET",
+      url: "/api/therapist/",
+      status: 200,
+      response: "fixture:therapists.json"
+    });
+
     //go to therapist list page
     cy.visit("/therapeut/lijst");
-    
-    //get all therapist from mockdata
 
     //check if data is in the list
     cy.get("[data-cy=TherapistFirstnameRow]").should("have.length", 2);
 
     //type in the filter
-    cy.get("[data-cy=TherapistFilter]").type("Jos");
+    cy.get("[data-cy=TherapistFilter]").type("Ruben");
 
     //check if filter works
     cy.get("[data-cy=TherapistFirstnameRow]").should("have.length", 1);
@@ -49,17 +51,15 @@ describe("Multimed therapist list", () => {
 
   //get therapist details
   it("Therapist details", function() {
-    //go to therapist list page
-    cy.visit("/therapeut/lijst");
-
-    //TODO Mockdata doesn't work
+    //get mockdata from server
     cy.server();
     cy.route({
       method: "GET",
-      url: "/api/therapeut/1",
+      url: "/api/therapist/1",
       status: 200,
-      response: "fixtures:therapist.json"
+      response: "fixture:therapist.json"
     });
+
     //go to therapist
     cy.get("[data-cy=TherapistFirstnameRow]")
       .first()
@@ -71,6 +71,6 @@ describe("Multimed therapist list", () => {
     //check fields
     cy.get("[data-cy=TherapistFirstname]").contains("Ruben");
     cy.get("[data-cy=TherapistLastname]").contains("Grillaert");
-    cy.get("[data-cy=TherapistClients]").should("have.length", 2);
+    cy.get("[data-cy=TherapistClients]").should("have.length", 1);
   });
 });

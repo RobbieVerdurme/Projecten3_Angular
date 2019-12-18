@@ -15,14 +15,20 @@ describe("Add Challenge as Therapist", () => {
         //click on button the make the challenge
         cy.get("[data-cy=MakeChallenge]").click();
 
-        //go to the overview page
-
-        //check if the challenge is there
-        cy.get("[data-cy=TitleChallenge]").contains("TitleChallengeTest");
+        //TODO redirect url check?
     })
 
     //assign challenge to user
     it("Add challenge to user 1", function(){
+        //mock doesn't work
+        cy.server();
+        cy.route({
+            method: 'GET',
+            url: '/api/users/details/1',
+            status: 200,
+            response: 'fixture:user.json'
+        })
+
         //go to user details
         cy.visit("/gebruiker/1");
 
@@ -30,22 +36,4 @@ describe("Add Challenge as Therapist", () => {
         cy.get("[data-cy=AddChallenges]").click();
 
     });
-/*
-    it('create a new challenge', function(){
-        cy.server();
-        cy.route({
-            method: 'GET',
-            url: 'https://localhost:44384//api/category',
-            status: 200,
-            response: 'fixtures:category.json'
-        });
-        cy.get('[data-cy=add-challenge-button]').click();
-        cy.wait(10000);
-    });
-
-    
-    it('add challenge to client', function(){
-
-    })
-    */
 });
