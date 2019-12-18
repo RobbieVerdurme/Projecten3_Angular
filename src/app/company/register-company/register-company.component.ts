@@ -70,8 +70,8 @@ export class RegisterCompanyComponent implements OnInit {
     this.setCompanyValues();
     this._companyDataService.addNewCompany(this.company)
     .subscribe(
-      (val) => {
-        if(val){
+      response => {
+        if(response.status === 200){
           this.router.navigate([`/bedrijf/lijst`])
         }
         else{
@@ -138,7 +138,7 @@ export class RegisterCompanyComponent implements OnInit {
     this.company.postalCode = this.companyForm.value.postalCode; 
     this.company.country = this.companyForm.value.country;
     this.company.site = this.companyForm.value.site;
-    this.company.contract = this.companyForm.value.contract
+    this.company.contract = this.companyForm.value.contract;
   }
 
 }

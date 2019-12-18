@@ -39,7 +39,7 @@ export class CompanyDataService {
 
   //Add a company, id generated in backend
   addNewCompany(company: Company){
-    return this.http.post(`${environment.apiUrl}/Companies`, company.toJSON());
+    return this.http.post(`${environment.apiUrl}/Companies`, company.toJSON(),  {observe: 'response', headers: this.headers});
   }
   
   //modify a company

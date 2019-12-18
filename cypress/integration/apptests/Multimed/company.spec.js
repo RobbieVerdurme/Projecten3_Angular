@@ -86,7 +86,7 @@ describe("Multimed company list", () => {
       cy.get("[data-cy=CompanyPostalcode]").contains(
         "9000 GentForLife BelgieEEEEEEEEEEE"
       );
-      cy.get("[data-cy=CompanyContract]").contains("12/20/2070");
+      cy.get("[data-cy=CompanyContract]").contains("19-12-2070");
     });
 
   //Delete company
