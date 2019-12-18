@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { LoginUser } from 'src/app/user/loginuser';
 import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 
+
 @Component({
   selector: 'app-register-company',
   templateUrl: './register-company.component.html',
@@ -71,7 +72,7 @@ export class RegisterCompanyComponent implements OnInit {
     this._companyDataService.addNewCompany(this.company)
     .subscribe(val => bool = false) 
         if(bool){
-          this.router.navigate['']
+          this.router.navigate(['bedrijf/lijst'])
         }else{
           this.errorMsg = 'Fout bij het aanmaken van een Bedrijf!'
         }
@@ -87,41 +88,41 @@ export class RegisterCompanyComponent implements OnInit {
   editCompany(){
     this.setCompanyValues();
     this._companyDataService.editCompany(this.company)
-    .subscribe(
-      val => {
-        if(val){
-          this.router.navigate['']
-        }else{
-          this.errorMsg = `Fout bij het aanpassen van ${this.company.name}!`
-        }
-      },
-      (err: HttpErrorResponse) => {
-        if(err.error instanceof Error){
-          this.errorMsg = `Error bij het aanpassen van bedrijf ${this.company.name}`
-        }else{
-          this.errorMsg = `Error ${err.status} bij het aanpassen van bedrijf ${this.company.name}`
-        }
+    .subscribe( response =>{
+      if(response.status === 200){
+        this.router.navigate([`bedrijf/${this.company.id}`])
+      }else{
+        this.errorMsg = `Fout bij het aanpassen van ${this.company.name}!`
       }
-    )
+    },(err: HttpErrorResponse) => {
+      if(err.error instanceof Error){
+        this.errorMsg = `Error bij het aanpassen van bedrijf ${this.company.name}`
+      }else{
+        this.errorMsg = `Fout bij het aanpassen van bedrijf ${this.company.name}`
+      }
+    }
+)
+        
   }
 
   deleteCompany(){
     var bool = true;
     this._companyDataService.removeCompany(this.company.id)
     .subscribe(
-      val => bool = false)
-        if(bool){
-          this.router.navigate['/bedrijf/lijst']
+      response => {
+        if(response.status === 200){
+          this.router.navigate(['/bedrijf/lijst'])
         }else{
           this.errorMsg = `Fout bij het verwijderen van ${this.company.name}!`
         }
+      },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
           this.errorMsg = `Error bij het verwijderen van bedrijf ${this.company.name}`
         }else{
-          this.errorMsg = `Error ${err.status} bij het verwijderen van bedrijf ${this.company.name}`
+          this.errorMsg = `Fout bij het verwijderen van bedrijf ${this.company.name}`
         }
-      }
+      })    
   }
 
   // Set new values to company

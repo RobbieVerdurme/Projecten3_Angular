@@ -44,12 +44,12 @@ export class CompanyDataService {
   
   //modify a company
   editCompany(company: Company){
-    return this.http.put(`${environment.apiUrl}/Companies/edit`, company.toJSON());
+    return this.http.put(`${environment.apiUrl}/Companies/edit`, company.toJSON(), {observe: 'response', headers: this.headers});
   }
 
   //remove a company
   removeCompany(id){
-    return this.http.delete(`${environment.apiUrl}/Companies/${id}`);
+    return this.http.delete(`${environment.apiUrl}/Companies/${id}`, {observe: 'response', headers: this.headers});
   }
 
 }
