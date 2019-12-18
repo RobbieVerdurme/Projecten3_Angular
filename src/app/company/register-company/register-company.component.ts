@@ -67,14 +67,16 @@ export class RegisterCompanyComponent implements OnInit {
 
   addCompany(){
     this.setCompanyValues();
-    var bool = true;
     this._companyDataService.addNewCompany(this.company)
-    .subscribe(val => bool = false) 
-        if(bool){
-          this.router.navigate['']
-        }else{
+    .subscribe(
+      (val) => {
+        if(val){
+          this.router.navigate([`/bedrijf/lijst`])
+        }
+        else{
           this.errorMsg = 'Fout bij het aanmaken van een Bedrijf!'
         }
+      },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
           this.errorMsg = `Error bij het aanmaken van bedrijf ${this.companyForm.value.name}`
@@ -82,46 +84,49 @@ export class RegisterCompanyComponent implements OnInit {
           this.errorMsg = `Error ${err.status} bij het aanmaken van bedrijf ${this.companyForm.value.name}`
         }
       }
+      ) 
   }
 
   editCompany(){
     this.setCompanyValues();
     this._companyDataService.editCompany(this.company)
     .subscribe(
-      val => {
+      (val) => {
         if(val){
-          this.router.navigate['']
-        }else{
-          this.errorMsg = `Fout bij het aanpassen van ${this.company.name}!`
+          this.router.navigate([`/bedrijf/` + this.company.id])
+        }
+        else{
+          this.errorMsg = 'Fout bij het aanpassen van een Bedrijf!'
         }
       },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
-          this.errorMsg = `Error bij het aanpassen van bedrijf ${this.company.name}`
+          this.errorMsg = `Error bij het aanpassen van bedrijf ${this.companyForm.value.name}`
         }else{
-          this.errorMsg = `Error ${err.status} bij het aanpassen van bedrijf ${this.company.name}`
+          this.errorMsg = `Error ${err.status} bij het aanpassen van bedrijf ${this.companyForm.value.name}`
         }
       }
     )
   }
 
   deleteCompany(){
-    var bool = true;
     this._companyDataService.removeCompany(this.company.id)
     .subscribe(
-      val => bool = false)
-        if(bool){
-          this.router.navigate['/bedrijf/lijst']
-        }else{
-          this.errorMsg = `Fout bij het verwijderen van ${this.company.name}!`
+      (val) => {
+        if(val){
+          this.router.navigate([`/bedrijf/lijst`])
         }
+        else{
+          this.errorMsg = 'Fout bij het verwijderen van een Bedrijf!'
+        }
+      },
       (err: HttpErrorResponse) => {
         if(err.error instanceof Error){
-          this.errorMsg = `Error bij het verwijderen van bedrijf ${this.company.name}`
+          this.errorMsg = `Error bij het verwijderen van bedrijf ${this.companyForm.value.name}`
         }else{
-          this.errorMsg = `Error ${err.status} bij het verwijderen van bedrijf ${this.company.name}`
+          this.errorMsg = `Error ${err.status} bij het verwijderen van bedrijf ${this.companyForm.value.name}`
         }
-      }
+      })
   }
 
   // Set new values to company

@@ -16,7 +16,7 @@ describe("Multimed company list", () => {
     cy.get("[data-cy=CompanySite]").type("TestCompany.be");
     cy.get("[data-cy=CompanyContract]").type("12/16/2069");
     cy.get("[data-cy=CompanyPhone]").type("049587765");
-    cy.get("[data-cy=CompanyEmail]").type("TestCompany@mail.com");
+    cy.get("[data-cy=CompanyEmail]").type("TestCompanyTest@mail.com");
     cy.get("[data-cy=CompanyStreet]").type("TestCompanyStreet");
     cy.get("[data-cy=CompanyHouseNumber]").type("5");
     cy.get("[data-cy=CompanyPlace]").type("Gent");
@@ -47,7 +47,7 @@ describe("Multimed company list", () => {
       //click on edit
       cy.get("[data-cy=DetailEditCompany]").click();
 
-      cy.wait(5000)
+      cy.wait(2000)
   
       //clear the fields
       cy.get("[data-cy=CompanyName]").clear();
@@ -76,6 +76,8 @@ describe("Multimed company list", () => {
       //click on edit
       cy.get("[data-cy=EditCompany]").click();
   
+      cy.wait(2000)
+
       //check fields
       cy.get("[data-cy=CompanyName]").contains("Multimed1");
       cy.get("[data-cy=CompanyPhone]").contains("0478995886");
