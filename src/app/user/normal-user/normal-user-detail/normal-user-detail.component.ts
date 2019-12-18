@@ -34,4 +34,8 @@ export class NormalUserDetailComponent implements OnInit {
   async LoadUser(){
     this.route.data.subscribe(item => this.user = item['user'])
   }
+
+  editUser(id: number): void{
+    this.router.navigate([`/gebruiker/edit/${id}`])
+  }
 }

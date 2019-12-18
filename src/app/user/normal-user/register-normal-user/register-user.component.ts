@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NormalUserDataService } from '../normal-user-data.service';
+import { NormalUser } from '../NormalUser';
 
 @Component({
   selector: 'app-register-user',
@@ -12,56 +13,106 @@ import { NormalUserDataService } from '../normal-user-data.service';
 })
 export class RegisterUserComponent implements OnInit {
   //var
-  public user: FormGroup;
+  public userForm: FormGroup;
   public errorMsg: string;
+  public isEdit: boolean = true;
+  public user:NormalUser;
   
   //const
   constructor(
     private auth: AuthenticationService,
     private router: Router,
     private fb: FormBuilder,
-    private normalUserService: NormalUserDataService
+    private normalUserService: NormalUserDataService,
+    private route: ActivatedRoute
   ) { }
 
   //meth
   ngOnInit() {
-    this.user = this.fb.group({
-      photo: [''],
+    this.route.data.subscribe(item => this.user = item['user'])
+
+    if(this.user === undefined){
+      this.isEdit = false
+      this.user = new NormalUser(0, "", "", "", "", new Date())
+    }
+    // remove create of company and add error, company should never be null if it has a detail page
+    if(this.user === null || this.user === undefined){
+      this.user = new NormalUser(0, "", "", "", "", new Date())
+    }
+
+    this.userForm = this.fb.group({
       username : [''],
-      firstname: [''],
-      lastname: [''],
-      email:[''],
-      telephone: [''],
+      firstname: [this.user.firstname, Validators.required],
+      lastname: [this.user.lastname, Validators.required],
+      email:[this.user.email, Validators.required],
+      telephone: [this.user.telephone, Validators.required],
       category: ['']
     });
   }
 
-  onSubmit(){
+  addUser(){
     this.normalUserService
     .addNewUser(
-      this.user.value.username,
-      this.user.value.firstname,
-      this.user.value.lastname,
-      this.user.value.email,
-      this.user.value.telephone,
-      this.user.value.category
+      this.userForm.value.firstname,
+      this.userForm.value.lastname,
+      this.userForm.value.email,
+      this.userForm.value.telephone,
+      this.userForm.value.category
       )
       .subscribe(
         response => {
           if (response.status === 200){
-            this.router.navigate([`gebruiker/lijst`])
+            this.normalUserService.addNewLoginUser(
+              this.userForm.value.username,
+              this.userForm.value.email
+            ).subscribe(
+              response => {
+                if(response.status === 200){
+                  this.router.navigate([`gebruiker/lijst`])
+                }
+                else{
+                  this.errorMsg = 'Fout bij het aanmaken van een de gebruiker!'
+                }
+              },
+              (err: HttpErrorResponse) => {
+                if(err.error instanceof Error){
+                  this.errorMsg = `Error bij het aanmaken van de gebruiker`
+                }else{
+                  this.errorMsg = `Error ${err.status} bij het aanmaken van de gebruiker`
+                }
+              }
+            )
           }else{
             this.errorMsg = "Error bij registreren"
           }
         },
         (err: HttpErrorResponse) => {
           if(err.error instanceof Error){
-            this.errorMsg = `Error bij het registreren van gebruiker ${this.user.value.firstname}`
+            this.errorMsg = `Error bij het registreren van gebruiker ${this.userForm.value.firstname}`
           } else{
-            this.errorMsg = `Error ${err.status} bij het registreren van gebruiker ${this.user.value.firstname}`
+            this.errorMsg = `Error ${err.status} bij het registreren van gebruiker ${this.userForm.value.firstname}`
           }
         }
       )
+  }
+
+  deleteUser(){
+    this.normalUserService.removeUser(this.user.id)
+    .subscribe(
+      response => {
+        if(response.status === 200){
+          this.router.navigate(['/gebruiker/lijst'])
+        }else{
+          this.errorMsg = `Fout bij het verwijderen van ${this.user.firstname}!`
+        }
+      },
+      (err: HttpErrorResponse) => {
+        if(err.error instanceof Error){
+          this.errorMsg = `Error bij het verwijderen van de gebruiker`
+        }else{
+          this.errorMsg = `Fout bij het verwijderen van de gebruiker`
+        }
+      })    
   }
 
 }
