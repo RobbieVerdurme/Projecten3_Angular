@@ -7,8 +7,9 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { CategoryService } from '../category.service';
 import { ChallengeService } from '../challenge.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, pipe } from 'rxjs';
 import { Challenge } from '../Challenge';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -22,25 +23,25 @@ export class AddChallengeComponent implements OnInit {
   dataSource: MatTableDataSource<Category>;
   private categories$: Observable<Category[]> = this.categoryService.categories$;
   private errorMessage$: Observable<string> = this.categoryService.loadingError$;
-  private displayedColumns: string[] = ['name'];
 
   selectedCategory: Category = null;
   selectedCategoryId: number = 0;
 
   isLoading: boolean = false;
-  submitError: string = null;
+  public submitError$ = new Subject<string>();
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private categoryService: CategoryService,
     private challengeService: ChallengeService,
-    private messageService: MessageService
+    private _messageService: MessageService
     ) {}
 
   ngOnInit() {
     this.challengeForm = this.fb.group({
       title: ['', [Validators.required]],
+      category: ['', [Validators.required]],
       description: ['', [Validators.required]],
       image: [''],
       level: ['', [Validators.required]]
@@ -52,30 +53,31 @@ export class AddChallengeComponent implements OnInit {
       {
         this.challengeService.addChallenge(this.challenge).subscribe(response => {
           if(response.status === 200){
-            this.submitError = null;
-            this.messageService.setMessage(`Uitdaging '${this.TitleField.value}' toegevoegd`);
-          }else{
-            this.submitError = "Kon de Uitdaging niet opslaan";
+            this.submitError$ = new Subject<string>();
+            this._messageService.setMessage(`Uitdaging '${this.TitleField.value}' toegevoegd`);
+            this.router.navigateByUrl('challenge/add');  
+          }
+          else if(response.status === 404)
+          {
+              this.submitError$.next("Deze categorie bestaat niet. Gelieve een andere categorie te kiezen.");
+          }
+          else if(response.status === 303)
+          { 
+            this.submitError$.next("Deze uitdaging bestaat al!");
+          }
+          else{
+            this.submitError$.next("Er liep iets fout! De uitdaging is niet toegevoegd.");
           }
         },(error)=>{
           console.log(error);
-          this.submitError = "Kon de Uitdaging niet opslaan";
+          this.submitError$.next("Kon de Uitdaging niet opslaan"); 
         });
 
       }
       else
       {
-        this.messageService.setMessage("Gelieve alle benodigde info op te geven!");
+        this._messageService.setMessage("Gelieve alle benodigde info op te geven!");
       }
-  }
-
-  selectCategory(category: Category) {
-    this.selectedCategory = category;
-    this.selectedCategoryId = category.id;
-  }
-
-  isSelected(element: Category): boolean {
-    return element.id === this.selectedCategoryId;
   }
 
   get TitleField() : FormControl

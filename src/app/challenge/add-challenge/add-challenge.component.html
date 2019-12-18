@@ -30,6 +30,27 @@
                         <input type="text" matInput placeholder="Link" formControlName="image"/>
                     </mat-form-field>
                 </div>
+            </div>
+            <div class="form-part">
+                <div class="form-field" id="category">
+                    Categorie : 
+                    <div *ngIf="isLoading">
+                        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                        <div>Categoriën aan het laden</div>
+                    </div>
+                    <div *ngIf="!isLoading" >
+                        <mat-form-field>
+                            <mat-label>
+                                Selecteer een categorie:
+                            </mat-label>
+                            <mat-select formControlName="category" [(value)]="selectedCategory" required>
+                                <mat-option *ngFor="let category of (categories$ | async)" [value]="category">
+                                    {{category.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>                       
+                    </div>                
+                </div>
                 <div class="form-field">
                     Niveau :
                     <mat-form-field>
@@ -37,38 +58,6 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="form-part">
-                <div class="form-field">
-                    Categorie : 
-                    <div *ngIf="isLoading">
-                        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-                        <div>Categoriën aan het laden</div>
-                    </div>
-                    <div *ngIf="!isLoading" >
-                        <div *ngIf="selectedCategoryId === -1">
-                            Gelieve een categorie te selecteren
-                        </div>
-                        <table mat-table [dataSource]="(categories$ | async)">
-                            <ng-container matColumnDef="name">
-                                <th mat-header-cell *matHeaderCellDef>Selecteer een Categorie</th>
-                                <td mat-cell *matCellDef="let element"> 
-                                <div class="button">
-                                    <button 
-                                        (click)="selectCategory(element)" 
-                                        class="categoryItem" 
-                                        mat-button>
-                                        {{element.name}}
-                                    </button>
-                                </div>
-                                </td>
-                            </ng-container>
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                        </table>
-                </div>
-                
-            </div>
-        </div>
             <br>
             <div *ngIf="submitError !== null">
                 {{submitError}}

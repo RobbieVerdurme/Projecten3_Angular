@@ -6,6 +6,7 @@ import {MatCardModule, MatInputModule, MatButtonModule, MatSortModule, MatPagina
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTableModule} from '@angular/material/table';
 import { NormalUserListComponent } from '../user/normal-user/normal-user-list/normal-user-list.component';
+import {MatSelectModule} from '@angular/material/select';
 import { ChallengeListComponent } from '../challenge/challenge-list/challenge-list.component';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ChallengeListComponent } from '../challenge/challenge-list/challenge-li
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   exports: [
     MatCardModule,
@@ -43,7 +45,8 @@ import { ChallengeListComponent } from '../challenge/challenge-list/challenge-li
     MatListModule,
     NormalUserListComponent,
     ChallengeListComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }
