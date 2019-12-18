@@ -7,9 +7,9 @@
         <table mat-table [dataSource]="(normalUsers$ | async)" matSort >
       
           <!-- Position Column -->
-          <tr matColumnDef="firstname" data-cy="normalUserRow">
+          <tr matColumnDef="firstname">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
-            <td mat-cell *matCellDef="let element" (click)="navigateToDetailPage(element)">
+            <td mat-cell *matCellDef="let element" (click)="navigateToDetailPage(element)" data-cy="normalUserRow">
               <span class="mobile-label">Voornaam:</span>
               {{element.firstname}} 
             </td>

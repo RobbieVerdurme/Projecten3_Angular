@@ -16,21 +16,21 @@
                         Gebruikersnaam:
                         <mat-form-field>
                             <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
-                                required />
+                                required data-cy="UserUsername"/>
                         </mat-form-field>
                     </div>
                     <div class="form-field">    
                         Voornaam : 
                         <mat-form-field>
                             <input type="text" matInput placeholder="Voornaam" formControlName="firstname"
-                                required />
+                                required data-cy="UserFirstname" />
                         </mat-form-field>
                     </div>
                     <div class="form-field">
                         Achternaam :
                         <mat-form-field>
                             <input type="text" matInput placeholder="Achternaam" formControlName="lastname"
-                                required />
+                                required data-cy="UserLastname"/>
                         </mat-form-field>
                     </div>
                 </div>
@@ -41,14 +41,14 @@
                     <div class="form-field">
                         E-mail :
                         <mat-form-field>
-                            <input type="text" matInput placeholder="email" formControlName="email" required />
+                            <input type="text" matInput placeholder="email" formControlName="email" required data-cy="UserEmail"/>
                         </mat-form-field>
                     </div>
                     <div class="form-field">
                         Telefoon :
                         <mat-form-field>
                             <input type="text" matInput placeholder="Telefoon" formControlName="telephone"
-                                required />
+                                required data-cy="UserPhone"/>
                         </mat-form-field>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         Categorie :
                         <mat-form-field>
                             <input type="text" matInput placeholder="Categorie" formControlName="category"
-                                required />
+                                required data-cy="UserCategory" />
                         </mat-form-field>
                         <button mat-button>
                             <mat-icon>add_circle</mat-icon>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="button">
-                    <button type="submit" mat-button>Registreer</button>
+                    <button type="submit" mat-button data-cy="UserRegister">Registreer</button>
                 </div>
             </form>
         </mat-card-content>

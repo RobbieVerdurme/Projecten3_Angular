@@ -21,7 +21,7 @@
                             <div class="label">
                                 Voornaam: 
                             </div>  
-                            <div class="value">
+                            <div class="value" data-cy="userUsername">
                                 {{user.firstname}}
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         <app-challenge-list [challenges]="user.challenges" data-cy="userChallenges"></app-challenge-list>
                     </div>
                     <div class="challenge-part">
-                        <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button>
+                        <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button data-cy="AddChallenges">
                             Voeg uitdagingen toe
                         </button>
                     </div>
