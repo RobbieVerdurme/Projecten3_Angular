@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { CategoryService } from '../category.service';
 import { ChallengeService } from '../challenge.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-add-challenge',
@@ -17,7 +19,9 @@ export class AddChallengeComponent implements OnInit {
 
   public inputForm: FormGroup;
   dataSource: MatTableDataSource<Category>;
-  displayedColumns: string[] = ['name'];
+  private categories$: Observable<Category[]> = this.categoryService.categories$;
+  private errorMessage$: Observable<string> = this.categoryService.loadingError$;
+  private displayedColumns: string[] = ['name'];
 
   selectedCategory: Category = null;
   selectedCategoryId: number = 0;
@@ -25,27 +29,18 @@ export class AddChallengeComponent implements OnInit {
   isLoading: boolean = false;
   submitError: string = null;
 
-  constructor(private router: Router,private fb: FormBuilder,private categoryService: CategoryService,private challengeService: ChallengeService,private messageService: MessageService) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private categoryService: CategoryService,
+    private challengeService: ChallengeService,
+    private messageService: MessageService
+    ) {}
 
   ngOnInit() {
     this.inputForm = this.fb.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]]
-    });
-    this.isLoading = true;
-    this.categoryService.getCategories().subscribe(response => {
-      if(response.status === 200){
-        this.dataSource = new MatTableDataSource(response.body);
-        this.submitError = null;
-        this.isLoading = false;
-      }else{
-        this.submitError = "Kon de Catergorieën niet ophalen";
-        this.isLoading = false;
-      }
-    },(error)=>{
-      console.log(error);
-      this.submitError = "Kon de Catergorieën niet ophalen";
-      this.isLoading = false;
     });
   }
 
@@ -83,5 +78,4 @@ export class AddChallengeComponent implements OnInit {
   {
     return <FormControl> this.inputForm.get("description");
   }
-
 }

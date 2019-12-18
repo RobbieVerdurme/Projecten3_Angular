@@ -36,12 +36,17 @@
                         <div *ngIf="selectedCategoryId === -1">
                             Gelieve een categorie te selecteren
                         </div>
-                        <table mat-table [dataSource]="dataSource">
+                        <table mat-table [dataSource]="(categories$ | async)">
                             <ng-container matColumnDef="name">
                                 <th mat-header-cell *matHeaderCellDef>Selecteer een Categorie</th>
                                 <td mat-cell *matCellDef="let element"> 
                                 <div class="button">
-                                    <button (click)="selectCategory(element)" [ngStyle]="isSelected(element) ? {'background-color' : '#7cb342', 'font-color': '#ffffff' } : {'background-color' : '#ffffff' , 'font-color' : '#000000' }" class="categoryItem" mat-button>{{element.name}}</button>
+                                    <button 
+                                        (click)="selectCategory(element)" 
+                                        class="categoryItem" 
+                                        mat-button>
+                                        {{element.name}}
+                                    </button>
                                 </div>
                                 </td>
                             </ng-container>

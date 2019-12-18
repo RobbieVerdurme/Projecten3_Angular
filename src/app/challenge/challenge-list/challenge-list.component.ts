@@ -49,9 +49,8 @@ export class ChallengeListComponent implements OnInit {
     }
 
     loadData(){
-      this.dataSource = new MatTableDataSource();
-
       this.challenges$ = this.challengeDataService.getChallengesForUser$(this.user.id)
+      this.dataSource = new MatTableDataSource();
     }
 
 }

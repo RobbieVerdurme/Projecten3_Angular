@@ -6,10 +6,6 @@ import { Router } from '@angular/router';
 import { CompanyDataService } from '../company-data.service';
 import { Observable } from 'rxjs';
 
-//MockData to fill company list
-const COMPANY_DATA: Company[] = [
-  new Company(0,  'HoGent',  '093697896',  'comp@ny.com',  'companystraat',  '1',  'Gent',  '9000',  'België',  'www.google.com', new Date())
-]
 
 @Component({
   selector: 'app-company-list',
