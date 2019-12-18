@@ -11,6 +11,9 @@
         </div>
     </mat-card-title>
     <mat-card-content>
+        <p *ngIf="errorMsg" class="error">
+            {{errorMsg}}
+        </p>
         <form [formGroup]="categoryAndLevelForm" (ngSubmit)="onSubmit()">
             <div>
                 <mat-form-field>

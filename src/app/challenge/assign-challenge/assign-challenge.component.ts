@@ -22,6 +22,7 @@ export class AssignChallengeComponent implements OnInit {
   public categoryAndLevelForm: FormGroup;
   private categories$: Observable<Category[]> = this.categoryService.categories$;
   private challenges$: Observable<Challenge[]>;
+  public errorMsg: string;
 
   selectedCategory: Category = null;
   selectedLevel: number= 0;
@@ -53,19 +54,22 @@ export class AssignChallengeComponent implements OnInit {
     if(this.categoryAndLevelForm.errors === null)
     {
       this._challengeService.getChallengesForCategoryAndLevel(this.selectedCategory.id, this.selectedLevel)
-      .subscribe(response =>{
-        this.isLoading = false;
-        if(response.status === 200)
-        {
+      .subscribe(
+        response => {
+          if(response.status === 200){
+          }
+          else{
+            this.errorMsg = 'Er zijn geen uitdagingen gevonden voor deze combinatie'
+          }
+        },
+        (err: HttpErrorResponse) => {
+          if(err.error instanceof Error){
+            this.errorMsg = `Er zijn geen uitdagingen gevonden voor deze combinatie`
+          }else{
+            this.errorMsg = `Er zijn geen uitdagingen gevonden voor deze combinatie`
+          }
         }
-        else if(response.status === 400)
-        {
-          this.submitError = "Er zijn geen challenges gevonden voor deze combinatie!";
-        }
-        else{
-          this.submitError = "Er is iets misgelopen! Probeer later opnieuw.";
-        }
-      });
+        ) 
       //   if(response.status === 200)
       //   {
       //     this.isLoading = false;
