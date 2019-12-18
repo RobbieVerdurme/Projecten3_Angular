@@ -6,10 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddChallengeComponent } from './add-challenge/add-challenge.component';
 import { AssignChallengeComponent } from './assign-challenge/assign-challenge.component';
 import { RouterModule, Routes } from '@angular/router';
+import { NormalUserResolver } from '../user/normal-user/normal-user-resolver';
 
 const routes : Routes = [
   {path: 'add', component: AddChallengeComponent},
-  {path: 'assign', component: AssignChallengeComponent},
+  {path: 'assign/:id', component: AssignChallengeComponent, resolve: {user: NormalUserResolver}},
   {path: '', pathMatch: 'full', redirectTo: '/welkom'}
 ];
 

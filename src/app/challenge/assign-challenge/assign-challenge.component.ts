@@ -1,13 +1,16 @@
 import { MessageService } from './../../message.service';
 import { ChallengeService } from './../challenge.service';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { SelectUserService } from './../select-user.service';
 import { Component, OnInit } from '@angular/core';
 import { Challenge } from '../Challenge';
 import { Category } from '../Category';
 import { NormalUser } from 'src/app/user/normal-user/NormalUser';
-import { MatListOption } from '@angular/material';
-import { Router } from '@angular/router';
+import { CategoryService } from '../category.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NumberValueAccessor, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable, pipe } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-assign-challenge',
@@ -16,74 +19,69 @@ import { Router } from '@angular/router';
 })
 export class AssignChallengeComponent implements OnInit {
 
-  challenges: Challenge[] = [];
+  public categoryAndLevelForm: FormGroup;
+  private categories$: Observable<Category[]> = this.categoryService.categories$;
+  private challenges$: Observable<Challenge[]>;
 
-  challengesToAdd: Challenge[] = [];
-  pageSize = 10;
-  challengesOnCurrentPage: Challenge[] = [];
+  selectedCategory: Category = null;
+  selectedLevel: number= 0;
 
   user: NormalUser
+ 
 
   submitError: String = null;
   isLoading = false;
 
-  constructor(private router: Router,private selectUserService: SelectUserService,private challengeService: ChallengeService,private messageService: MessageService) { }
+  constructor(
+    private _router: Router,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private _challengeService: ChallengeService,
+    private categoryService: CategoryService,
+    private _messageService: MessageService) { }
 
   ngOnInit() {
-    this.user = this.selectUserService.getSubject().value;
-    this.isLoading = true;
-    this.challengeService.getChallengesForUserPerCategory(this.user.id).subscribe((response)=>{
-      if(response.status === 200){
-        this.challenges = response.body
-        this.submitError = null;
-        this.isLoading = false;
-        this.challengesOnCurrentPage = this.challenges.slice(0,this.pageSize);
-      }else{
-        this.submitError = "Kon de beschikbare uitdagingen niet ophalen";
-        this.challenges = null;
-        this.challengesOnCurrentPage = [];
-        this.isLoading = false;
-      }
-    },(error)=>{
-      this.submitError = "Kon de beschikbare uitdagingen niet ophalen";
-      this.challengesOnCurrentPage = [];
-      this.challenges = null;
-      this.isLoading = false;
-      console.log(error);
-    });
-  }
-
-  onPageChange(e){
-    this.challengesOnCurrentPage = this.challenges.slice(e.pageIndex * e.pageSize,(e.pageIndex + 1) * e.pageSize);
-  }
-
-  onSelectionChange(e,v){
-    this.challengesToAdd = v.map(element => element.value);
+    this.route.data.subscribe(item => this.user = item['user']);
+    this.categoryAndLevelForm = this.fb.group({
+      category: ['', [Validators.required]],
+      level: ['', [Validators.required]]
+    })
   }
 
   onSubmit(){
-    this.submitError = null;
-    //Trigger empty selection warning
-    if(this.challengesToAdd === null){
-      this.challengesToAdd = [];
-    }else if(this.challengesToAdd.length === 0){
-      return;
-    }
-    else{
-      this.challengeService.assignChallenges(this.user.id,this.challengesToAdd.map(challenge => challenge.id)).subscribe((response)=> {
-        if(response.status === 200){
-          this.submitError = null;
-          //post message and return to detail screen
-          this.messageService.setMessage(`Uitdagingen toegewezen aan gebruiker`);
-          this.router.navigate(["/gebruiker/id"]);
-        }else{
-          this.submitError = "Kon de uitdagingen niet toewijzen aan de gebruiker";
+    this.isLoading = true;
+    if(this.categoryAndLevelForm.errors === null)
+    {
+      this._challengeService.getChallengesForCategoryAndLevel(this.selectedCategory.id, this.selectedLevel)
+      .subscribe(response =>{
+        this.isLoading = false;
+        if(response.status === 200)
+        {
         }
-      },(error)=>{
-        console.log(error);
-        this.submitError = "Kon de uitdagingen niet toewijzen aan de gebruiker";
+        else if(response.status === 400)
+        {
+          this.submitError = "Er zijn geen challenges gevonden voor deze combinatie!";
+        }
+        else{
+          this.submitError = "Er is iets misgelopen! Probeer later opnieuw.";
+        }
       });
+      //   if(response.status === 200)
+      //   {
+      //     this.isLoading = false;
+      //     this._router.navigateByUrl(`user/detail/${this.user.id}`);
+      //   }
+      //   else if(response.status === 400)
+      //   {
+      //     this.isLoading = false;
+      //     this.submitError = "Er zijn geen uitdagingen voor deze categorie en niveau! Probeer een andere combinatie.";
+      //   }
+      //   else
+      //   {
+      //     this.isLoading = false;
+      //     this.submitError = "Er ging iets mis! Probeer later opnieuw.";
+      //   }
+      // })
     }
   }
-
 }

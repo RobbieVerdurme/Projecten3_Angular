@@ -24,7 +24,7 @@ export class NormalUserDetailComponent implements OnInit {
   }
 
   navigateToAssignChallenges(){
-    this.router.navigate(["/challenge/assign"]);
+    this.router.navigate([`/challenge/assign/${this.user.id}`]);
   }
 
   dismissMessage(){

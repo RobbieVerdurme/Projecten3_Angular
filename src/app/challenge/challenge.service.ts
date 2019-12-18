@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 })
 export class ChallengeService {
   public loadingError$ = new Subject<string>();
-
   constructor(private httpClient: HttpClient) { }
 
   addChallenge(challenge: Challenge){
@@ -43,5 +42,12 @@ export class ChallengeService {
           (challenge: any): Challenge => Challenge.fromJSON(challenge))
       )
     );
+  }
+
+  getChallengesForCategoryAndLevel(categoryId: number, level: number)
+  {
+    let headers = new HttpHeaders();
+    return this.httpClient
+    .get<Challenge[]>(`${environment.apiUrl}/challenge/category?categoryId=${categoryId}&level=${level}`, {observe: 'response',headers: headers});
   }
 }
