@@ -13,7 +13,7 @@ import { NormalUser } from 'src/app/user/normal-user/NormalUser';
   styleUrls: ['./challenge-list.component.css']
 })
 export class ChallengeListComponent implements OnInit {
-  @Input() user: NormalUser;
+  @Input() challenges: Challenge[];
 
   displayedColumns: string[] = ['description']
   dataSource: MatTableDataSource<Challenge>;
@@ -21,25 +21,25 @@ export class ChallengeListComponent implements OnInit {
   public errorMsg: string;
 
   public challenges$: Observable<Challenge[]>;
-  public challenges: Challenge[];
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   
     constructor(
       private breakpointObserver: BreakpointObserver,
-      private challengeDataService: ChallengeService
-      ) 
-      { }
+      private challengeDataService: ChallengeService) { 
+    }
   
     ngOnInit() {
-      this.loadData();
+      this.dataSource = new MatTableDataSource(this.challenges); 
       this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
-          this.displayedColumns = result.matches ? 
+        this.displayedColumns = result.matches ? 
           ['description'] : 
           ['description'];
       });
-      
+
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
 
     applyFilter(filterValue: string) {
@@ -49,26 +49,4 @@ export class ChallengeListComponent implements OnInit {
         this.dataSource.paginator.firstPage();
       }
     }
-
-    loadData(){
-      this.dataSource = new MatTableDataSource();
-      this.challengeDataService.getChallengesForUser(this.user.id).subscribe(
-        response =>
-        {
-          if(response.status === 200)
-          {
-            this.challenges = (response.body.map(c => Challenge.fromJSONChallengeUser(c)));
-            console.log("suck my dick");
-          }
-          else
-      {
-            this.errorMsg = "De challenges van de gebruiker konden niet opgehaald worden.";
-          }
-        }
-      );
-      
-          this.dataSource = new MatTableDataSource();
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        } 
   }

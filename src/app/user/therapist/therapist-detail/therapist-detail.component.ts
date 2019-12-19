@@ -10,7 +10,7 @@ import { Therapist } from '../Therapist';
 })
 export class TherapistDetailComponent implements OnInit {
 
-  private therapist: Therapist;
+  public therapist: Therapist;
 
   constructor(
     private route: ActivatedRoute, 

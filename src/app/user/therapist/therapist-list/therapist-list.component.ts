@@ -16,7 +16,7 @@ export class TherapistListComponent implements OnInit {
   //var
   displayedColumns: string[] = ['firstname', 'familyname', 'email', 'telephone', 'function'];
   dataSource: MatTableDataSource<Therapist>;
-  private therapists$ = this.therapistDataService.therapists$
+  public therapists$ = this.therapistDataService.therapists$
 
   
 
@@ -36,6 +36,11 @@ export class TherapistListComponent implements OnInit {
   ngOnInit(){
     this.dataSource = new MatTableDataSource(); 
 
+    this.therapists$.subscribe(x => {
+      this.dataSource = new MatTableDataSource(x);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
 
     this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
@@ -44,8 +49,7 @@ export class TherapistListComponent implements OnInit {
 
       });
     
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
   }
 
   applyFilter(filterValue: string) {

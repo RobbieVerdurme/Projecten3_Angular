@@ -21,7 +21,7 @@
                                 <div class="label">
                                     Voornaam:
                                 </div>
-                                <div class="value">
+                                <div class="value" data-cy="TherapistFirstname">
                                     {{therapist.firstname}}
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                                     <div class="label">
                                         Familienaam:
                                     </div>
-                                    <div class="value">
+                                    <div class="value" data-cy="TherapistLastname">
                                         {{therapist.lastname}}
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                     </div>
                     <div class='title-fill'></div>
                     <div class="detail-content" >
-                        <app-normal-user-list [normalUsers]="therapist.clients" id="client-list"></app-normal-user-list>
+                        <app-normal-user-list [normalUsers]="therapist.clients" id="client-list" data-cy="TherapistClients"></app-normal-user-list>
                     </div>
                 </div>
             </div>

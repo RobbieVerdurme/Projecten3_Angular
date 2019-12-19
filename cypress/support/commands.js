@@ -23,3 +23,25 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+//addLoginCommand
+Cypress.Commands.add('login', () => {
+    const username = 'SofieV';
+  
+    cy.request({
+      method: 'POST',
+      url: '/api/account',
+      body: {username:username, password: 'P@ssword123' }
+    }).then(res => localStorage.setItem('currentUser', res.body));
+  });
+
+  //add login for therapist
+  Cypress.Commands.add('loginTherapist', () => {
+    const username = 'TestTh';
+  
+    cy.request({
+      method: 'POST',
+      url: '/api/account',
+      body: {username:username, password: 'P@ssword123' }
+    }).then(res => localStorage.setItem('currentUser', res.body));
+  });

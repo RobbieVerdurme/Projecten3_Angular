@@ -13,7 +13,6 @@ import { Therapist } from '../../therapist/Therapist';
 import { TherapistDataService } from '../../therapist/therapist-data.service';
 import { Observable, Subject, of } from 'rxjs';
 import { NormalUserDataService } from '../normal-user-data.service';
-import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-normal-user-list',
@@ -47,40 +46,11 @@ export class NormalUserListComponent implements OnInit {
   //methods
   ngOnInit() {
     this.loadData()
-
-
-    this.filterNormalUsers$
-    .pipe(
-      distinctUntilChanged(),
-      map(val => val.toLowerCase())
-    )
-    .subscribe(
-      val => {
-        const params = val ? { queryParams: { filter: val } } : undefined;
-        if(this.normalUsers == null){
-          this.router.navigate(['/gebruiker/lijst'], params);
-        } 
-      }
-    );
-
-    this.route.queryParams.subscribe(params => {
-      if (params['filter']) {
-        this.filterNormalUser = params['filter'];
-      }
-      else {
-        this.filterNormalUser = '';
-      }
-    });
-
-
     this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
         ['firstname', 'lastname'] : 
         ['firstname', 'lastname', 'email', 'challenges'];
     });
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
@@ -101,16 +71,23 @@ export class NormalUserListComponent implements OnInit {
     if(this.aut.isMultimed()){
       //Get all normal users  
       if(this.normalUsers == null){
-        this.normalUsers$ = this.normalUserDataService.normalUsers$
+        this.normalUserDataService.normalUsers$.subscribe(
+          x=> {
+            this.fillDataSource(x)
+          }
+        )
       }
       //Get users of given company
       else{
-        this.normalUsers$ = of(this.normalUsers);
+        this.fillDataSource(this.normalUsers)
       }
     }
     else{
       //Get therapist and display his clients
-      this.normalUsers$ = this.therapistDataService.getTherapistClients$(1);
+      var therapist = <Therapist>this.aut.user$.value
+      this.therapistDataService.getTherapistClients$(therapist.id).subscribe(
+        x=> this.fillDataSource(x)
+      );
 
       //this.normalUsers$ = this.therapistDataService.getTherapistClients$(1);
       //This is used to get therapist clients from backend
@@ -120,6 +97,14 @@ export class NormalUserListComponent implements OnInit {
       this.dataSource = new MatTableDataSource(therapist.clients)
       */
     }
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  fillDataSource(users: Array<NormalUser>){
+    this.dataSource = new MatTableDataSource(users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 }

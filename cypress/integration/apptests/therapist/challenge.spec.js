@@ -1,26 +1,39 @@
-describe('therapist challenges tests', function(){
-    beforeEach(function(){
-        cy.visit('/login');
-        cy.get('[data-cy=username]').type('TestTh');
-        cy.get('[data-cy=password]').type('P@ssword123');
-        cy.get('[data-cy=login-button]').click();
+describe("Add Challenge as Therapist", () => {
+    beforeEach(function() {
+      cy.loginTherapist();
     });
-    /*
-    it('create a new challenge', function(){
+
+    //add challenge
+    it("Add new challenge", function(){
+        //go to add challenge
+        cy.visit("/challenge/add");
+
+        //fill in the required items
+        cy.get("[data-cy=TitleChallenge]").type("TitleChallengeTest");
+        cy.get("[data-cy=DescriptionChallenge]").type("DescriptionChallengeTest");
+
+        //click on button the make the challenge
+        cy.get("[data-cy=MakeChallenge]").click();
+
+        //TODO redirect url check?
+    })
+
+    //assign challenge to user
+    it("Add challenge to user 1", function(){
+        //mock doesn't work
         cy.server();
         cy.route({
             method: 'GET',
-            url: 'https://localhost:44384//api/category',
+            url: '/api/users/details/1',
             status: 200,
-            response: 'fixtures:category.json'
-        });
-        cy.get('[data-cy=add-challenge-button]').click();
-        cy.wait(10000);
+            response: 'fixture:user.json'
+        })
+
+        //go to user details
+        cy.visit("/gebruiker/1");
+
+        //click on button to add challenges
+        cy.get("[data-cy=AddChallenges]").click();
+
     });
-
-    
-    it('add challenge to client', function(){
-
-    })
-    */
 });

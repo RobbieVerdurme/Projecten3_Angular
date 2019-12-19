@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, first } from 'rxjs/operators';
 import { NormalUser } from './NormalUser';
 
 @Injectable({
@@ -25,12 +25,23 @@ export class NormalUserDataService {
 
   getNormalUser$(id): Observable<NormalUser> {
     return this.http
-      .get(`${environment.apiUrl}/users/${id}`)
+      .get(`${environment.apiUrl}/users/details/${id}`)
       .pipe(map((the: any): NormalUser => NormalUser.FromJSON(the)));
   }
 
-  addNewUser(normalUser: NormalUser) {
-    return this.http.post(`${environment.apiUrl}/users/add`, normalUser.toJSON());
+  addNewUser(username: string, firstname: string, lastname: string, email: string, telephone: string, category: string) {
+    let headers = new HttpHeaders();
+    let body = {
+      firstName: firstname,
+      familyName: lastname,
+      email: email,
+      phone: telephone,
+      company: 35,
+      categories: [1],
+      therapists: [1]
+    }
+    console.log(body)
+    return this.http.post(`${environment.apiUrl}/users/add`, body, {observe: 'response', headers: headers});
   }
   editNormalUser(normalUser: NormalUser) {
     return this.http

@@ -15,12 +15,12 @@ import { Observable } from 'rxjs';
 })
 export class NormalUserDetailComponent implements OnInit {
 //var
-  private user : NormalUser;
+  public user : NormalUser;
   constructor(private challengeService: ChallengeService, private route: ActivatedRoute, private router: Router, private messageService: MessageService, private selectUserService: SelectUserService) { 
   }
 
   ngOnInit() {
-    this.route.data.subscribe(item => this.user = item['user'])
+    this.LoadUser()
   }
 
   navigateToAssignChallenges(){
@@ -29,5 +29,9 @@ export class NormalUserDetailComponent implements OnInit {
 
   dismissMessage(){
     this.messageService.setMessage(null);
+  }
+
+  async LoadUser(){
+    this.route.data.subscribe(item => this.user = item['user'])
   }
 }

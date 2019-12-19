@@ -1,12 +1,12 @@
 <mat-card>
     <div class="title">
         <mat-card-title class="titlePart">
-            <div class="card-title">
+            <div class="card-title" data-cy="CompanyName">
                 {{company.name}}
             </div>
             <div class="fill"></div>
             <div class="card-title">
-                <button mat-button class="titlePart" (click)="editCompany(company.id)"><mat-icon>settings</mat-icon></button>
+                <button mat-button class="titlePart" (click)="editCompany(company.id)" data-cy="DetailEditCompany"><mat-icon>settings</mat-icon></button>
             </div>
         </mat-card-title>
     </div>
@@ -16,26 +16,26 @@
                 <div class="infoPart">
                     <!--Goes to localhost/$link, should go to $link only-->
                     <mat-card-subtitle>Contact</mat-card-subtitle>
-                    <p>{{company.phone}}</p>
-                    <p>{{company.mail}}</p>
+                    <p data-cy="CompanyPhone">{{company.phone}}</p>
+                    <p data-cy="CompanyEmail">{{company.mail}}</p>
                 </div>
                 <div class="fill"></div>
                 <div class="infoPart">
                     <mat-card-subtitle>Adres</mat-card-subtitle>
-                    <p>{{company.street}} {{company.houseNumber}}</p>
-                    <p>{{company.postalCode}} {{company.city}} {{company.country}}</p>
+                    <p data-cy="CompanyStreet">{{company.street}} {{company.houseNumber}}</p>
+                    <p data-cy="CompanyPostalcode">{{company.postalCode}} {{company.city}} {{company.country}}</p>
                 </div>
                 <div class="fill"></div>
                 <div class="infoPart">
                     <mat-card-subtitle>Einde contract</mat-card-subtitle>
-                    <p>{{company.contract | date: "dd-MM-yyyy"}}</p>
+                    <p data-cy="CompanyContract">{{company.contract | date: "dd-MM-yyyy"}}</p>
                 </div>
                 <div class="fill"></div>
         </div>
         <div class="detail-section">
             <div>
                 <h3>Bedrijfsleden</h3>
-                <app-normal-user-list [normalUsers]="company.companyMembers"></app-normal-user-list>
+                <app-normal-user-list [normalUsers]="company.companyMembers" data-cy="CompanyMembers"></app-normal-user-list>
             </div>
         </div>
     </mat-card-content>
