@@ -21,7 +21,8 @@ export class AssignChallengeComponent implements OnInit {
 
   public categoryAndLevelForm: FormGroup;
   private categories$: Observable<Category[]> = this.categoryService.categories$;
-  private challenges$: Observable<Challenge[]>;
+  private challenges$: Subject<Challenge[]> = new Subject<Challenge[]>();
+  private challengeIds: number[];
   public errorMsg: string;
 
   selectedCategory: Category = null;
@@ -50,21 +51,25 @@ export class AssignChallengeComponent implements OnInit {
   }
 
   onSubmit(){
+    this.errorMsg = null;
     this.isLoading$.next(true);
     if(this.categoryAndLevelForm.errors === null)
     {
       this._challengeService.getChallengesForCategoryAndLevel(this.selectedCategory.id, this.selectedLevel)
       .subscribe(
         response => {
-          this.isLoading$.next(false)
           if(response.status === 200){
-              this.errorMsg = "Gelukt!";
+              this.challenges$.next(response.body);
+              this.setChallengesForUser();
+              this.isLoading$.next(false);
           }
           else{
-            this.errorMsg = 'Er zijn geen uitdagingen gevonden voor deze combinatie'
+          this.isLoading$.next(false)
+          this.errorMsg = 'Er zijn geen uitdagingen gevonden voor deze combinatie'
           }
         },
         (err: HttpErrorResponse) => {
+          this.isLoading$.next(false)
           if(err.error instanceof Error){
             this.errorMsg = `Er zijn geen uitdagingen gevonden voor deze combinatie`
           }else{
@@ -73,5 +78,34 @@ export class AssignChallengeComponent implements OnInit {
         }
         ) 
     }
+  }
+
+  setChallengesForUser()
+  {
+    this.challenges$.subscribe(challenges => {
+      challenges.forEach(challenge => {
+        this.challengeIds.push(challenge.id);
+      })
+    });
+    this._challengeService.assignChallenges(this.user.id, this.challengeIds).subscribe(response => 
+    {
+      if(response.status === 200)
+      {
+        this._router.navigateByUrl(`gebruiker/${this.user.id}`);
+      }
+      else if(response.status === 400)
+      {
+        this.errorMsg = "Uitdagingen niet toegewezen aan gebruiker.";
+      }
+    },
+      (err: HttpErrorResponse) => 
+      {
+        this.isLoading$.next(false)
+        if(err.error instanceof Error){
+          this.errorMsg = `Er zijn geen uitdagingen toegevoegd aan de gebruiker.`;
+        }else{
+          this.errorMsg = `Er zijn geen uitdagingen toegevoegd aan de gebruiker.`;
+        }
+      });
   }
 }
