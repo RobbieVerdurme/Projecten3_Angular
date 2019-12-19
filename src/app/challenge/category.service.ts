@@ -26,6 +26,7 @@ export class CategoryService {
         .map((category: any): Category => Category.fromJSON(category))
       )
     );
+  }
 
   addNewCategory(category: string) {
     let headers = new HttpHeaders();

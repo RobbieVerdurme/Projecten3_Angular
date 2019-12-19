@@ -31,7 +31,7 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
     FormsModule,
     MatDialogModule
   ],
