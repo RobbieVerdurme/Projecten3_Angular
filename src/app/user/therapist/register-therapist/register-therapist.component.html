@@ -7,17 +7,10 @@
                 <p *ngIf="errorMsg" class="error">
                     {{ errorMsg }}
                 </p>
-                <form [formGroup]="user" (ngSubmit)="onSubmit()">
+                <form [formGroup]="therapistForm" (ngSubmit)="onSubmit()">
                     <div class="form-part">
                         <div class="title">
                             Algemeen
-                        </div>
-                        <div class="form-field">
-                            Gebruikersnaam : 
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
-                                    required data-cy="TherapistUsername" />
-                            </mat-form-field>
                         </div>
                         <div class="form-field">
                             Voornaam :
@@ -60,47 +53,94 @@
                     </div>
                     <div class="form-part">
                         <div class="title">
+                            Adres
+                        </div>
+                        <div class="form-field">
+                            Straat :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Straat" formControlName="street" data-cy="TherapistStreet" />
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field">
+                            Nummer :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Nummer" formControlName="houseNumber" data-cy="TherapistHouseNumber" />
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field">
+                            Postcode :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Postcode" formControlName="postalCode" data-cy="TherapistPostalCode" />
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field">
+                            Plaats :
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Plaats" formControlName="city" data-cy="TherapistCity" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="form-part">
+                        <div class="title">
                             Specifieke informatie
                         </div>
                         <div class="form-field">
+                            <div>
                             Werk-uren :
+                        </div>
                             <mat-form-field>
-                                <input type="text" matInput placeholder="werk uren" formControlName="workingHours"
+                                <input type="text" matInput placeholder="Maandag" formControlName="workingHoursMa"
                                     required data-cy="TherapistWorkHours" />
                             </mat-form-field>
-                                <!--
-                                <table class="workingHours">
-                                    <tr>
-                                        <td>Maandag</td>
-                                        <td>Dinsdag</td>
-                                        <td>Woensdag</td>
-                                        <td>Donderdag</td>
-                                        <td>Vrijdag</td>
-                                        <td>Zaterdag</td>
-                                        <td>Zondag</td>
-                                    </tr>
-                                    <tr>
-                                        <td>9-17</td>
-                                        <td>9-17</td>
-                                        <td>9-16</td>
-                                        <td>9-17</td>
-                                        <td>9-17</td>
-                                        <td>gesloten</td>
-                                        <td>gesloten</td>
-                                    </tr>
-                                </table>
-                                -->
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Dinsdag" formControlName="workingHoursDi"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Woensdag" formControlName="workingHoursWo"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Donderdag" formControlName="workingHoursDo"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Vrijdag" formControlName="workingHoursVr"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Zaterdag" formControlName="workingHoursZa"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Zondag" formControlName="workingHoursZo"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
                         </div>
                         <div class="form-field">
-                            Categorie :
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Categorie" formControlName="category" required data-cy="TherapistCategory" />
-                            </mat-form-field>
+                            <mat-label>
+                                Selecteer een type: 
+                            </mat-label>
+                            <mat-select formControlName="type" [(value)]="selectedType" required>
+                                <mat-option *ngFor="let type of (types$ | async)" [value]="type">
+                                    {{type.type}}
+                                </mat-option>
+                            </mat-select>
                             <button mat-button><mat-icon>add_circle</mat-icon></button>
+                        </div> 
+                    </div>
+                    <div *ngIf="isEdit == false">
+                        <div class="button">
+                            <button (click)="addTherapist()" mat-button data-cy="TherapistRegister">Voeg toe</button>
                         </div>
                     </div>
-                    <div class="button">
-                        <button type="submit" mat-button data-cy="TherapistRegister">Registreer</button>
+                    <div *ngIf="isEdit == true">
+                        <div class="button">
+                            <button mat-button (click)="editTherapist()" data-cy="EditTherapist">Aanpassen</button>
+                            <div *ngIf="isTherapist() == false">
+                                <button mat-button (click)="deleteTherapist()" data-cy="DeleteTherapist">Verwijderen</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </mat-card-content>

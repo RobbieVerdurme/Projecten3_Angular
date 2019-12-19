@@ -5,6 +5,9 @@ import { map, shareReplay } from "rxjs/operators";
 import { AuthenticationService } from "./../user/authentication.service";
 import { Role } from "../user/role";
 import { LoginUser } from "../user/loginuser";
+import { Therapist } from '../user/therapist/Therapist';
+import { TherapistDataService } from '../user/therapist/therapist-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-main-nav",
@@ -25,7 +28,9 @@ export class MainNavComponent {
   //ctor
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private _authenticationService: AuthenticationService
+    private _authenticationService: AuthenticationService,
+    private _authService: AuthenticationService,
+    private router: Router
   ) {}
 
   //methods
@@ -44,6 +49,11 @@ export class MainNavComponent {
 
   get isLoggedIn(){
     return this._authenticationService.isLoggedIn();
+  }
+
+  goToProfile(){
+    var therapist = <Therapist>this._authService.user$.value
+     this.router.navigate([`/therapeut/${therapist.id}`])
   }
 
 }
