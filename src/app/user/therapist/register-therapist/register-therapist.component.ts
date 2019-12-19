@@ -8,6 +8,9 @@ import { TherapistDataService } from '../therapist-data.service';
 import { OpeningTimes } from '../opening-times/opening-times';
 import { TherapistType } from '../TherapistType';
 import { Observable, Subject } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { TherapistTypeDialogComponent } from '../therapist-type-dialog/therapist-type-dialog.component';
+import { Category } from 'src/app/challenge/Category';
 
 @Component({
   selector: 'app-register-therapist',
@@ -32,7 +35,8 @@ export class RegisterTherapistComponent implements OnInit {
     private _therapistDataService: TherapistDataService,
     private router: Router,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   //method
@@ -202,6 +206,18 @@ export class RegisterTherapistComponent implements OnInit {
     
     //this.therapistForm.value.category
   }
+
+  OpenDialog(): void {
+    const dialogref = this.dialog.open(TherapistTypeDialogComponent, {
+      data: {
+        type: "",
+        category: new Array<Category>()
+      }
+    })
+    dialogref.afterClosed().subscribe( result =>{
+      this.types$ = this._therapistDataService.TherapistTypes$;
+    })
+  };
   
   onSubmit(){
     this.auth
