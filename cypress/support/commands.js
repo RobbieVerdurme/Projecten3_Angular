@@ -37,11 +37,11 @@ Cypress.Commands.add('login', () => {
 
   //add login for therapist
   Cypress.Commands.add('loginTherapist', () => {
-    const username = 'TestTh';
+    const username = 't@t.com';
   
     cy.request({
       method: 'POST',
       url: '/api/account',
-      body: {username:username, password: 'P@ssword123' }
+      body: {username:username, password: 'Multimed@tt04' }
     }).then(res => localStorage.setItem('currentUser', res.body));
   });

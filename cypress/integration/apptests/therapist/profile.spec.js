@@ -16,7 +16,7 @@ describe("Therapist Profile", () => {
         });
 
         //go to profilepage
-        cy.visit("/profile")
+        cy.visit("/therapeut/1")
 
         //check if everyting is filled in
         cy.get("[data-cy=TherapistFirstname]").contains("Ruben")
@@ -43,7 +43,32 @@ describe("Therapist Profile", () => {
         //click on edit profile wheel
         cy.get("[data-cy=EditProfile]").click()
 
+        //clear input
+        cy.get("[data-cy=TherapistUsername]").clear()
+        cy.get("[data-cy=TherapistFirstname]").clear()
+        cy.get("[data-cy=TherapistLastname]").clear()
+        cy.get("[data-cy=TherapistEmail]").clear()
+        cy.get("[data-cy=TherapistWebsite]").clear()
+        cy.get("[data-cy=TherapistPhone]").clear()
+
         //change input in fields
-        //cy.get("[data-cy=]").type("")
+        cy.get("[data-cy=TherapistUsername]").type("TestTherapist");
+        cy.get("[data-cy=TherapistFirstname]").type("TherapistTestingtest");
+        cy.get("[data-cy=TherapistLastname]").type("Test");
+        cy.get("[data-cy=TherapistEmail]").type("TestTherapist@mail.com");
+        cy.get("[data-cy=TherapistWebsite]").type("TestTherapist.com");
+        cy.get("[data-cy=TherapistPhone]").type("047899556");
+        cy.get("[data-cy=TherapistCategory]").select("Diëtist")
+
+        //click aanpassen
+        cy.get("[data-cy=EditTherapist]").click()
+        
+        //check fields
+        cy.get("[data-cy=TherapistUsername]").contains("TestTherapist");
+        cy.get("[data-cy=TherapistFirstname]").contains("TherapistTestingtest");
+        cy.get("[data-cy=TherapistLastname]").contains("Test");
+        cy.get("[data-cy=TherapistEmail]").contains("TestTherapist@mail.com");
+        cy.get("[data-cy=TherapistWebsite]").contains("TestTherapist.com");
+        cy.get("[data-cy=TherapistPhone]").contains("047899556");
     });
 });

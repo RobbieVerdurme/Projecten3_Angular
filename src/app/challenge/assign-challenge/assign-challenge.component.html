@@ -13,7 +13,7 @@
                     <mat-label>
                         Selecteer een categorie:
                     </mat-label>
-                    <mat-select formControlName="category" [(value)]="selectedCategory" required>
+                    <mat-select formControlName="category" [(value)]="selectedCategory" required data-cy="SelectedCategory">
                         <mat-option *ngFor="let category of (categories$ | async)" [value]="category">
                             {{category.name}}
                         </mat-option>
@@ -24,14 +24,14 @@
                     <mat-label>
                         Selecteer een niveau:
                     </mat-label>
-                    <input type="number" matInput placeholder="Niveau" formControlName="level" [value]="selectedLevel" required/>
+                    <input type="number" matInput placeholder="Niveau" formControlName="level" [value]="selectedLevel" required data-cy="SelectedLevel"/>
                 </mat-form-field>
                 <div class="fill"></div>
             </div>
             <div class="form-part">
                 <div class="fill"></div>
                 <div class="button">
-                    <button type="submit" mat-button>
+                    <button type="submit" mat-button data-cy="AddChallengeToUser">
                         Uitdagingen toewijzen aan gebruiker
                     </button>  
                 </div>

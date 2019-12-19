@@ -16,7 +16,7 @@ describe("Multimed therapist list", () => {
     cy.get("[data-cy=TherapistWebsite]").type("TestTherapist.com");
     cy.get("[data-cy=TherapistWorkHours]").type("9-17");
     cy.get("[data-cy=TherapistPhone]").type("047899556");
-    cy.get("[data-cy=TherapistCategory]").type("Ondergewicht");
+    cy.get("[data-cy=TherapistCategory]").select("Diëtist")
 
     //click register
     cy.get("[data-cy=TherapistRegister]").click();
