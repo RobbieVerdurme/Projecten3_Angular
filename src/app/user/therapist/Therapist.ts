@@ -158,16 +158,7 @@ export class Therapist extends LoginUser{
         therapist.street = json.street;
         therapist.houseNumber = json.houseNumber;
         therapist.postalCode = json.postalCode;
-        therapist.therapistType = json.therapistType;
-
-        var functions: string[] = null;
-        
-        if(json.therapistType != null){
-            json.therapistType.array.forEach(element => {
-                functions.push(element.Type); 
-            });;
-            therapist.function = functions[0];
-        }
+        therapist.therapistType = TherapistType.fromJSON(json.therapistType);
 
         var ot: Array<OpeningTimes> = json.openingTimes.map(OpeningTimes.FromJSON)
         if( ot.length == 0){
