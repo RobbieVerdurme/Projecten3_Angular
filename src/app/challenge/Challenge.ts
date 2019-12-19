@@ -27,9 +27,12 @@ export class Challenge{
     }
 
     //Set JSON object to Challenge object
-    static fromJSON(json: any): Challenge{
+    static fromJSON(json: any): Challenge
+    {
         return new Challenge(json.challengeId,json.title,json.description,Category.fromJSON(json.category), json.level);
     }
+
+    
 
     //Set Challenge object to JSON object
     toJSON(): any{

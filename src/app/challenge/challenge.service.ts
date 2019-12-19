@@ -33,15 +33,10 @@ export class ChallengeService {
     return this.httpClient.get<Challenge[]>(`${environment.apiUrl}/challenge/category/user/${id}`,{observe: 'response',headers: headers});
   }
 
-  getChallengesForUser$(id: number): Observable<Challenge[]>{
+  getChallengesForUser(id: number){
+    let headers = new HttpHeaders();
     return this.httpClient
-    .get<Challenge[]>(`${environment.apiUrl}/challenge/user/${id}`)
-    .pipe(
-      map(
-        (list: any[]): Challenge[] => list.map(
-          (challenge: any): Challenge => Challenge.fromJSON(challenge))
-      )
-    );
+    .get<Challenge[]>(`${environment.apiUrl}/challenge/user/${id}`, {observe: 'response',headers: headers});
   }
 
   getChallengesForCategoryAndLevel(categoryId: number, level: number)

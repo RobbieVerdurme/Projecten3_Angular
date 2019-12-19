@@ -97,7 +97,7 @@ export class AssignChallengeComponent implements OnInit {
       {
         this.errorMsg = "Uitdagingen niet toegewezen aan gebruiker.";
       }
-    },
+  },
       (err: HttpErrorResponse) => 
       {
         this.isLoading$.next(false)

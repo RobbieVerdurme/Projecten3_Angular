@@ -18,7 +18,10 @@ export class ChallengeListComponent implements OnInit {
   displayedColumns: string[] = ['description']
   dataSource: MatTableDataSource<Challenge>;
 
+  public errorMsg: string;
+
   public challenges$: Observable<Challenge[]>;
+  public challenges: Challenge[];
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -36,8 +39,7 @@ export class ChallengeListComponent implements OnInit {
           ['description'] : 
           ['description'];
       });
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      
     }
 
     applyFilter(filterValue: string) {
@@ -49,8 +51,24 @@ export class ChallengeListComponent implements OnInit {
     }
 
     loadData(){
-      this.challenges$ = this.challengeDataService.getChallengesForUser$(this.user.id)
       this.dataSource = new MatTableDataSource();
-    }
-
-}
+      this.challengeDataService.getChallengesForUser(this.user.id).subscribe(
+        response =>
+        {
+          if(response.status === 200)
+          {
+            this.challenges = (response.body.map(challenge => Challenge.fromJSON(challenge)));
+            console.log("suck my dick");
+          }
+          else
+      {
+            this.errorMsg = "De challenges van de gebruiker konden niet opgehaald worden.";
+          }
+        }
+      );
+      
+          this.dataSource = new MatTableDataSource();
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } 
+  }
