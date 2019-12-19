@@ -19,8 +19,7 @@ export class TherapistDetailComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.route.data.subscribe(item => this.therapist = item['therapist'])
-    console.log(this.therapist.openingTimes)
+    this.route.data.subscribe(item => this.therapist = item['therapist']);
   }
 
   dismissMessage(){
