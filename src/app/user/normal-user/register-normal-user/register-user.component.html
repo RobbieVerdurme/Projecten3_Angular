@@ -62,7 +62,7 @@
                             <input type="text" matInput placeholder="Categorie" formControlName="category"
                                 required data-cy="UserCategory" />
                         </mat-form-field>
-                        <button mat-button>
+                        <button mat-button (click)="openDialog()">
                             <mat-icon>add_circle</mat-icon>
                         </button>
                     </div>

@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <!-- message bestaat niet in normal user detail
         <div *ngIf="message !== null" fxLayout="row" fxLayoutAlign="start space-around">
-            <div>{{message]]</div><div fxFlex="5 5 auto"></div><div><button (click)="dismissMessage()">&times;</button></div>
+            <div>{{errorMsg}}</div><div fxFlex="5 5 auto"></div>
         </div>
         -->
         <mat-card class="matcard">
@@ -70,7 +70,7 @@
                     </div>
                     <!--Pass data with state param and navigate-->
                     <div class="challenge-part">
-                        <app-challenge-list [challenges]="user.challenges" data-cy="userChallenges"></app-challenge-list>
+                        <app-challenge-list [challenges]="challenges" data-cy="userChallenges"></app-challenge-list>
                     </div>
                     <div class="challenge-part">
                         <button class="addchallengebtn" (click)="navigateToAssignChallenges()" mat-button data-cy="AddChallenges">
