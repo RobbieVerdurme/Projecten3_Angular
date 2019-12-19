@@ -7,6 +7,7 @@ import { Therapist } from '../Therapist';
 import { TherapistDataService } from '../therapist-data.service';
 import { OpeningTimes } from '../opening-times/opening-times';
 import { TherapistType } from '../TherapistType';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-register-therapist',
@@ -19,6 +20,11 @@ export class RegisterTherapistComponent implements OnInit {
   public errorMsg: string;
   public therapist: Therapist
   public isEdit: boolean = true;
+
+  selectedType: TherapistType = null;
+
+  private types$: Observable<TherapistType[]> = this._therapistDataService.TherapistTypes$;
+  //isLoading$: Subject<boolean> = new Subject<boolean>();
 
   //const
   constructor(
@@ -43,19 +49,19 @@ export class RegisterTherapistComponent implements OnInit {
         lastname: [this.therapist.lastname, Validators.required],
         email:[this.therapist.email, Validators.required],
         telephone: [this.therapist.telephone, Validators.required],
-        workingHoursMa: [''],
-        workingHoursDi: [''],
-        workingHoursWo: [''],
-        workingHoursDo: [''],
-        workingHoursVr: [''],
-        workingHoursZa: [''],
-        workingHoursZo: [''],
-        website: [this.therapist.website],
-        street: [this.therapist.street],
-        houseNumber: [this.therapist.houseNumber],
-        postalCode: [this.therapist.postalCode],
-        city: [this.therapist.city],
-        category: ['']
+        workingHoursMa: ['', Validators.required],
+        workingHoursDi: ['', Validators.required],
+        workingHoursWo: ['', Validators.required],
+        workingHoursDo: ['', Validators.required],
+        workingHoursVr: ['', Validators.required],
+        workingHoursZa: ['', Validators.required],
+        workingHoursZo: ['', Validators.required],
+        website: [this.therapist.website, Validators.required],
+        street: [this.therapist.street, Validators.required],
+        houseNumber: [this.therapist.houseNumber, Validators.required],
+        postalCode: [this.therapist.postalCode, Validators.required],
+        city: [this.therapist.city, Validators.required],
+        type: ['', Validators.required]
       });
     }
     else{
@@ -65,19 +71,19 @@ export class RegisterTherapistComponent implements OnInit {
         lastname: [this.therapist.lastname, Validators.required],
         email:[this.therapist.email, Validators.required],
         telephone: [this.therapist.telephone, Validators.required],
-        workingHoursMa: [this.therapist.openingTimes[0].Interval],
-        workingHoursDi: [this.therapist.openingTimes[1].Interval],
-        workingHoursWo: [this.therapist.openingTimes[2].Interval],
-        workingHoursDo: [this.therapist.openingTimes[3].Interval],
-        workingHoursVr: [this.therapist.openingTimes[4].Interval],
-        workingHoursZa: [this.therapist.openingTimes[5].Interval],
-        workingHoursZo: [this.therapist.openingTimes[6].Interval],
-        website: [this.therapist.website],
-        street: [this.therapist.street],
-        houseNumber: [this.therapist.houseNumber],
-        postalCode: [this.therapist.postalCode],
-        city: [this.therapist.city],
-        category: ['']
+        workingHoursMa: [this.therapist.openingTimes[0].Interval, Validators.required],
+        workingHoursDi: [this.therapist.openingTimes[1].Interval, Validators.required],
+        workingHoursWo: [this.therapist.openingTimes[2].Interval, Validators.required],
+        workingHoursDo: [this.therapist.openingTimes[3].Interval, Validators.required],
+        workingHoursVr: [this.therapist.openingTimes[4].Interval, Validators.required],
+        workingHoursZa: [this.therapist.openingTimes[5].Interval, Validators.required],
+        workingHoursZo: [this.therapist.openingTimes[6].Interval, Validators.required],
+        website: [this.therapist.website, Validators.required],
+        street: [this.therapist.street, Validators.required],
+        houseNumber: [this.therapist.houseNumber, Validators.required],
+        postalCode: [this.therapist.postalCode, Validators.required],
+        city: [this.therapist.city, Validators.required],
+        type: [this.therapist.therapistType, Validators.required]
       });
     }
   }
@@ -171,6 +177,7 @@ export class RegisterTherapistComponent implements OnInit {
     this.therapist.houseNumber = this.therapistForm.value.houseNumber
     this.therapist.postalCode = this.therapistForm.value.postalCode
     this.therapist.city = this.therapistForm.value.city
+    this.therapist.therapistType = this.therapistForm.value.type
 
     if(this.isEdit){
       this.therapist.openingTimes.push(this.therapistForm.value.workingHoursMa)
@@ -207,7 +214,7 @@ export class RegisterTherapistComponent implements OnInit {
       this.therapistForm.value.telephone,
       this.therapistForm.value.workingHours,
       this.therapistForm.value.website,
-      this.therapistForm.value.category
+      this.therapistForm.value.type
       )
       .subscribe(
         val => {

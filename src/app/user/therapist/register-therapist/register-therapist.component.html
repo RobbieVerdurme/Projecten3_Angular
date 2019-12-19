@@ -117,13 +117,17 @@
                                     required data-cy="TherapistWorkHours" />
                             </mat-form-field>
                         </div>
-                        <!-- <div class="form-field">
-                            Categorie :
-                            <mat-form-field>
-                                <input type="text" matInput placeholder="Categorie" formControlName="category" required data-cy="TherapistCategory" />
-                            </mat-form-field>
+                        <div class="form-field">
+                            <mat-label>
+                                Selecteer een type: 
+                            </mat-label>
+                            <mat-select formControlName="type" [(value)]="selectedType" required>
+                                <mat-option *ngFor="let type of (types$ | async)" [value]="type">
+                                    {{type.type}}
+                                </mat-option>
+                            </mat-select>
                             <button mat-button><mat-icon>add_circle</mat-icon></button>
-                        </div> -->
+                        </div> 
                     </div>
                     <div *ngIf="isEdit == false">
                         <div class="button">

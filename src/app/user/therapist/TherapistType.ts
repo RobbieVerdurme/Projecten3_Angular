@@ -15,6 +15,10 @@ export class TherapistType{
         return this._therapistTypeId
     }
 
+    get type():string{
+        return this._type;
+    }
+
     toJSON(): any{
         return {
             therapistTypeId: this.therapistTypeId

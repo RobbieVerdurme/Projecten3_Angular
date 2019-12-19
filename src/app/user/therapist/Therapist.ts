@@ -199,7 +199,7 @@ export class Therapist extends LoginUser{
             houseNumber: this.houseNumber,
             postalCode: this.postalCode,
             city: this.city,
-            therapistTypeId: 1,
+            therapistTypeId: this.therapistType.therapistTypeId,
             OpeningTimes: this.openingTimes.map(ot => ot.toJSON())
         }
     }
