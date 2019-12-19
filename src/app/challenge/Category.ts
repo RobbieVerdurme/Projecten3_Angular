@@ -13,12 +13,6 @@ export class Category {
         }
     }
 
-    toJSONForAdd(): any{
-        return{
-            categoryId: this._id
-        }
-    }
-
     get id(): number{
         return this._id;
     }
@@ -33,5 +27,9 @@ export class Category {
 
     set name(name:String){
         this._name = name
+    }
+
+    toJSONForAdd(): any{
+        return this.id
     }
 }
