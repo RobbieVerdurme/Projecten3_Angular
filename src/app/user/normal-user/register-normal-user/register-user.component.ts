@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AuthenticationService } from '../../authentication.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NormalUserDataService } from '../normal-user-data.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { CategoryDialogComponent } from 'src/app/category-dialog/category-dialog.component';
 
 @Component({
   selector: 'app-register-user',
@@ -17,6 +19,7 @@ export class RegisterUserComponent implements OnInit {
   
   //const
   constructor(
+    public dialog: MatDialog,
     private auth: AuthenticationService,
     private router: Router,
     private fb: FormBuilder,
@@ -62,6 +65,14 @@ export class RegisterUserComponent implements OnInit {
           }
         }
       )
+  }
+
+  
+  openDialog(): void {
+    this.dialog.open(CategoryDialogComponent, {
+      data: ""
+    });
+    
   }
 
 }

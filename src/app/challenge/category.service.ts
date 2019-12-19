@@ -26,5 +26,9 @@ export class CategoryService {
         .map((category: any): Category => Category.fromJSON(category))
       )
     );
+
+  addNewCategory(category: string) {
+    let headers = new HttpHeaders();
+    return this.httpClient.post(`${environment.apiUrl}/category/add?category=`+ category, {observe: 'response', headers: headers});
   }
 }

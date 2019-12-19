@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Voeg een categorie toe</h1>
+<div mat-dialog-content>
+  <p>Typ hier de naam van de categorie</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClick()">Voeg Toe</button>
+</div>

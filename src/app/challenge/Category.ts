@@ -26,4 +26,12 @@ export class Category {
     get name() : String{
         return this._name;
     }
+
+    set id(id:number){
+        this._id = id
+    }
+
+    set name(name:String){
+        this._name = name
+    }
 }
