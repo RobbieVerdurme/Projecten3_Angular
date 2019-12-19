@@ -18,6 +18,8 @@ export class ChallengeListComponent implements OnInit {
   displayedColumns: string[] = ['description']
   dataSource: MatTableDataSource<Challenge>;
 
+  public length: number;
+  private 
   public errorMsg: string;
 
   public challenges$: Observable<Challenge[]>;
@@ -25,10 +27,8 @@ export class ChallengeListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   
-    constructor(
-      private breakpointObserver: BreakpointObserver,
-      private challengeDataService: ChallengeService) { 
-    }
+    constructor(private breakpointObserver: BreakpointObserver)
+      {}
   
     ngOnInit() {
       this.dataSource = new MatTableDataSource(this.challenges); 
@@ -37,10 +37,11 @@ export class ChallengeListComponent implements OnInit {
           ['description'] : 
           ['description'];
       });
-
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
+
+    
 
     applyFilter(filterValue: string) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
