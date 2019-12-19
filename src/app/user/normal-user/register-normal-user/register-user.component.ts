@@ -61,27 +61,9 @@ export class RegisterUserComponent implements OnInit {
       )
       .subscribe(
         response => {
-          if (response.status === 200){
-            this.normalUserService.addNewLoginUser(
-              this.userForm.value.username,
-              this.userForm.value.email
-            ).subscribe(
-              response => {
-                if(response.status === 200){
-                  this.router.navigate([`gebruiker/lijst`])
-                }
-                else{
-                  this.errorMsg = 'Fout bij het aanmaken van een de gebruiker!'
-                }
-              },
-              (err: HttpErrorResponse) => {
-                if(err.error instanceof Error){
-                  this.errorMsg = `Error bij het aanmaken van de gebruiker`
-                }else{
-                  this.errorMsg = `Error ${err.status} bij het aanmaken van de gebruiker`
-                }
-              }
-            )
+          if (response.status === 200)
+          {
+            this.router.navigate(['/gebruiker/lijst'])
           }else{
             this.errorMsg = "Error bij registreren"
           }

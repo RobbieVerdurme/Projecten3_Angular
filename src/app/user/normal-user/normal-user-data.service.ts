@@ -37,22 +37,11 @@ export class NormalUserDataService {
       email: email,
       phone: telephone,
       company: 1,
-      categories: [1],
-      therapists: [1]
+      categories: [],
+      therapists: []
     }
     console.log(body)
     return this.http.post(`${environment.apiUrl}/users/add`, body, {observe: 'response', headers: headers});
-  }
-
-  addNewLoginUser(username: string, email: string) {
-    let headers = new HttpHeaders();
-    let body = {
-      username: username,
-      email: email,
-      password: username + "@123Ab"
-    }
-    console.log(body)
-    return this.http.post(`${environment.apiUrl}/Account/register`, body, {observe: 'response', headers: headers});
   }
 
   editNormalUser(normalUser: NormalUser) {
