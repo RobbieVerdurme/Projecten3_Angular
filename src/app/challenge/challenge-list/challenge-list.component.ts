@@ -57,7 +57,7 @@ export class ChallengeListComponent implements OnInit {
         {
           if(response.status === 200)
           {
-            this.challenges = (response.body.map(challenge => Challenge.fromJSON(challenge)));
+            this.challenges = (response.body.map(c => Challenge.fromJSONChallengeUser(c)));
             console.log("suck my dick");
           }
           else
