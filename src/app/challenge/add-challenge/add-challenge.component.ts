@@ -55,7 +55,7 @@ export class AddChallengeComponent implements OnInit {
           if(response.status === 200){
             this.submitError$ = new Subject<string>();
             this._messageService.setMessage(`Uitdaging '${this.TitleField.value}' toegevoegd`);
-            this.router.navigateByUrl('challenge/add');  
+            this.ngOnInit();
           }
           else if(response.status === 404)
           {
