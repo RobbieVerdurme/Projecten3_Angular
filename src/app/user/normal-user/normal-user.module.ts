@@ -21,7 +21,7 @@ const routes = [
   declarations: [
     RegisterUserComponent,
     NormalUserComponent,
-    NormalUserDetailComponent
+    NormalUserDetailComponent,
   ],
   imports: [
     CommonModule,

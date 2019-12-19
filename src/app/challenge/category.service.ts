@@ -2,18 +2,21 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from './Category';
-import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-
-  private readonly baseurl: String = "https://projecten3backend20191106111602.azurewebsites.net/api";
-
   constructor(private httpClient: HttpClient) { }
 
   getCategories(): Observable<HttpResponse<Category[]>>{
-    return this.httpClient.get<Category[]>(`${this.baseurl}/category`,{observe: 'response',headers: {"Access-Control-Allow-Origin":"*"}});
+    let headers = new HttpHeaders();
+    return this.httpClient.get<Category[]>(`${environment.apiUrl}/category`,{observe: 'response',headers: headers});
+  }
+
+  addNewCategory(category: string) {
+    let headers = new HttpHeaders();
+    return this.httpClient.post(`${environment.apiUrl}/category/add?category=`+ category, {observe: 'response', headers: headers});
   }
 }

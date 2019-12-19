@@ -24,6 +24,7 @@ export class NormalUserDetailComponent implements OnInit {
   }
 
   navigateToAssignChallenges(){
+    this.selectUserService.setUser(this.user);
     this.router.navigate(["/challenge/assign"]);
   }
 
