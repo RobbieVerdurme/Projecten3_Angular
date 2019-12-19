@@ -11,20 +11,14 @@ import { environment } from 'src/environments/environment';
 })
 export class ChallengeService {
   public loadingError$ = new Subject<string>();
-
   constructor(private httpClient: HttpClient) { }
 
-  addChallenge(title: String, description: String, category: Category): Observable<HttpResponse<Object>>{
+  addChallenge(challenge: Challenge){
     let headers = new HttpHeaders();
-    let body = {
-      title: title,
-      description: description,
-      category: category
-    };
-    return this.httpClient.post(`${environment.apiUrl}/challenge/add`,body,{observe: 'response',headers: headers});
+    return this.httpClient.post(`${environment.apiUrl}/challenge/add`,challenge.toJSONForAdd(), {observe: 'response', headers: headers});
   }
 
-  assignChallenges(userId: number, challenges: Array<number>){
+  assignChallenges(userId: number, challenges: number[]){
     let headers = new HttpHeaders();
     let body = {
       UserId: userId,
@@ -37,5 +31,18 @@ export class ChallengeService {
   getChallengesForUserPerCategory(id: number){
     let headers = new HttpHeaders();
     return this.httpClient.get<Challenge[]>(`${environment.apiUrl}/challenge/category/user/${id}`,{observe: 'response',headers: headers});
+  }
+
+  getChallengesForUser(id: number){
+    let headers = new HttpHeaders();
+    return this.httpClient
+    .get<Challenge[]>(`${environment.apiUrl}/challenge/user/${id}`, {observe: 'response',headers: headers});
+  }
+
+  getChallengesForCategoryAndLevel(categoryId: number, level: number)
+  {
+    let headers = new HttpHeaders();
+    return this.httpClient
+    .get<Challenge[]>(`${environment.apiUrl}/challenge/category?categoryId=${categoryId}&level=${level}`, {observe: 'response',headers: headers});
   }
 }

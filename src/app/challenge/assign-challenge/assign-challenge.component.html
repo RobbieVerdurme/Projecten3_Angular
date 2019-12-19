@@ -1,39 +1,47 @@
 <mat-card>
     <mat-card-title>
-        <div fxLayout="column" fxLayout.gt-sm="row">
-            <div>
-                Voeg Uitdagingen toe voor 
-            </div>
-            <div fxFlex="5 5 auto"></div>
-            <div>
-                {{user.firstname}} {{user.lastname}}
-            </div>
-        </div>
+        Voeg uitdagingen toe voor {{user.firstname}} {{user.lastname}}
     </mat-card-title>
     <mat-card-content>
-        <div *ngIf="!isLoading" fxLayout="column">
-            <mat-selection-list #list (selectionChange)="onSelectionChange($event, list.selectedOptions.selected)">
-                <mat-list-option *ngFor="let challenge of challengesOnCurrentPage" >
-                    {{challenge.title}}
-                </mat-list-option>
-            </mat-selection-list>
-            <mat-paginator [length]="challenges !== null ? challenges.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 100]" (page)="onPageChange($event)"></mat-paginator>
-            <br>
-            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-                <div *ngIf="challengesToAdd?.length === 0 && submitError === null">
-                    Gelieve minstens één uitdaging te selecteren
-                </div>
-                <div *ngIf="submitError !== null">
-                    {{submitError}}
-                </div>
-                <div class="button" mat-button (click)="onSubmit()">
-                    <button type="submit" mat-button>Uitdagingen Toevoegen</button>
-                </div>
+        <p *ngIf="errorMsg" class="error">
+            {{errorMsg}}
+        </p>
+        <form [formGroup]="categoryAndLevelForm" (ngSubmit)="onSubmit()">
+            <div class="form-part">
+                <div class="fill"></div>
+                <mat-form-field>
+                    <mat-label>
+                        Selecteer een categorie:
+                    </mat-label>
+                    <mat-select formControlName="category" [(value)]="selectedCategory" required>
+                        <mat-option *ngFor="let category of (categories$ | async)" [value]="category">
+                            {{category.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="fill"></div>
+                <mat-form-field>
+                    <mat-label>
+                        Selecteer een niveau:
+                    </mat-label>
+                    <input type="number" matInput placeholder="Niveau" formControlName="level" [value]="selectedLevel" required/>
+                </mat-form-field>
+                <div class="fill"></div>
             </div>
-        </div>
-        <div *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
-            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-            <div>Uitdagingen aan het laden</div>
-        </div>
+            <div class="form-part">
+                <div class="fill"></div>
+                <div class="button">
+                    <button type="submit" mat-button>
+                        Uitdagingen toewijzen aan gebruiker
+                    </button>  
+                </div>
+                <div class="fill"></div>
+            </div>
+            <div *ngIf="(isLoading$ | async)" fxLayout="column" fxLayoutAlign="center center">
+                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                <div>Uitdagingen aan het laden</div>
+            </div>
+        </form>
+        
     </mat-card-content>
 </mat-card>

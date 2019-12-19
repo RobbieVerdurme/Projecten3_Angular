@@ -14,16 +14,20 @@ export class TherapistDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private router: Router, 
+    private _router: Router, 
     private messageService: MessageService) { 
     }
 
   ngOnInit() {
-    this.route.data.subscribe(item => this.therapist = item['therapist'])
+    this.route.data.subscribe(item => this.therapist = item['therapist']);
   }
 
   dismissMessage(){
     this.messageService.setMessage(null);
+  }
+
+  editTherapist(id: number): void{
+    this._router.navigate([`/therapeut/edit/${id}`])
   }
 
 }

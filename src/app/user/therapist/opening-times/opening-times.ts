@@ -16,11 +16,22 @@ export class OpeningTimes{
         return this._interval;
     }
 
+    set Interval(interval: string){
+        this._interval = interval
+    }
+
     static FromJSON(json: any): OpeningTimes{
         const ot = new OpeningTimes(
-            json.Interval
+            json.interval
         );
-        ot.OpeningTimesId = json.OpeningTimesId
+        ot.OpeningTimesId = json.openingTimesId
         return ot;
+    }
+
+    toJSON(): any{
+        return {
+            openingTimesId: this.OpeningTimesId,
+            interval: this.Interval
+        }
     }
 }

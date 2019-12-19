@@ -6,7 +6,7 @@
       <mat-toolbar *ngIf="isLoggedIn">Menu</mat-toolbar>
       <mat-nav-list *ngIf="isLoggedIn">
         <a mat-list-item [routerLink]="['/welkom']"><mat-icon>home</mat-icon> Home</a>
-        <a mat-list-item [routerLink]="['/profile']" *ngIf="isTherapist" data-cy="profile-button"><mat-icon>account_circle</mat-icon> Profiel</a>
+        <a mat-list-item (click)="goToProfile()" *ngIf="isTherapist" data-cy="profile-button"><mat-icon>account_circle</mat-icon> Profiel</a>
         <h3 mat-list-item>Overzicht</h3>
         <a mat-list-item class="submenu" [routerLink]="['/gebruiker/lijst']" *ngIf="isMultimed" data-cy="gebruikers-button"><mat-icon>people</mat-icon> Gebruikers</a>
         <a mat-list-item class="submenu" [routerLink]="['/gebruiker/lijst']" *ngIf="isTherapist" data-cy="klanten-button"><mat-icon>people</mat-icon> Klanten</a>

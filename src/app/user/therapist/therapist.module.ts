@@ -15,7 +15,8 @@ import { TherapistResolver } from './therapist-resolver';
 const routes = [
   {path: 'registreren', canActivate:[AuthGuard], component: RegisterTherapistComponent},
   {path: 'lijst', canActivate:[AuthGuard], component: TherapistListComponent},
-  {path: ':id', canActivate:[AuthGuard], component: TherapistDetailComponent, resolve: {therapist: TherapistResolver}}
+  {path: ':id', canActivate:[AuthGuard], component: TherapistDetailComponent, resolve: {therapist: TherapistResolver}},
+  {path: 'edit/:id', canActivate: [AuthGuard], component: RegisterTherapistComponent, resolve: { therapist: TherapistResolver} }
 ]
 
 @NgModule({
