@@ -8,7 +8,7 @@ import { Category } from '../Category';
 import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 import { CategoryService } from '../category.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NumberValueAccessor, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NumberValueAccessor, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -26,7 +26,6 @@ export class AssignChallengeComponent implements OnInit {
   public errorMsg: string;
 
   selectedCategory: Category = null;
-  selectedLevel: number= 0;
 
   user: NormalUser
  
@@ -78,6 +77,11 @@ export class AssignChallengeComponent implements OnInit {
         }
         ) 
     }
+  }
+
+  get selectedLevel(): number
+  {
+    return (<FormControl> this.categoryAndLevelForm.get("level")).value;
   }
 
   setChallengesForUser()
