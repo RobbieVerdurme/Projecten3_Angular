@@ -67,5 +67,8 @@ export class NormalUserDetailComponent implements OnInit {
         }
       }
     )
+
+  editUser(id: number): void{
+    this.router.navigate([`/gebruiker/edit/${id}`])
   }
 }

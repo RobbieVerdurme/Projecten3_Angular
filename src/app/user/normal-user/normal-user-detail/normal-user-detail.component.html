@@ -7,6 +7,10 @@
         <mat-card class="matcard">
             <mat-card-title>
                 Details {{user.firstname}}
+                <div class="fill"></div>
+                <div class="card-title">
+                    <button mat-button class="titlePart" (click)="editUser(user.id)" data-cy="DetailEditCompany"><mat-icon>settings</mat-icon></button>
+                </div>
             </mat-card-title>
             <mat-card-content>
                 <div class="detail-section">

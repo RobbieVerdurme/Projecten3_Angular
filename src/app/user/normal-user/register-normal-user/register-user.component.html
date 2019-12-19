@@ -1,18 +1,23 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Registreer gebruiker</mat-card-title>
+            <div *ngIf="isEdit == false">
+                <mat-card-title>Voeg een bedrijf toe</mat-card-title>
+            </div>
+            <div *ngIf="isEdit == true">
+                <mat-card-title>{{user.firstname}} aanpassen</mat-card-title>
+            </div>
         </mat-card-header>
         <mat-card-content>
             <p *ngIf="errorMsg" class="error">
                 {{ errorMsg }}
             </p>
-            <form [formGroup]="user" (ngSubmit)="onSubmit()">    
+            <form [formGroup]="userForm">    
                 <div class="form-part">
                     <div class="title">
                         Algemeen
                     </div>  
-                    <div class="form-field">  
+                    <div *ngIf="isEdit == false" class="form-field">  
                         Gebruikersnaam:
                         <mat-form-field>
                             <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
@@ -67,8 +72,16 @@
                         </button>
                     </div>
                 </div>
-                <div class="button">
-                    <button type="submit" mat-button data-cy="UserRegister">Registreer</button>
+                <div *ngIf="isEdit == false">
+                    <div class="button">
+                        <button (click)="addUser()" mat-button data-cy="AddUser">Registreer</button>
+                    </div>
+                </div>
+                <div *ngIf="isEdit == true">
+                    <div class="button">
+                        <button mat-button (click)="editUser()" data-cy="EditUser">Aanpassen</button>
+                        <button mat-button (click)="deleteUser()" data-cy="DeleteUser">Verwijderen</button>
+                    </div>
                 </div>
             </form>
         </mat-card-content>

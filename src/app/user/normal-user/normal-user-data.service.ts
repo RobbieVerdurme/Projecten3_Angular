@@ -29,23 +29,29 @@ export class NormalUserDataService {
       .pipe(map((the: any): NormalUser => NormalUser.FromJSON(the)));
   }
 
-  addNewUser(username: string, firstname: string, lastname: string, email: string, telephone: string, category: string) {
+  addNewUser(firstname: string, lastname: string, email: string, telephone: string, category: string) {
     let headers = new HttpHeaders();
     let body = {
       firstName: firstname,
       familyName: lastname,
       email: email,
       phone: telephone,
-      company: 35,
-      categories: [1],
-      therapists: [1]
+      company: 1,
+      categories: [],
+      therapists: []
     }
     console.log(body)
     return this.http.post(`${environment.apiUrl}/users/add`, body, {observe: 'response', headers: headers});
   }
+
   editNormalUser(normalUser: NormalUser) {
     return this.http
       .put(`${environment.apiUrl}/users/edit`, normalUser.toJSON())
       .pipe();
+  }
+
+  removeUser(id){
+    let headers = new HttpHeaders();
+    return this.http.delete(`${environment.apiUrl}/users/delete/${id}`, {observe: 'response', headers: headers});
   }
 }

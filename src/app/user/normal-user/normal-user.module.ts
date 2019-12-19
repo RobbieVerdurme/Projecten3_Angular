@@ -15,6 +15,7 @@ const routes = [
   {path: 'registreren', canActivate:[AuthGuard], component: RegisterUserComponent},
   {path: 'lijst', canActivate:[AuthGuard], component: NormalUserListComponent},
   {path: ':id', canActivate:[AuthGuard], component: NormalUserDetailComponent, resolve: {user: NormalUserResolver}},
+  {path: 'edit/:id', canActivate: [AuthGuard], component: RegisterUserComponent, resolve: { user: NormalUserResolver} }
 ]
 
 @NgModule({
