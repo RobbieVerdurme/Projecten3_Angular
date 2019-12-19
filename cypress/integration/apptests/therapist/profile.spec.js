@@ -6,15 +6,24 @@ describe("Therapist Profile", () => {
 
     //profile page
     it("Profile page check", function(){
+        //mock
+        cy.server();
+        cy.route({
+            method: "GET",
+            url: "/api/therapist/1",
+            status: 200,
+            response: "fixture:therapist.json"
+        });
+
         //go to profilepage
         cy.visit("/profile")
 
         //check if everyting is filled in
-        cy.get("[data-cy=TherapistFirstname]").contains("Therapist")
-        cy.get("[data-cy=TherapistLastname]").contains("De Peape")
-        cy.get("[data-cy=TherapistEmail]").contains("TherapistDePeape@multimed.com")
-        cy.get("[data-cy=TherapistPhone]").contains("0478995888")
-        cy.get("[data-cy=Therapistwebsite]").contains("TherapistDePeape.be")
+        cy.get("[data-cy=TherapistFirstname]").contains("Ruben")
+        cy.get("[data-cy=TherapistLastname]").contains("Grillaert")
+        cy.get("[data-cy=TherapistEmail]").contains("ruben.grillaert.y1033@student.hogent.be")
+        cy.get("[data-cy=TherapistPhone]").contains("0474139526")
+        cy.get("[data-cy=Therapistwebsite]").contains("RubenGrillaert.be")
         //TODO Werkuren testen
         
         //check if everyting is visable

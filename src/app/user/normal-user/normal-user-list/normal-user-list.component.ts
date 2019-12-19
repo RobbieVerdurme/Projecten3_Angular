@@ -84,7 +84,8 @@ export class NormalUserListComponent implements OnInit {
     }
     else{
       //Get therapist and display his clients
-      this.therapistDataService.getTherapistClients$(1).subscribe(
+      var therapist = <Therapist>this.aut.user$.value
+      this.therapistDataService.getTherapistClients$(therapist.id).subscribe(
         x=> this.fillDataSource(x)
       );
 

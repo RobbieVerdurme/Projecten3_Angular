@@ -43,9 +43,9 @@ export class AuthenticationService {
         parsedToken = null;
     }
     if(parsedToken.roles == Role.Mulitmed){
-      this._user$ = new BehaviorSubject<LoginUser>(new Multimed(parsedToken.id, parsedToken.unique_name, parsedToken.roles));
+      this._user$ = new BehaviorSubject<LoginUser>(new Multimed(parsedToken.Id, parsedToken.unique_name, parsedToken.roles));
     }else{
-      this._user$ = new BehaviorSubject<LoginUser>(new Therapist(parsedToken.id, parsedToken.unique_name, parsedToken.roles));
+      this._user$ = new BehaviorSubject<LoginUser>(new Therapist(parsedToken.Id, parsedToken.unique_name, parsedToken.roles));
     }
   }else{
     this._user$ = new BehaviorSubject<LoginUser>(parsedToken && parsedToken.unique_name && parsedToken.role);
@@ -72,9 +72,9 @@ export class AuthenticationService {
             
             //de juiste gebruiker aanmaken aan de hand van de role
             if(parsedToken.roles == Role.Mulitmed){
-              this._user$.next(new Multimed(parsedToken.id, username, parsedToken.roles))
+              this._user$.next(new Multimed(parsedToken.Id, username, parsedToken.roles))
             }else{
-              this._user$.next(new Therapist(parsedToken.id, username, parsedToken.roles))
+              this._user$.next(new Therapist(parsedToken.Id, username, parsedToken.roles))
             }
         
             return true;
@@ -117,9 +117,9 @@ export class AuthenticationService {
     if(localToken){
       let parsedToken = parseJwt(localToken);
       if(parsedToken.roles == Role.Mulitmed){
-        this._user$.next(new Multimed(parsedToken.id, parsedToken.unique_name, parsedToken.roles))
+        this._user$.next(new Multimed(parsedToken.Id, parsedToken.unique_name, parsedToken.roles))
       }else{
-        this._user$.next(new Therapist(parsedToken.id, parsedToken.unique_name, parsedToken.roles))
+        this._user$.next(new Therapist(parsedToken.Id, parsedToken.unique_name, parsedToken.roles))
       }
       return localToken;
     }
@@ -129,7 +129,7 @@ export class AuthenticationService {
     const localToken = localStorage.getItem(this._tokenKey);
     if(localToken){
       let parsedToken = parseJwt(localToken);
-      const id = parsedToken.id;
+      const id = parsedToken.Id;
       return id;
     }
     return null;
