@@ -1,6 +1,7 @@
 import { NormalUser } from '../normal-user/NormalUser';
 import { LoginUser } from '../loginuser';
 import { OpeningTimes } from './opening-times/opening-times';
+import { TherapistType } from './TherapistType';
 
 export class Therapist extends LoginUser{
         private _firstname: string
@@ -14,8 +15,8 @@ export class Therapist extends LoginUser{
         private _postalCode: string
         private _city: string
         private _clients = new Array<NormalUser>()
-        private _openingTimes = new Array<OpeningTimes>()
-
+        private _openingTimes: Array<OpeningTimes>
+        private _therapistType: TherapistType
     constructor(
         private _therapistId: number,
         private _therapistUsername: string,
@@ -25,6 +26,14 @@ export class Therapist extends LoginUser{
     }
 
     //Getters
+    get therapistType(){
+        return this._therapistType;
+    } 
+
+    set therapistType(tt: TherapistType){
+        this._therapistType = tt
+    }
+
     get website(): string{
         return this._website;
     }
@@ -149,6 +158,7 @@ export class Therapist extends LoginUser{
         therapist.street = json.street;
         therapist.houseNumber = json.houseNumber;
         therapist.postalCode = json.postalCode;
+        therapist.therapistType = json.therapistType;
 
         var functions: string[] = null;
         
@@ -165,10 +175,12 @@ export class Therapist extends LoginUser{
                 therapist.openingTimes.push(new OpeningTimes("geen"));
             }   
         }
+        else{
+            therapist.openingTimes = ot
+        }
         var x = json.Clients
         if(x != undefined){
             therapist.clients = json.clients.map(NormalUser.FromJSON)
-            console.log(json.clients);
         }
         
         return therapist
@@ -177,8 +189,9 @@ export class Therapist extends LoginUser{
     //set Therapist object to JSON object
     toJSON(): any{
         return{
-            firstname: this.firstname,
-            lastname: this.lastname,
+            therapistId: this.id,
+            firstName: this.firstname,
+            lastName: this.lastname,
             email: this.email,
             phoneNumber: this.telephone,
             website: this.website,
@@ -186,11 +199,16 @@ export class Therapist extends LoginUser{
             houseNumber: this.houseNumber,
             postalCode: this.postalCode,
             city: this.city,
-            therapistTypeId: 1
+            therapistTypeId: 1,
+            OpeningTimes: this.openingTimes.map(ot => ot.toJSON())
         }
     }
 
     addClient(client: NormalUser){
         this._clients.push(client)
+    }
+
+    addOpeningsTime(ot: OpeningTimes){
+        this._openingTimes.push(ot)
     }
 }

@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Therapist } from '../Therapist';
 import { TherapistDataService } from '../therapist-data.service';
+import { OpeningTimes } from '../opening-times/opening-times';
+import { TherapistType } from '../TherapistType';
 
 @Component({
   selector: 'app-register-therapist',
@@ -33,22 +35,51 @@ export class RegisterTherapistComponent implements OnInit {
     if(this.therapist === undefined){
       this.isEdit = false
       this.therapist = new Therapist(0, "", "")
-    }
+      this.therapist.openingTimes = new Array<OpeningTimes>()
 
-    this.therapistForm = this.fb.group({
-      photo: [''],
-      firstname: [this.therapist.firstname, Validators.required],
-      lastname: [this.therapist.lastname, Validators.required],
-      email:[this.therapist.email, Validators.required],
-      telephone: [this.therapist.telephone, Validators.required],
-      workingHours: [this.therapist.openingTimes],
-      website: [this.therapist.website],
-      street: [this.therapist.street],
-      houseNumber: [this.therapist.houseNumber],
-      postalCode: [this.therapist.postalCode],
-      city: [this.therapist.city],
-      category: ['']
-    });
+      this.therapistForm = this.fb.group({
+        photo: [''],
+        firstname: [this.therapist.firstname, Validators.required],
+        lastname: [this.therapist.lastname, Validators.required],
+        email:[this.therapist.email, Validators.required],
+        telephone: [this.therapist.telephone, Validators.required],
+        workingHoursMa: [''],
+        workingHoursDi: [''],
+        workingHoursWo: [''],
+        workingHoursDo: [''],
+        workingHoursVr: [''],
+        workingHoursZa: [''],
+        workingHoursZo: [''],
+        website: [this.therapist.website],
+        street: [this.therapist.street],
+        houseNumber: [this.therapist.houseNumber],
+        postalCode: [this.therapist.postalCode],
+        city: [this.therapist.city],
+        category: ['']
+      });
+    }
+    else{
+      this.therapistForm = this.fb.group({
+        photo: [''],
+        firstname: [this.therapist.firstname, Validators.required],
+        lastname: [this.therapist.lastname, Validators.required],
+        email:[this.therapist.email, Validators.required],
+        telephone: [this.therapist.telephone, Validators.required],
+        workingHoursMa: [this.therapist.openingTimes[0].Interval],
+        workingHoursDi: [this.therapist.openingTimes[1].Interval],
+        workingHoursWo: [this.therapist.openingTimes[2].Interval],
+        workingHoursDo: [this.therapist.openingTimes[3].Interval],
+        workingHoursVr: [this.therapist.openingTimes[4].Interval],
+        workingHoursZa: [this.therapist.openingTimes[5].Interval],
+        workingHoursZo: [this.therapist.openingTimes[6].Interval],
+        website: [this.therapist.website],
+        street: [this.therapist.street],
+        houseNumber: [this.therapist.houseNumber],
+        postalCode: [this.therapist.postalCode],
+        city: [this.therapist.city],
+        category: ['']
+      });
+    }
   }
 
   getErrorMessage(errors: any){
@@ -103,6 +134,7 @@ export class RegisterTherapistComponent implements OnInit {
 
   editTherapist(){
     this.setTherapistValues()
+    var x = this.therapist
     this._therapistDataService.editTherapist(this.therapist)
     .subscribe(
       Response => {
@@ -139,6 +171,28 @@ export class RegisterTherapistComponent implements OnInit {
     this.therapist.houseNumber = this.therapistForm.value.houseNumber
     this.therapist.postalCode = this.therapistForm.value.postalCode
     this.therapist.city = this.therapistForm.value.city
+
+    if(this.isEdit){
+      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursMa)
+      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursDi)
+      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursWo)
+      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursDo)
+      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursVr)
+      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursZa)
+      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursZo)
+    }
+    else{
+      this.therapist.openingTimes = new Array<OpeningTimes>()
+      this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursMa))
+      this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursDi))
+      this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursWo))
+      this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursDo))
+      this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursVr))
+      this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursZa))
+      this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursZo))
+    }
+
+    
     //this.therapistForm.value.category
   }
   

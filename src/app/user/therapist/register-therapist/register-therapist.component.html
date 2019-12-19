@@ -85,41 +85,45 @@
                             Specifieke informatie
                         </div>
                         <div class="form-field">
+                            <div>
                             Werk-uren :
+                        </div>
                             <mat-form-field>
-                                <input type="text" matInput placeholder="werk uren" formControlName="workingHours"
+                                <input type="text" matInput placeholder="Maandag" formControlName="workingHoursMa"
                                     required data-cy="TherapistWorkHours" />
                             </mat-form-field>
-                                <!--
-                                <table class="workingHours">
-                                    <tr>
-                                        <td>Maandag</td>
-                                        <td>Dinsdag</td>
-                                        <td>Woensdag</td>
-                                        <td>Donderdag</td>
-                                        <td>Vrijdag</td>
-                                        <td>Zaterdag</td>
-                                        <td>Zondag</td>
-                                    </tr>
-                                    <tr>
-                                        <td>9-17</td>
-                                        <td>9-17</td>
-                                        <td>9-16</td>
-                                        <td>9-17</td>
-                                        <td>9-17</td>
-                                        <td>gesloten</td>
-                                        <td>gesloten</td>
-                                    </tr>
-                                </table>
-                                -->
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Dinsdag" formControlName="workingHoursDi"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Woensdag" formControlName="workingHoursWo"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Donderdag" formControlName="workingHoursDo"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Vrijdag" formControlName="workingHoursVr"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Zaterdag" formControlName="workingHoursZa"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Zondag" formControlName="workingHoursZo"
+                                    required data-cy="TherapistWorkHours" />
+                            </mat-form-field>
                         </div>
-                        <div class="form-field">
+                        <!-- <div class="form-field">
                             Categorie :
                             <mat-form-field>
                                 <input type="text" matInput placeholder="Categorie" formControlName="category" required data-cy="TherapistCategory" />
                             </mat-form-field>
                             <button mat-button><mat-icon>add_circle</mat-icon></button>
-                        </div>
+                        </div> -->
                     </div>
                     <div *ngIf="isEdit == false">
                         <div class="button">
