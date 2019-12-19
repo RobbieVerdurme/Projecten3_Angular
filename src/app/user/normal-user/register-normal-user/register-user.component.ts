@@ -85,6 +85,7 @@ export class RegisterUserComponent implements OnInit {
     this.dialog.open(CategoryDialogComponent, {
       data: ""
     });
+  }
     
   deleteUser(){
     this.normalUserService.removeUser(this.user.id)
