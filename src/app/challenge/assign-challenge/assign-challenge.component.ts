@@ -21,8 +21,8 @@ export class AssignChallengeComponent implements OnInit {
 
   public categoryAndLevelForm: FormGroup;
   private categories$: Observable<Category[]> = this.categoryService.categories$;
-  private challenges$: Subject<Challenge[]> = new Subject<Challenge[]>();
-  private challengeIds: number[];
+  public challenges: Challenge[];
+  public challengeIds: number[];
   public errorMsg: string;
 
   selectedCategory: Category = null;
@@ -58,7 +58,7 @@ export class AssignChallengeComponent implements OnInit {
       .subscribe(
         response => {
           if(response.status === 200){
-              this.challenges$.next(response.body);
+              this.challenges = (response.body.map(challenge => Challenge.fromJSON(challenge)));
               this.setChallengesForUser();
               this.isLoading$.next(false);
           }
@@ -86,11 +86,7 @@ export class AssignChallengeComponent implements OnInit {
 
   setChallengesForUser()
   {
-    this.challenges$.subscribe(challenges => {
-      challenges.forEach(challenge => {
-        this.challengeIds.push(challenge.id);
-      })
-    });
+    this.challengeIds = this.challenges.map(c => c.id);
     this._challengeService.assignChallenges(this.user.id, this.challengeIds).subscribe(response => 
     {
       if(response.status === 200)

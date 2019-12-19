@@ -18,7 +18,7 @@ export class ChallengeService {
     return this.httpClient.post(`${environment.apiUrl}/challenge/add`,challenge.toJSONForAdd(), {observe: 'response', headers: headers});
   }
 
-  assignChallenges(userId: number, challenges: Array<number>){
+  assignChallenges(userId: number, challenges: number[]){
     let headers = new HttpHeaders();
     let body = {
       UserId: userId,
