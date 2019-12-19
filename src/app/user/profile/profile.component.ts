@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   //const
   constructor(
     private _authService: AuthenticationService,
-    private _therapistService: TherapistDataService,
+    private _therapistDataService: TherapistDataService,
     private router: Router,
     private fb: FormBuilder,
     private route: ActivatedRoute
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
 
   //method
   ngOnInit() {
-    this._therapistService
+    this._therapistDataService
       .getTherapist$(1)
       .subscribe(item => (this.therapist = item));
 
@@ -54,21 +54,28 @@ export class ProfileComponent implements OnInit {
   }
 
   editTherapist(){
-    this.updateTherapistValues();
-    this._therapistService.editTherapist(this.therapist)
-      .subscribe(
-        val => {
-          if(val){
-            this.router.navigate['profile']
-          }
-          else{
-            this.errorMsg = `Fout bij het aanpassen van therapeut ${this.therapist.lastname}!`
-          }
+    this.setTherapistValues()
+    this._therapistDataService.editTherapist(this.therapist)
+    .subscribe(
+      Response => {
+        if(Response.status === 200){
+          this.router.navigate(['/therapeut/lijst'])
         }
-      )
+        else{
+          this.errorMsg = 'Fout bij het aanpassen van een therapeut'
+        }
+      },
+      (err: HttpErrorResponse) => {
+        if(err.error instanceof Error){
+          this.errorMsg = `Error bij het aanpassen van therapeut ${this.therapistForm.value.firstname}`
+        }else{
+          this.errorMsg = `Error ${err.status} bij het aanpassen van therapeut ${this.therapistForm.value.firstname}`
+        }
+      }
+    )
   }
 
-  updateTherapistValues(){
+  setTherapistValues(){
     this.therapist.firstname = this.therapistForm.value.firstname;
     this.therapist.lastname = this.therapistForm.value.lastname;
     this.therapist.email = this.therapistForm.value.email;
