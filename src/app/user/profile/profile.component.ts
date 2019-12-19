@@ -30,18 +30,32 @@ export class ProfileComponent implements OnInit {
 
   //method
   ngOnInit() {
-    this._therapistDataService
-      .getTherapist$(1)
-      .subscribe(item => (this.therapist = item));
+     var therapist = <Therapist>this._authService.user$.value
+     this.router.navigate([`/therapeut/${therapist.id}`])
+     console.log(therapist.id)
+     this._therapistDataService.getTherapist$(therapist.id).subscribe()
+    // this._therapistDataService
+    //   .getTherapist$(therapist.id)
+    //   .subscribe(
+    //     item => {
+    //       this.therapist = item
+    //       this.therapistForm = this.fb.group({
+    //         firstname: [this.therapist.firstname, Validators.required],
+    //         lastname: [this.therapist.lastname, Validators.required],
+    //         email: [this.therapist.email, [Validators.required, Validators.email]],
+    //         telephone: [this.therapist.telephone],
+    //         website: [this.therapist.website]
+    //       });
+    //     });
 
     //Add validation to form
-    this.therapistForm = this.fb.group({
-      firstname: [this.therapist.firstname, Validators.required],
-      lastname: [this.therapist.lastname, Validators.required],
-      email: [this.therapist.email, [Validators.required, Validators.email]],
-      telephone: [this.therapist.telephone],
-      website: [this.therapist.website]
-    });
+    // this.therapistForm = this.fb.group({
+    //   firstname: [this.therapist.firstname, Validators.required],
+    //   lastname: [this.therapist.lastname, Validators.required],
+    //   email: [this.therapist.email, [Validators.required, Validators.email]],
+    //   telephone: [this.therapist.telephone],
+    //   website: [this.therapist.website]
+    // });
     
   }
 

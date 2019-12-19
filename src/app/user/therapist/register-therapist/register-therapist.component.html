@@ -129,7 +129,9 @@
                     <div *ngIf="isEdit == true">
                         <div class="button">
                             <button mat-button (click)="editTherapist()" data-cy="EditTherapist">Aanpassen</button>
-                            <button mat-button (click)="deleteTherapist()" data-cy="DeleteTherapist">Verwijderen</button>
+                            <div *ngIf="isTherapist() == false">
+                                <button mat-button (click)="deleteTherapist()" data-cy="DeleteTherapist">Verwijderen</button>
+                            </div>
                         </div>
                     </div>
                 </form>

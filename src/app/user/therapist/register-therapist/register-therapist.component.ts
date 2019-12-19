@@ -123,7 +123,9 @@ export class RegisterTherapistComponent implements OnInit {
     )
   }
 
-
+  isTherapist(){
+    return this.auth.isTherapist()         
+  }
 
 
   setTherapistValues(){
