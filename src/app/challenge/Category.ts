@@ -13,6 +13,12 @@ export class Category {
         }
     }
 
+    toJSONForAdd(): any{
+        return{
+            categoryId: this._id
+        }
+    }
+
     get id(): number{
         return this._id;
     }

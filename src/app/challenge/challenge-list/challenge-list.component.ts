@@ -3,11 +3,9 @@ import { Challenge } from '../Challenge';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Category } from '../Category';
-
-var data : Challenge[] = [];
-data.push(new Challenge(0, "Loop 10km","Loop een afstand van in totaal 10 kilometer",new Category(1,"Sport")));
-data.push(new Challenge(1, "Gezonde Maaltijd", "Maak een speciale gezonde maaltijd",new Category(2,"Eten")));
-data.push(new Challenge(2,"Daguitstap", "Doe een daguitstap en neem eigen middagmaal mee",new Category(3,"Recreatie")));
+import { Observable, Subject, of } from 'rxjs';
+import { ChallengeService } from '../challenge.service';
+import { NormalUser } from 'src/app/user/normal-user/NormalUser';
 
 @Component({
   selector: 'app-challenge-list',
@@ -19,12 +17,18 @@ export class ChallengeListComponent implements OnInit {
 
   displayedColumns: string[] = ['description']
   dataSource: MatTableDataSource<Challenge>;
+
+  public length: number;
+  private 
+  public errorMsg: string;
+
+  public challenges$: Observable<Challenge[]>;
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   
-    constructor(private breakpointObserver: BreakpointObserver,) { 
-    }
+    constructor(private breakpointObserver: BreakpointObserver)
+      {}
   
     ngOnInit() {
       this.dataSource = new MatTableDataSource(this.challenges); 
@@ -33,10 +37,11 @@ export class ChallengeListComponent implements OnInit {
           ['description'] : 
           ['description'];
       });
-
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
+
+    
 
     applyFilter(filterValue: string) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -45,5 +50,4 @@ export class ChallengeListComponent implements OnInit {
         this.dataSource.paginator.firstPage();
       }
     }
-
-}
+  }

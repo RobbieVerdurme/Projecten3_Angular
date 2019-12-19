@@ -6,6 +6,7 @@ import {MatCardModule, MatInputModule, MatButtonModule, MatSortModule, MatPagina
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTableModule} from '@angular/material/table';
 import { NormalUserListComponent } from '../user/normal-user/normal-user-list/normal-user-list.component';
+import {MatSelectModule} from '@angular/material/select';
 import { ChallengeListComponent } from '../challenge/challenge-list/challenge-list.component';
 import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
 import { FormsModule } from '@angular/forms';
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
+    MatSelectModule
     FormsModule,
     MatDialogModule
   ],
@@ -49,6 +51,7 @@ import { FormsModule } from '@angular/forms';
     NormalUserListComponent,
     ChallengeListComponent,
     MatProgressSpinnerModule,
+    MatSelectModule,
     CategoryDialogComponent,
     FormsModule,
     MatDialogModule

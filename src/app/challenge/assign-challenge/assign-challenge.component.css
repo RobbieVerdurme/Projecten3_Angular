@@ -1,0 +1,41 @@
+mat-card{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+mat-card-title{
+    color: #50927C;
+    font-weight: bold;
+    flex: 0 0 100%;
+}
+
+mat-card-content{
+    flex: 0 0 100%;
+}
+
+.form-part{
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 10px;
+}
+
+mat-form-field, .button{
+    flex: 0 0 20%;
+}
+
+.fill{
+    flex: 1 1 100%;
+}
+
+.button{
+    flex: 0 0 90%;
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .button button{
+    color: white;
+    background-color: #50927C;
+  }

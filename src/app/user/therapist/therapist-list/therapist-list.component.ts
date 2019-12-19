@@ -45,7 +45,7 @@ export class TherapistListComponent implements OnInit {
     this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
         ['firstname', 'lastname'] : 
-        ['firstname', 'lastname', 'email', 'telephone'];
+        ['firstname', 'lastname', 'email', 'telephone', 'function'];
 
       });
     
