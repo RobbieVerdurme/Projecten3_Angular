@@ -9,4 +9,4 @@ Dit is de repository voor Multimed Groep 2, in het kader van Projecten 3 - Angul
 Gebruikersnaam | Wachtwoord | Role
 -------------- | ---------- | ----
 SofieV | P@ssword123 | multimed
-TestTh | P@ssword123  | Therapist
+TestTh@mail.om | Multimed@TestThTestTh0478995888  | Therapist
