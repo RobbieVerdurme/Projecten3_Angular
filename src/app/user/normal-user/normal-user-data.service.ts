@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, map, first } from 'rxjs/operators';
 import { NormalUser } from './NormalUser';
+import { Category } from 'src/app/challenge/Category';
 
 @Injectable({
   providedIn: 'root'
@@ -29,16 +30,16 @@ export class NormalUserDataService {
       .pipe(map((the: any): NormalUser => NormalUser.FromJSON(the)));
   }
 
-  addNewUser(firstname: string, lastname: string, email: string, telephone: string, category: string) {
+  addNewUser(firstname: string, lastname: string, email: string, telephone: string, categories: number[], therapists: number[], company: number) {
     let headers = new HttpHeaders();
     let body = {
       firstName: firstname,
       familyName: lastname,
       email: email,
       phone: telephone,
-      company: 1,
-      categories: [],
-      therapists: []
+      company: company,
+      categories: categories,
+      therapists: therapists
     }
     console.log(body)
     return this.http.post(`${environment.apiUrl}/users/add`, body, {observe: 'response', headers: headers});
