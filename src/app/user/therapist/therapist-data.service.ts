@@ -65,4 +65,8 @@ export class TherapistDataService {
     );
   }
 
+  addNewTherapistType(tt: TherapistType) {
+    return this.http.post(`${environment.apiUrl}/therapist/type/add`, tt.toAddTypeJSON(), {observe: 'response', headers: this.headers});
+  }
+
 }

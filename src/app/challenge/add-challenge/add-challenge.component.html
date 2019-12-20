@@ -3,6 +3,9 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>Nieuwe Uitdaging</mat-card-title>
+        <mat-card-subtitle>
+            {{succesMessage}}
+        </mat-card-subtitle>
     </mat-card-header>  
     <mat-card-content>
         <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()">
@@ -11,20 +14,21 @@
                     Titel :
                     <mat-form-field>
                         <input type="text" matInput placeholder="Titel" formControlName="title" required data-cy="TitleChallenge"/>
-                        <mat-error *ngIf='TitleField.errors?.required && TitleField.touched'>Titel is verplicht</mat-error>
+                        <mat-error *ngIf='TitleField.errors?.required && TitleField.touched'>Titel is verplicht!</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="form-field">
                     Omschrijving :
                     <mat-form-field>
                         <input type="text" matInput placeholder="Omschrijving" formControlName="description" required data-cy="DescriptionChallenge"/>
-                        <mat-error *ngIf='DescriptionField.errors?.required && DescriptionField.touched'>Omschrijving is verplicht</mat-error>
+                        <mat-error *ngIf='DescriptionField.errors?.required && DescriptionField.touched'>Omschrijving is verplicht!</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="form-field">
                     Link afbeelding :
                     <mat-form-field>
                         <input type="text" matInput placeholder="Link" formControlName="image"/>
+                        <mat-error *ngIf='ImageField.errors?.required && ImageField.touched'>Afbeeldingslink is verplicht!</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -33,7 +37,7 @@
                     Categorie : 
                     <div *ngIf="isLoading">
                         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-                        <div>Categoriën aan het laden</div>
+                        <div>Categoriën aan het laden!</div>
                     </div>
                     <div *ngIf="!isLoading" >
                         <mat-form-field>
@@ -45,6 +49,7 @@
                                     {{category.name}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf='CategoryField.errors?.required && CategoryField.touched'>Categorie is verplicht!</mat-error>
                         </mat-form-field>                       
                     </div>                
                 </div>
@@ -52,6 +57,7 @@
                     Niveau :
                     <mat-form-field>
                         <input type="number" matInput placeholder="Niveau" formControlName="level" required data-cy="niveauChallenge"/>
+                        <mat-error *ngIf='LevelField.errors?.required && LevelField.touched'>Niveau is verplicht!</mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -59,8 +65,12 @@
             <div class="button">
                 <button type="submit" mat-button data-cy="MakeChallenge" >Maak Uitdaging</button>
             </div>
+            <div *ngIf="(isLoading$ | async)" fxLayout="column" fxLayoutAlign="center center">
+                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                <div>Uitdagingen aan het toevoegen</div>
+            </div>
         </form>
-        
+        <p id="error"></p>
     </mat-card-content>
 </mat-card>
 </div>

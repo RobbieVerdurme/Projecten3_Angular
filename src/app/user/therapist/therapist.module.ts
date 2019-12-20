@@ -11,6 +11,7 @@ import { TherapistComponent } from './therapist/therapist.component';
 import { OpeningTimesComponent } from './opening-times/opening-times.component';
 import { resolve } from 'url';
 import { TherapistResolver } from './therapist-resolver';
+import { TherapistTypeDialogComponent } from './therapist-type-dialog/therapist-type-dialog.component';
 
 const routes = [
   {path: 'registreren', canActivate:[AuthGuard], component: RegisterTherapistComponent},
@@ -25,13 +26,17 @@ const routes = [
     RegisterTherapistComponent,
     TherapistListComponent,
     TherapistDetailComponent,
-    OpeningTimesComponent
+    OpeningTimesComponent,
+    TherapistTypeDialogComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
+  ],
+  entryComponents:[
+    TherapistTypeDialogComponent
   ]
 })
 export class TherapistModule { }

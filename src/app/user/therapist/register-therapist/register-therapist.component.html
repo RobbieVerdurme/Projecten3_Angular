@@ -126,7 +126,7 @@
                                     {{type.type}}
                                 </mat-option>
                             </mat-select>
-                            <button mat-button><mat-icon>add_circle</mat-icon></button>
+                            <button mat-button (click)="OpenDialog()"><mat-icon>add_circle</mat-icon></button>
                         </div> 
                     </div>
                     <div *ngIf="isEdit == false">
