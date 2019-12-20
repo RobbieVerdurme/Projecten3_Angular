@@ -65,8 +65,8 @@
                                 <mat-label>
                                     Selecteer een categorie:
                                 </mat-label>
-                                <mat-select formControlName="categories" [(value)]="selectedCategories" required multiple>
-                                    <mat-option *ngFor="let category of (categories$ | async)" [value]="category">
+                                <mat-select formControlName="categories" [(value)]="selectedCategories" data-cy="UserCategories" multiple>
+                                    <mat-option *ngFor="let category of (categories$ | async)" [value]="category" data-cy="UserCategoriesOption">
                                         {{category.name}}
                                     </mat-option>
                                 </mat-select>
@@ -84,8 +84,8 @@
                                 <mat-label>
                                     Selecteer een bedrijf:
                                 </mat-label>
-                                <mat-select formControlName="company" [(value)]="selectedCompany" required>
-                                    <mat-option *ngFor="let company of (companies$ | async)" [value]="company">
+                                <mat-select formControlName="company" [(value)]="selectedCompany" data-cy="UserCompany" required>
+                                    <mat-option *ngFor="let company of (companies$ | async)" [value]="company" data-cy="UserCompanyOption">
                                         {{company.name}}
                                     </mat-option>
                                 </mat-select>
@@ -103,8 +103,8 @@
                                 <mat-label>
                                     Selecteer therapeuten:
                                 </mat-label>
-                                <mat-select formControlName="therapists" [(value)]="selectedTherapists" required multiple>
-                                    <mat-option *ngFor="let therapist of (therapist$ | async)" [value]="therapist">
+                                <mat-select formControlName="therapists" [(value)]="selectedTherapists" data-cy="UserTherapists" multiple>
+                                    <mat-option *ngFor="let therapist of (therapist$ | async)" [value]="therapist" data-cy="UserTherapistsOption">
                                         {{therapist.firstname}} {{therapist.lastname}}
                                     </mat-option>
                                 </mat-select>
