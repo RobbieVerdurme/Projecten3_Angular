@@ -87,7 +87,7 @@ export class RegisterTherapistComponent implements OnInit {
         houseNumber: [this.therapist.houseNumber, Validators.required],
         postalCode: [this.therapist.postalCode, Validators.required],
         city: [this.therapist.city, Validators.required],
-        type: [this.therapist.therapistType, Validators.required]
+        type: [this.therapist.therapistType.type, Validators.required]
       });
     }
   }
@@ -144,7 +144,6 @@ export class RegisterTherapistComponent implements OnInit {
 
   editTherapist(){
     this.setTherapistValues()
-    var x = this.therapist
     this._therapistDataService.editTherapist(this.therapist)
     .subscribe(
       Response => {
@@ -175,22 +174,20 @@ export class RegisterTherapistComponent implements OnInit {
     this.therapist.lastname = this.therapistForm.value.lastname,
     this.therapist.email = this.therapistForm.value.email,
     this.therapist.telephone = this.therapistForm.value.telephone,
-    this.therapist.openingTimes = this.therapistForm.value.workingHours,
     this.therapist.website = this.therapistForm.value.website
     this.therapist.street = this.therapistForm.value.street
     this.therapist.houseNumber = this.therapistForm.value.houseNumber
     this.therapist.postalCode = this.therapistForm.value.postalCode
     this.therapist.city = this.therapistForm.value.city
     this.therapist.therapistType = this.therapistForm.value.type
-
     if(this.isEdit){
-      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursMa)
-      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursDi)
-      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursWo)
-      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursDo)
-      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursVr)
-      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursZa)
-      this.therapist.openingTimes.push(this.therapistForm.value.workingHoursZo)
+      this.therapist.openingTimes[0].Interval = this.therapistForm.value.workingHoursMa
+      this.therapist.openingTimes[1].Interval = this.therapistForm.value.workingHoursDi
+      this.therapist.openingTimes[2].Interval = this.therapistForm.value.workingHoursWo
+      this.therapist.openingTimes[3].Interval = this.therapistForm.value.workingHoursDo
+      this.therapist.openingTimes[4].Interval = this.therapistForm.value.workingHoursVr
+      this.therapist.openingTimes[5].Interval = this.therapistForm.value.workingHoursZa
+      this.therapist.openingTimes[6].Interval = this.therapistForm.value.workingHoursZo
     }
     else{
       this.therapist.openingTimes = new Array<OpeningTimes>()
@@ -202,8 +199,6 @@ export class RegisterTherapistComponent implements OnInit {
       this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursZa))
       this.therapist.openingTimes.push(new OpeningTimes(this.therapistForm.value.workingHoursZo))
     }
-
-    
     //this.therapistForm.value.category
   }
 
