@@ -8,6 +8,7 @@ import { SelectUserService } from 'src/app/challenge/select-user.service';
 import { ChallengeService } from 'src/app/challenge/challenge.service';
 import { Observable, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NormalUserDataService } from '../normal-user-data.service';
 
 @Component({
   selector: 'app-normal-user-detail',
@@ -21,7 +22,7 @@ export class NormalUserDetailComponent implements OnInit {
   public challenges: Challenge[];
   public errorMsg$: Subject<string> = new Subject<string>();
   public isLoading$: Subject<boolean> = new Subject<boolean>();
-  constructor(private challengeService: ChallengeService, private route: ActivatedRoute, private router: Router, private messageService: MessageService, private selectUserService: SelectUserService) { 
+  constructor(private challengeService: ChallengeService, private route: ActivatedRoute, private router: Router, private messageService: MessageService, private selectUserService: SelectUserService, private normalUserService: NormalUserDataService) { 
   }
 
   ngOnInit() {
@@ -69,7 +70,22 @@ export class NormalUserDetailComponent implements OnInit {
     )
   }
   
-  editUser(id: number): void{
-    this.router.navigate([`/gebruiker/edit/${id}`])
+  deleteUser(id: number): void{
+    this.normalUserService.removeUser(this.user.id)
+    .subscribe(
+      response => {
+        if(response.status === 200){
+          this.router.navigate(['/gebruiker/lijst'])
+        }else{
+          this.errorMsg$.next(`Er liep iets fout, de gebruiker kon niet worden verwijderd`);
+        }
+      },
+      (err: HttpErrorResponse) => {
+        if(err.error instanceof Error){
+          this.errorMsg$.next(`Er liep iets fout, de gebruiker kon niet worden verwijderd`);
+        }else{
+          this.errorMsg$.next(`Er liep iets fout, de gebruiker kon niet worden verwijderd`);
+        }
+      })    
   }
 }

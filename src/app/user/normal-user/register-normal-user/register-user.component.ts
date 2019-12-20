@@ -114,23 +114,23 @@ export class RegisterUserComponent implements OnInit {
     });
   }
     
-  deleteUser(){
-    this.normalUserService.removeUser(this.user.id)
-    .subscribe(
-      response => {
-        if(response.status === 200){
-          this.router.navigate(['/gebruiker/lijst'])
-        }else{
-          this.errorMsg = `Fout bij het verwijderen van ${this.user.firstname}!`
-        }
-      },
-      (err: HttpErrorResponse) => {
-        if(err.error instanceof Error){
-          this.errorMsg = `Error bij het verwijderen van de gebruiker`
-        }else{
-          this.errorMsg = `Fout bij het verwijderen van de gebruiker`
-        }
-      })    
-  }
+  // deleteUser(){
+  //   this.normalUserService.removeUser(this.user.id)
+  //   .subscribe(
+  //     response => {
+  //       if(response.status === 200){
+  //         this.router.navigate(['/gebruiker/lijst'])
+  //       }else{
+  //         this.errorMsg = `Fout bij het verwijderen van ${this.user.firstname}!`
+  //       }
+  //     },
+  //     (err: HttpErrorResponse) => {
+  //       if(err.error instanceof Error){
+  //         this.errorMsg = `Error bij het verwijderen van de gebruiker`
+  //       }else{
+  //         this.errorMsg = `Fout bij het verwijderen van de gebruiker`
+  //       }
+  //     })    
+  // }
 
 }
