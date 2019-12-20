@@ -71,8 +71,8 @@ export class ProfileComponent implements OnInit {
     this.setTherapistValues()
     this._therapistDataService.editTherapist(this.therapist)
     .subscribe(
-      Response => {
-        if(Response.status === 200){
+      response => {
+        if(response.status === 200){
           this.router.navigate(['/therapeut/lijst'])
         }
         else{

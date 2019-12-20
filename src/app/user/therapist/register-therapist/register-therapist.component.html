@@ -121,7 +121,7 @@
                             <mat-label>
                                 Selecteer een type: 
                             </mat-label>
-                            <mat-select formControlName="type" [(value)]="selectedType" required>
+                            <mat-select formControlName="type" [(value)]="selectedType" required data-cy="TherapistType">
                                 <mat-option *ngFor="let type of (types$ | async)" [value]="type">
                                     {{type.type}}
                                 </mat-option>
