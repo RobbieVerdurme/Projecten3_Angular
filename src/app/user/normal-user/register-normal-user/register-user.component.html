@@ -2,7 +2,7 @@
     <mat-card>
         <mat-card-header>
             <div *ngIf="isEdit == false">
-                <mat-card-title>Voeg een bedrijf toe</mat-card-title>
+                <mat-card-title>Voeg een gebruiker toe</mat-card-title>
             </div>
             <div *ngIf="isEdit == true">
                 <mat-card-title>{{user.firstname}} aanpassen</mat-card-title>
@@ -17,13 +17,6 @@
                     <div class="title">
                         Algemeen
                     </div>  
-                    <div *ngIf="isEdit == false" class="form-field">  
-                        Gebruikersnaam:
-                        <mat-form-field>
-                            <input type="text" matInput placeholder="Gebruikersnaam" formControlName="username"
-                                required data-cy="UserUsername"/>
-                        </mat-form-field>
-                    </div>
                     <div class="form-field">    
                         Voornaam : 
                         <mat-form-field>
@@ -57,20 +50,67 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="form-part"> 
+                <div class="form-part">
                     <div class="title">
                         Specifieke informatie
                     </div>
-                    <div class="form-field">                   
-                        Categorie :
-                        <mat-form-field>
-                            <input type="text" matInput placeholder="Categorie" formControlName="category"
-                                required data-cy="UserCategory" />
-                        </mat-form-field>
-                        <button mat-button (click)="openDialog()">
-                            <mat-icon>add_circle</mat-icon>
-                        </button>
+                    <div class="form-field" id="categories">
+                        Categorie : 
+                        <div *ngIf="isLoading">
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                            <div>Categoriën aan het laden</div>
+                        </div>
+                        <div *ngIf="!isLoading" >
+                            <mat-form-field>
+                                <mat-label>
+                                    Selecteer een categorie:
+                                </mat-label>
+                                <mat-select formControlName="categories" [(value)]="selectedCategories" required multiple>
+                                    <mat-option *ngFor="let category of (categories$ | async)" [value]="category">
+                                        {{category.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>                       
+                        </div>                
                     </div>
+                    <div class="form-field" id="company" *ngIf="!isEdit">
+                        Bedrijf : 
+                        <div *ngIf="isLoading">
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                            <div>Bedrijven aan het laden</div>
+                        </div>
+                        <div *ngIf="!isLoading" >
+                            <mat-form-field>
+                                <mat-label>
+                                    Selecteer een bedrijf:
+                                </mat-label>
+                                <mat-select formControlName="company" [(value)]="selectedCompany" required>
+                                    <mat-option *ngFor="let company of (companies$ | async)" [value]="company">
+                                        {{company.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>                       
+                        </div>                
+                    </div>
+                    <div class="form-field" id="therapists">
+                        Therapeuten : 
+                        <div *ngIf="isLoading">
+                            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                            <div>Therapeuten aan het laden</div>
+                        </div>
+                        <div *ngIf="!isLoading" >
+                            <mat-form-field>
+                                <mat-label>
+                                    Selecteer therapeuten:
+                                </mat-label>
+                                <mat-select formControlName="therapists" [(value)]="selectedTherapists" required multiple>
+                                    <mat-option *ngFor="let therapist of (therapist$ | async)" [value]="therapist">
+                                        {{therapist.firstname}} {{therapist.lastname}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>                       
+                        </div>    
+                    </div>         
                 </div>
                 <div *ngIf="isEdit == false">
                     <div class="button">
@@ -79,7 +119,6 @@
                 </div>
                 <div *ngIf="isEdit == true">
                     <div class="button">
-                        <button mat-button (click)="editUser()" data-cy="EditUser">Aanpassen</button>
                         <button mat-button (click)="deleteUser()" data-cy="DeleteUser">Verwijderen</button>
                     </div>
                 </div>
