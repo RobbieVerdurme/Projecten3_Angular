@@ -9,14 +9,14 @@ describe("Multimed therapist list", () => {
     cy.visit("/therapeut/registreren");
 
     //fil in the fields
-    cy.get("[data-cy=TherapistUsername]").type("TestTherapist");
     cy.get("[data-cy=TherapistFirstname]").type("TherapistTestingtest");
     cy.get("[data-cy=TherapistLastname]").type("Test");
     cy.get("[data-cy=TherapistEmail]").type("TestTherapist@mail.com");
     cy.get("[data-cy=TherapistWebsite]").type("TestTherapist.com");
     cy.get("[data-cy=TherapistWorkHours]").type("9-17");
     cy.get("[data-cy=TherapistPhone]").type("047899556");
-    cy.get("[data-cy=TherapistCategory]").select("Diëtist")
+    cy.get("[data-cy=TherapistType]").select("Diëtist")
+    
 
     //click register
     cy.get("[data-cy=TherapistRegister]").click();
