@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Voeg een type toe</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <p *ngIf="errorMsg" class="error">
+      {{errorMsg}}
+  </p>
+    <p>Typ hier de naam van de type</p>
+    <input matInput [(ngModel)]="data.type">
+    <p>Selecteer de categorieën voor dit type</p>
+    <mat-select placeholder="Categorieën" [formControl]="categories" multiple>
+        <mat-select-trigger>
+          {{categories.value ? categories.value[0].name : ''}}
+          <span *ngIf="categories.value?.length > 1" class="example-additional-selection">
+            (+{{categories.value.length - 1}} {{categories.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let category of (categories$ | async)" [value]="category">{{category.name}}</mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClick()">Voeg Toe</button>
+</div>

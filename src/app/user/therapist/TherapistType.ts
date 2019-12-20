@@ -1,4 +1,7 @@
+import { Category } from 'src/app/challenge/Category';
+
 export class TherapistType{
+    private _categories: Array<Category>
     constructor(
         private _therapistTypeId: number,
         private _type: string,
@@ -19,9 +22,24 @@ export class TherapistType{
         return this._type;
     }
 
+    get categories(): Array<Category>{
+        return this._categories;
+    }
+
+    set categories(cats: Array<Category>){
+        this._categories = cats
+    }
+
     toJSON(): any{
         return {
-            therapistTypeId: this.therapistTypeId
+            therapistTypeId: this.therapistTypeId,
+        }
+    }
+
+    toAddTypeJSON(): any{
+        return{
+            type: this.type,
+            categories: this.categories.map(cat => cat.toJSONForAdd())
         }
     }
 }

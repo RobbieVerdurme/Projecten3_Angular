@@ -10,6 +10,8 @@ import { ChallengeService } from '../challenge.service';
 import { Observable, Subject, pipe } from 'rxjs';
 import { Challenge } from '../Challenge';
 import { map } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -23,11 +25,12 @@ export class AddChallengeComponent implements OnInit {
   dataSource: MatTableDataSource<Category>;
   private categories$: Observable<Category[]> = this.categoryService.categories$;
   private errorMessage$: Observable<string> = this.categoryService.loadingError$;
+  public succesMessage: string;
 
   selectedCategory: Category = null;
   selectedCategoryId: number = 0;
 
-  isLoading: boolean = false;
+  public isLoading$: Subject<boolean> = new Subject<boolean>();
   public submitError$ = new Subject<string>();
 
   constructor(
@@ -39,11 +42,12 @@ export class AddChallengeComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    this.isLoading$.next(false);
     this.challengeForm = this.fb.group({
       title: ['', [Validators.required]],
       category: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      image: [''],
+      image: ['', [Validators.required]],
       level: ['', [Validators.required]]
     });
   }
@@ -51,25 +55,28 @@ export class AddChallengeComponent implements OnInit {
   onSubmit(){
     if(this.challengeForm.errors === null)
       {
+        this.isLoading$.next(true);
         this.challengeService.addChallenge(this.challenge).subscribe(response => {
           if(response.status === 200){
             this.submitError$ = new Subject<string>();
-            this._messageService.setMessage(`Uitdaging '${this.TitleField.value}' toegevoegd`);
+            this.succesMessage = "Challenge succesvol toegevoegd";
             this.ngOnInit();
           }
           else if(response.status === 404)
           {
-              this.submitError$.next("Deze categorie bestaat niet. Gelieve een andere categorie te kiezen.");
+            this.isLoading$.next(false);
+            this.submitError$.next("Deze categorie bestaat niet. Gelieve een andere categorie te kiezen.");
           }
           else if(response.status === 303)
           { 
+            this.isLoading$.next(false);
             this.submitError$.next("Deze uitdaging bestaat al!");
           }
           else{
+            this.isLoading$.next(false);
             this.submitError$.next("Er liep iets fout! De uitdaging is niet toegevoegd.");
           }
         },(error)=>{
-          console.log(error);
           this.submitError$.next("Kon de Uitdaging niet opslaan"); 
         });
 
@@ -98,6 +105,11 @@ export class AddChallengeComponent implements OnInit {
   get LevelField(): FormControl
   {
     return <FormControl> this.challengeForm.get("level");
+  }
+
+  get CategoryField(): FormControl
+  {
+    return <FormControl> this.challengeForm.get('category');
   }
 
   get challenge()
