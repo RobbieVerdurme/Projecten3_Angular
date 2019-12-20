@@ -13,16 +13,12 @@ describe("Multimed Add user", () => {
         cy.get("[data-cy=UserLastname]").type("Test");
         cy.get("[data-cy=UserEmail]").type("TestUser@mail.com");
         cy.get("[data-cy=UserPhone]").type("047899556");  
-        cy.get("[data-cy=UserCategories]").click();
-        cy.get("[data-cy=UserCategoriesOption]").first().click();
         cy.get("[data-cy=UserCompany]").click();    
         cy.get("[data-cy=UserCompanyOption]").first().click();
-        cy.get("[data-cy=UserTherapists]").click();
-        cy.get("[data-cy=UserTherapistsOption]").first().click();
 
 
         //click register
-        cy.get("[data-cy=UserRegister]").click();
+        cy.get("[data-cy=AddUser]").click();
 
         //TODO SHOULD URL REDIRECT ?
         cy.url().should("eq", "http://localhost:4200/gebruiker/lijst");

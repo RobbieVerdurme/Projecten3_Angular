@@ -33,8 +33,8 @@ export class RegisterUserComponent implements OnInit {
   private errorMessageCompany$: Observable<string> = this.companyDataService.loadingError$;
   private errorMessageTherapist$: Observable<string> = this.therapistDataService.loadingError$;
   
-  selectedCategories: Category[] = null;
-  selectedTherapists: Therapist[] = null;
+  selectedCategories: Category[] = [];
+  selectedTherapists: Therapist[] = [];
   selectedCompany: Company = null;
 
   isLoading: boolean = false;

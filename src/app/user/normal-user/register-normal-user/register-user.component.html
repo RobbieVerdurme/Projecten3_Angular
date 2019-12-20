@@ -65,7 +65,7 @@
                                 <mat-label>
                                     Selecteer een categorie:
                                 </mat-label>
-                                <mat-select formControlName="categories" [(value)]="selectedCategories" data-cy="UserCategories" required multiple>
+                                <mat-select formControlName="categories" [(value)]="selectedCategories" data-cy="UserCategories" multiple>
                                     <mat-option *ngFor="let category of (categories$ | async)" [value]="category" data-cy="UserCategoriesOption">
                                         {{category.name}}
                                     </mat-option>
@@ -103,7 +103,7 @@
                                 <mat-label>
                                     Selecteer therapeuten:
                                 </mat-label>
-                                <mat-select formControlName="therapists" [(value)]="selectedTherapists" data-cy="UserTherapists" required multiple>
+                                <mat-select formControlName="therapists" [(value)]="selectedTherapists" data-cy="UserTherapists" multiple>
                                     <mat-option *ngFor="let therapist of (therapist$ | async)" [value]="therapist" data-cy="UserTherapistsOption">
                                         {{therapist.firstname}} {{therapist.lastname}}
                                     </mat-option>
