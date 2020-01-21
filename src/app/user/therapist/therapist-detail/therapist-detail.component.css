@@ -25,8 +25,14 @@
   }
   
   mat-card-title{
+    display: flex;
+    flex-wrap: nowrap;
     margin-left: 15px;
-      font-weight: bold;
+  }
+
+  .card-title{
+    color: #50927C;
+    font-weight: bold;
   }
   
   mat-card-content{
@@ -66,19 +72,6 @@
     flex: 0 0 50%;
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .title{
-    flex: 0 0 30%;
-    font-weight: bold;
-    height: 25px;
-    margin: 25px 15px;
-  }
-
-  .title-fill{
-    flex: 0 0 60%;
-    margin: 25px 0px;
-    height: 25px;
   }
 
   #contact-title, #contact-title-fill{

@@ -1,7 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <mat-card>
             <mat-card-title>
-                Detail therapeut {{therapist.lastname}}
+                <div class="card-title" id="title">
+                     Detail therapeut {{therapist.lastname}}
+                </div>
                 <div class="fill"></div>
                 <div class="card-title">
                 <button mat-button class="titlePart" (click)="editTherapist(therapist.id)" data-cy="DetailEditTherapist"><mat-icon>settings</mat-icon></button>
