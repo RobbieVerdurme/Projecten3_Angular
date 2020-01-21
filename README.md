@@ -9,4 +9,4 @@ Dit is de repository voor Multimed Groep 2, in het kader van Projecten 3 - Angul
 Gebruikersnaam | Wachtwoord | Role
 -------------- | ---------- | ----
 SofieV | P@ssword123 | multimed
-TestTh@mail.om | Multimed@TestThTestTh0478995888  | Therapist
+info@ergotherapieopkindermaat.be | Multimed@NatasjaDroesbeke0473 75 33 25  | Therapist
