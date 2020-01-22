@@ -169,9 +169,9 @@ export class Therapist extends LoginUser{
         else{
             therapist.openingTimes = ot
         }
-        var x = json.Clients
+        var x = json.clients
         if(x != undefined){
-            therapist.clients = json.clients.map(NormalUser.FromJSON)
+            therapist.clients = x.map(NormalUser.FromJSON);
         }
         
         return therapist

@@ -13,6 +13,7 @@ import { Therapist } from '../../therapist/Therapist';
 import { TherapistDataService } from '../../therapist/therapist-data.service';
 import { Observable, Subject, of } from 'rxjs';
 import { NormalUserDataService } from '../normal-user-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-normal-user-list',
@@ -28,6 +29,7 @@ export class NormalUserListComponent implements OnInit {
   public filterNormalUser: string = '';
   public filterNormalUsers$ = new Subject<string>();
   public normalUsers$: Observable<NormalUser[]>;
+  public errorMsg$: Subject<string> = new Subject<string>();
   
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -85,9 +87,22 @@ export class NormalUserListComponent implements OnInit {
     else{
       //Get therapist and display his clients
       var therapist = <Therapist>this.aut.user$.value
-      this.therapistDataService.getTherapistClients$(therapist.id).subscribe(
-        x=> this.fillDataSource(x)
-      );
+      this.therapistDataService.getTherapistClients(therapist.id).subscribe(
+        response =>
+      {
+        if(response.status === 200)
+        {
+          this.fillDataSource(response.body.map((client: any) : NormalUser => NormalUser.FromJSON(client)));
+        }
+        else
+        {
+          this.errorMsg$.next("Er liep iets fout, de challenges van de user konden niet opgehaald worden.");
+        }
+      },
+      (err: HttpErrorResponse) => {
+        this.errorMsg$.next(`Er zijn geen cliënten gevonden voor deze therapeut.`);
+      }
+    );
 
       //this.normalUsers$ = this.therapistDataService.getTherapistClients$(1);
       //This is used to get therapist clients from backend
