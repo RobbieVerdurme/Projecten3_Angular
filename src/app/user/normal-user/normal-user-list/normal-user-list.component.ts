@@ -23,7 +23,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class NormalUserListComponent implements OnInit {
 //var
   @Input() normalUsers: NormalUser[]
-  displayedColumns: string[] = ['firstname', 'lastname', 'email', 'challenges'];
+  displayedColumns: string[] = ['firstname', 'lastname', 'email'];
   dataSource: MatTableDataSource<NormalUser>;
 
   public filterNormalUser: string = '';
@@ -51,7 +51,7 @@ export class NormalUserListComponent implements OnInit {
     this.breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
         ['firstname', 'lastname'] : 
-        ['firstname', 'lastname', 'email', 'challenges'];
+        ['firstname', 'lastname', 'email'];
     });
   }
 
