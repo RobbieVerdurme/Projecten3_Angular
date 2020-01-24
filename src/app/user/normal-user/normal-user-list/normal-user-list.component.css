@@ -3,8 +3,6 @@ table {
     width: 100%;
     opacity: 0.89;
     overflow: auto;
-    display: flex;
-    flex-wrap: wrap;
   }
   
   .mat-form-field {
@@ -13,7 +11,7 @@ table {
   }
   
   th{
-    width: 100%;
+    width: 30%;
   }
   td{
     width: 30%;
