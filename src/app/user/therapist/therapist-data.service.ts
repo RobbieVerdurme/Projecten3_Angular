@@ -31,14 +31,9 @@ export class TherapistDataService {
       .pipe(map((the: any): Therapist => Therapist.fromJSON(the)));
   }
 
-  getTherapistClients$(id): Observable<NormalUser[]>{
-      return this.http.get(`${environment.apiUrl}/therapist/clients/${id}`).pipe(
-        catchError(error => {
-          this.loadingError$.next(error.statusText);
-          return of(null);
-        }),
-        map((list: any[]): NormalUser[] => list.map(NormalUser.FromJSON))
-      );
+  getTherapistClients(id: number)
+  {
+      return this.http.get<NormalUser[]>(`${environment.apiUrl}/therapist/clients/${id}`, {observe: 'response', headers: this.headers});
   }
 
   addNewTherapist(therapist: Therapist) {
